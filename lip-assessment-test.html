@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唇部美学标准化评估量表 - 专业测试版</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --primary-light: #D2B48C;
+            --primary-dark: #654321;
+            --secondary-color: #CD853F;
+            --accent-color: #F4A460;
+            --bg-primary: #FFF8DC;
+            --bg-secondary: #FFFEF7;
+            --text-primary: #2F1B14;
+            --text-secondary: #8B4513;
+            --text-light: #A0522D;
+            --border-color: #DEB887;
+            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
+            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --error-color: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-icon {
+            margin-right: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .question-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-number {
+            background: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        .rating-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .rating-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .rating-option:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .rating-option input[type="radio"] {
+            display: none;
+        }
+
+        .rating-option input[type="radio"]:checked + .option-content {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .rating-option input[type="radio"]:checked + .option-content::before {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .option-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .option-content::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .option-score {
+            margin-left: auto;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .total-score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .score-level {
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .score-excellent {
+            background: #e8f5e8;
+            color: var(--success-color);
+            border: 2px solid var(--success-color);
+        }
+
+        .score-good {
+            background: #fff3e0;
+            color: var(--warning-color);
+            border: 2px solid var(--warning-color);
+        }
+
+        .score-fair {
+            background: #ffebee;
+            color: var(--error-color);
+            border: 2px solid var(--error-color);
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .score-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .score-item-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .score-item-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .recommendations {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+            margin-top: 2rem;
+        }
+
+        .recommendations h3 {
+            color: #2e7d2e;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #c8e6c9;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .recommendations li:before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .company-info {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .company-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .disclaimer {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .disclaimer h5 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            color: #d84315;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .test-form {
+                padding: 1.5rem;
+            }
+
+            .rating-options {
+                grid-template-columns: 1fr;
+            }
+
+            .total-score {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">唇部美学标准化评估量表</h1>
+            <p class="subtitle">专业互动测试版 - 绛唇解语花医学美容评估系统</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="test-form" id="assessmentTest">
+            <!-- 进度条 -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text">
+                测试进度: <span id="progressText">0%</span>
+            </p>
+
+            <!-- 第一部分：唇部对称性 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">⚖️</span>
+                    唇部对称性评估 (0-20分)
+                </h2>
+                <div class="question-group">
+                    <div class="question">
+                        <span class="question-number">1</span>
+                        请评估患者的唇部对称性
+                    </div>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="radio" name="symmetry" value="20" required>
+                            <div class="option-content">
+                                完全对称，左右唇形完美匹配
+                                <span class="option-score">20分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="symmetry" value="15">
+                            <div class="option-content">
+                                轻微不对称，肉眼难以察觉
+                                <span class="option-score">15分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="symmetry" value="10">
+                            <div class="option-content">
+                                轻微不对称，仔细观察可见
+                                <span class="option-score">10分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="symmetry" value="5">
+                            <div class="option-content">
+                                明显不对称，影响美观
+                                <span class="option-score">5分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="symmetry" value="0">
+                            <div class="option-content">
+                                严重不对称，需要矫正
+                                <span class="option-score">0分</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二部分：唇部比例 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📐</span>
+                    唇部比例评估 (0-25分)
+                </h2>
+                <div class="question-group">
+                    <div class="question">
+                        <span class="question-number">2</span>
+                        请评估患者的唇部比例是否符合黄金比例标准
+                    </div>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="radio" name="proportion" value="25" required>
+                            <div class="option-content">
+                                完全符合黄金比例，上下唇1:1.618
+                                <span class="option-score">25分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="proportion" value="20">
+                            <div class="option-content">
+                                接近黄金比例，比例协调
+                                <span class="option-score">20分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="proportion" value="15">
+                            <div class="option-content">
+                                基本符合比例，略有偏差
+                                <span class="option-score">15分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="proportion" value="10">
+                            <div class="option-content">
+                                比例失调，但不严重
+                                <span class="option-score">10分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="proportion" value="0">
+                            <div class="option-content">
+                                严重不符合黄金比例
+                                <span class="option-score">0分</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三部分：唇珠形态 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💎</span>
+                    唇珠形态评估 (0-15分)
+                </h2>
+                <div class="question-group">
+                    <div class="question">
+                        <span class="question-number">3</span>
+                        请评估患者的唇珠形态质量
+                    </div>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="radio" name="cupid" value="15" required>
+                            <div class="option-content">
+                                自然圆润，形态完美无瑕疵
+                                <span class="option-score">15分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="cupid" value="12">
+                            <div class="option-content">
+                                形态良好，有轻微不完美
+                                <span class="option-score">12分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="cupid" value="8">
+                            <div class="option-content">
+                                轻微缺陷，需要微调
+                                <span class="option-score">8分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="cupid" value="5">
+                            <div class="option-content">
+                                明显变形，影响整体美观
+                                <span class="option-score">5分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="cupid" value="0">
+                            <div class="option-content">
+                                严重缺陷或完全缺失
+                                <span class="option-score">0分</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四部分：皮肤质地 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🌟</span>
+                    皮肤质地评估 (0-20分)
+                </h2>
+                <div class="question-group">
+                    <div class="question">
+                        <span class="question-number">4</span>
+                        请评估患者唇部皮肤的质地状况
+                    </div>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="radio" name="texture" value="20" required>
+                            <div class="option-content">
+                                光滑细腻，质感优秀
+                                <span class="option-score">20分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="texture" value="15">
+                            <div class="option-content">
+                                整体良好，有轻微纹理
+                                <span class="option-score">15分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="texture" value="10">
+                            <div class="option-content">
+                                轻微皱纹，质地一般
+                                <span class="option-score">10分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="texture" value="5">
+                            <div class="option-content">
+                                明显纹理不佳，需要改善
+                                <span class="option-score">5分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="texture" value="0">
+                            <div class="option-content">
+                                质地粗糙，严重老化
+                                <span class="option-score">0分</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第五部分：颜色均匀度 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎨</span>
+                    颜色均匀度评估 (0-20分)
+                </h2>
+                <div class="question-group">
+                    <div class="question">
+                        <span class="question-number">5</span>
+                        请评估患者唇部颜色的均匀程度
+                    </div>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="radio" name="color" value="20" required>
+                            <div class="option-content">
+                                色泽均匀自然，颜色理想
+                                <span class="option-score">20分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="color" value="15">
+                            <div class="option-content">
+                                整体均匀，有轻微色差
+                                <span class="option-score">15分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="color" value="10">
+                            <div class="option-content">
+                                轻微色差，不太明显
+                                <span class="option-score">10分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="color" value="5">
+                            <div class="option-content">
+                                明显色彩不均，影响美观
+                                <span class="option-score">5分</span>
+                            </div>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="color" value="0">
+                            <div class="option-content">
+                                严重色差或色素沉着
+                                <span class="option-score">0分</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="submit-section">
+                <button type="button" class="submit-btn" onclick="calculateResults()" id="calculateBtn" disabled>
+                    计算评估结果
+                </button>
+                <button type="button" class="submit-btn" onclick="resetTest()" style="background: #666;">
+                    重新测试
+                </button>
+            </div>
+        </form>
+
+        <!-- 结果显示区域 -->
+        <div class="results-section" id="resultsSection">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                评估结果分析
+            </h2>
+
+            <div class="score-display">
+                <div class="total-score" id="totalScore">0</div>
+                <div class="score-label">总评估分数 (满分100分)</div>
+                <div class="score-level" id="scoreLevel"></div>
+            </div>
+
+            <div class="score-breakdown" id="scoreBreakdown">
+                <!-- 动态生成评分明细 -->
+            </div>
+
+            <div class="recommendations" id="recommendations">
+                <!-- 动态生成专业建议 -->
+            </div>
+
+            <!-- 公司信息和免责声明 -->
+            <div class="company-info">
+                <h4>📍 机构信息</h4>
+                <p><strong>重庆联合丽格科技有限公司</strong></p>
+                <p>📍 地址：重庆市渝中区临江支路28号</p>
+                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
+                <p>📄 渝 ICP 备 2024023473 号</p>
+            </div>
+
+            <div class="disclaimer">
+                <h5>⚠️ 专业声明</h5>
+                <p>
+                    本评估工具仅供医疗专业人士参考使用，不能替代专业医学诊断。
+                    评估结果应结合临床经验和患者个体情况进行综合判断。
+                    如需医疗建议，请咨询合格的医疗专业人士。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 实时更新进度
+        function updateProgress() {
+            const form = document.getElementById('assessmentTest');
+            const requiredFields = form.querySelectorAll('input[required]');
+            const completedFields = Array.from(requiredFields).filter(field => {
+                return form.querySelector(`input[name="${field.name}"]:checked`);
+            });
+
+            const progress = (completedFields.length / requiredFields.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+
+            // 启用/禁用计算按钮
+            const calculateBtn = document.getElementById('calculateBtn');
+            calculateBtn.disabled = progress < 100;
+        }
+
+        // 监听表单变化
+        document.getElementById('assessmentTest').addEventListener('change', updateProgress);
+
+        // 计算评估结果
+        function calculateResults() {
+            const form = document.getElementById('assessmentTest');
+            const formData = new FormData(form);
+
+            // 获取各项评分
+            const scores = {
+                symmetry: parseInt(formData.get('symmetry')) || 0,
+                proportion: parseInt(formData.get('proportion')) || 0,
+                cupid: parseInt(formData.get('cupid')) || 0,
+                texture: parseInt(formData.get('texture')) || 0,
+                color: parseInt(formData.get('color')) || 0
+            };
+
+            // 计算总分
+            const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+
+            // 显示总分
+            document.getElementById('totalScore').textContent = totalScore;
+
+            // 确定评级
+            let scoreLevel, levelClass;
+            if (totalScore >= 80) {
+                scoreLevel = '优秀 (80-100分)';
+                levelClass = 'score-excellent';
+            } else if (totalScore >= 60) {
+                scoreLevel = '良好 (60-79分)';
+                levelClass = 'score-good';
+            } else {
+                scoreLevel = '需要改善 (0-59分)';
+                levelClass = 'score-fair';
+            }
+
+            const scoreLevelElement = document.getElementById('scoreLevel');
+            scoreLevelElement.textContent = scoreLevel;
+            scoreLevelElement.className = `score-level ${levelClass}`;
+
+            // 生成评分明细
+            const breakdown = document.getElementById('scoreBreakdown');
+            breakdown.innerHTML = `
+                <div class="score-item">
+                    <div class="score-item-value">${scores.symmetry}/20</div>
+                    <div class="score-item-label">唇部对称性</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.proportion}/25</div>
+                    <div class="score-item-label">唇部比例</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.cupid}/15</div>
+                    <div class="score-item-label">唇珠形态</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.texture}/20</div>
+                    <div class="score-item-label">皮肤质地</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.color}/20</div>
+                    <div class="score-item-label">颜色均匀度</div>
+                </div>
+            `;
+
+            // 生成专业建议
+            const recommendations = document.getElementById('recommendations');
+            let recommendationText = '<h3>📋 专业建议</h3><ul>';
+
+            if (totalScore >= 80) {
+                recommendationText += '<li>整体评估结果优秀，唇部美学状态良好</li>';
+                recommendationText += '<li>建议维持现有状态，定期复查</li>';
+                recommendationText += '<li>可考虑轻微的保养性治疗</li>';
+            } else if (totalScore >= 60) {
+                recommendationText += '<li>整体状态良好，有改善空间</li>';
+                recommendationText += '<li>建议根据具体薄弱环节制定改善方案</li>';
+                recommendationText += '<li>可考虑针对性的美学治疗</li>';
+            } else {
+                recommendationText += '<li>建议制定综合性改善方案</li>';
+                recommendationText += '<li>需要专业医生详细评估和指导</li>';
+                recommendationText += '<li>可考虑分阶段进行美学治疗</li>';
+            }
+
+            // 根据具体评分给出针对性建议
+            if (scores.symmetry < 10) {
+                recommendationText += '<li>唇部对称性需要重点关注和改善</li>';
+            }
+            if (scores.proportion < 15) {
+                recommendationText += '<li>建议优化唇部比例，追求更协调的美感</li>';
+            }
+            if (scores.cupid < 8) {
+                recommendationText += '<li>唇珠形态需要专业塑形处理</li>';
+            }
+            if (scores.texture < 10) {
+                recommendationText += '<li>皮肤质地改善是治疗重点之一</li>';
+            }
+            if (scores.color < 10) {
+                recommendationText += '<li>需要关注唇部颜色均匀度的改善</li>';
+            }
+
+            recommendationText += '</ul>';
+            recommendations.innerHTML = recommendationText;
+
+            // 显示结果区域
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 重置测试
+        function resetTest() {
+            document.getElementById('assessmentTest').reset();
+            document.getElementById('resultsSection').style.display = 'none';
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 页面加载时初始化进度
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

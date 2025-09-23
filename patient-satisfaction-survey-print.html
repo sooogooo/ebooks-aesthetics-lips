@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>患者满意度调查问卷 - 打印版</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            body {
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'SimSun', sans-serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .org-info {
+            font-size: 9pt;
+            color: #888;
+        }
+
+        .basic-info {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        .basic-info h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .info-label {
+            font-weight: bold;
+            min-width: 100px;
+            margin-right: 10px;
+        }
+
+        .info-input {
+            flex: 1;
+            border-bottom: 1px solid #333;
+            min-height: 20px;
+            padding: 2px 5px;
+        }
+
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .question-group {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        .question-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-number {
+            background: #4caf50;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .scale-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 50px;
+        }
+
+        .scale-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11pt;
+            background: white;
+            margin-bottom: 5px;
+        }
+
+        .scale-label {
+            font-size: 8pt;
+            text-align: center;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .scale-extremes {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9pt;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .satisfaction-summary {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #333;
+            background: #f9f9f9;
+        }
+
+        .summary-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .score-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #666;
+            background: white;
+        }
+
+        .score-label {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .score-box {
+            font-size: 16pt;
+            font-weight: bold;
+            border: 2px solid #333;
+            width: 60px;
+            height: 40px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .total-score-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+        }
+
+        .total-score-label {
+            font-size: 12pt;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .total-score-box {
+            font-size: 24pt;
+            font-weight: bold;
+            border: 3px solid #4caf50;
+            width: 120px;
+            height: 60px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .satisfaction-criteria {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .criteria-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 10pt;
+        }
+
+        .criteria-item {
+            padding: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            text-align: center;
+        }
+
+        .excellent-level {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .good-level {
+            background: #fff3e0;
+            border-color: #ff9800;
+        }
+
+        .poor-level {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .feedback-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .feedback-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .feedback-content {
+            min-height: 80px;
+            border: 1px solid #ccc;
+            background: white;
+            padding: 10px;
+        }
+
+        .recommendation-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+        }
+
+        .recommendation-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e65100;
+            text-align: center;
+        }
+
+        .recommendation-content {
+            min-height: 60px;
+            border: 1px solid #ffcc02;
+            background: white;
+            padding: 10px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .signature-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .date-label {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #388e3c;
+        }
+
+        @media screen {
+            .form-container {
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ 打印表格</button>
+
+    <div class="form-container">
+        <!-- 表头 -->
+        <div class="header">
+            <div class="title">患者满意度调查问卷</div>
+            <div class="subtitle">Patient Satisfaction Survey</div>
+            <div class="org-info">重庆联合丽格科技有限公司 | www.bccsw.cn | 023-68726872</div>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="basic-info avoid-break">
+            <h3>📋 基本信息 / Basic Information</h3>
+            <div class="info-row">
+                <div class="info-label">患者姓名:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">性别:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">年龄:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">治疗项目:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">治疗日期:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">主治医生:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">调查日期:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+            </div>
+        </div>
+
+        <!-- 说明文字 -->
+        <div style="margin: 20px 0; padding: 15px; background: #e3f2fd; border: 1px solid #2196f3; border-radius: 5px;">
+            <p style="text-align: center; font-weight: bold; color: #1565c0; margin-bottom: 8px;">📌 填写说明</p>
+            <p style="font-size: 11pt; line-height: 1.5; color: #1976d2;">
+                亲爱的患者，为了不断提升我们的服务质量，请您根据真实感受对以下各项进行评分。
+                评分范围为1-10分，1分表示非常不满意，10分表示非常满意。您的宝贵意见将帮助我们提供更好的服务。
+            </p>
+        </div>
+
+        <!-- 满意度评分 -->
+        <div class="section avoid-break">
+            <div class="section-title">⭐ 一、整体满意度评分 (1-10分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    治疗效果满意度 - 本次治疗的效果是否符合您的预期？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较好</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">完美</div>
+                    </div>
+                </div>
+                <div class="scale-extremes">
+                    <span>完全不符合预期</span>
+                    <span>完全符合或超出预期</span>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    医生专业水平 - 您对主治医生的专业技术水平评价如何？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较好</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    服务态度评价 - 医护人员的服务态度如何？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较好</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">完美</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    治疗过程舒适度 - 治疗过程中的舒适度如何？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较好</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>舒适</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">完美</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">5</span>
+                    沟通解释清晰度 - 医生的解释是否清楚易懂？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">完全<br>不清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>清楚</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">完美</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">6</span>
+                    环境设施满意度 - 您对诊疗环境和设施的评价？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较好</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>满意</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">完美</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">7</span>
+                    价格合理性 - 您认为价格与效果是否合理？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">非常<br>不合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">较不<br>合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">较合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">非常<br>合理</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">超值</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">8</span>
+                    推荐意愿 - 您是否愿意向朋友推荐我们的服务？
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">绝对<br>不推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">不推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">可能<br>不推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">中性</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">一般</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">6</div>
+                        <div class="scale-label">可能<br>推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">7</div>
+                        <div class="scale-label">愿意<br>推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">8</div>
+                        <div class="scale-label">很愿意<br>推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">9</div>
+                        <div class="scale-label">强烈<br>推荐</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">10</div>
+                        <div class="scale-label">极力<br>推荐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 满意度汇总 -->
+        <div class="satisfaction-summary avoid-break">
+            <div class="summary-title">📊 满意度评分汇总</div>
+            <div class="score-summary">
+                <div class="score-item">
+                    <div class="score-label">治疗效果</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">医生专业</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">服务态度</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">治疗舒适</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">沟通清晰</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">环境设施</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">价格合理</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">推荐意愿</div>
+                    <div class="score-box">___ / 10</div>
+                </div>
+            </div>
+
+            <div class="total-score-section">
+                <div class="total-score-label">综合满意度评分</div>
+                <div class="total-score-box">___ / 80</div>
+            </div>
+        </div>
+
+        <!-- 满意度等级标准 -->
+        <div class="satisfaction-criteria avoid-break">
+            <div class="criteria-title">🏆 满意度等级标准</div>
+            <div class="criteria-grid">
+                <div class="criteria-item excellent-level">
+                    <strong>非常满意 (65-80分)</strong><br>
+                    服务质量优秀，超出预期
+                </div>
+                <div class="criteria-item good-level">
+                    <strong>比较满意 (50-64分)</strong><br>
+                    服务质量良好，基本满意
+                </div>
+                <div class="criteria-item poor-level">
+                    <strong>需要改进 (0-49分)</strong><br>
+                    服务质量有待提升
+                </div>
+            </div>
+        </div>
+
+        <!-- 意见反馈 -->
+        <div class="feedback-section avoid-break">
+            <div class="feedback-title">💭 您的宝贵意见和建议</div>
+            <div class="feedback-content">
+                <!-- 空白区域供手写 -->
+            </div>
+        </div>
+
+        <!-- 改进建议 -->
+        <div class="recommendation-section avoid-break">
+            <div class="recommendation-title">💡 您希望我们在哪些方面进一步改进？</div>
+            <div class="recommendation-content">
+                <!-- 空白区域供手写 -->
+            </div>
+        </div>
+
+        <!-- 签名区域 -->
+        <div class="signature-section avoid-break">
+            <div class="signature-box">
+                <div class="signature-label">患者签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-label">调查员签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <div style="text-align: center;">
+                <strong>重庆联合丽格科技有限公司</strong><br>
+                地址：重庆市渝中区临江支路28号 | 电话：023-68726872 | 网站：www.bccsw.cn<br>
+                渝 ICP 备 2024023473 号
+            </div>
+            <div style="margin-top: 10px; text-align: center; font-size: 8pt; color: #888;">
+                感谢您的信任与配合，您的满意是我们最大的动力
+            </div>
+        </div>
+    </div>
+</body>
+</html>

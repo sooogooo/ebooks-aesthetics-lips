@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>术前风险评估清单 - 安全筛查系统</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <style>
+        :root {
+            --primary-color: #d32f2f;
+            --primary-light: #ff6659;
+            --primary-dark: #9a0007;
+            --secondary-color: #ff5722;
+            --accent-color: #ff8a65;
+            --bg-primary: #fef5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --text-light: #7f8c8d;
+            --border-color: #bdc3c7;
+            --shadow-light: 0 2px 8px rgba(211, 47, 47, 0.1);
+            --shadow-medium: 0 4px 16px rgba(211, 47, 47, 0.15);
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+            --safe-color: #2e7d32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .assessment-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-icon {
+            margin-right: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .risk-category {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .category-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .risk-level {
+            margin-left: auto;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .risk-high { background: var(--error-color); }
+        .risk-medium { background: var(--warning-color); }
+        .risk-low { background: var(--safe-color); }
+
+        .checklist-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .checklist-item.checked {
+            border-color: var(--primary-color);
+            background: #fff5f5;
+        }
+
+        .checklist-item.high-risk.checked {
+            border-color: var(--error-color);
+            background: #ffebee;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .checklist-item.checked .checkbox {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checklist-item.high-risk.checked .checkbox {
+            background: var(--error-color);
+            border-color: var(--error-color);
+        }
+
+        .checkbox::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .checklist-item.checked .checkbox::after {
+            opacity: 1;
+        }
+
+        .item-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .risk-indicator {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .indicator-high { background: var(--error-color); }
+        .indicator-medium { background: var(--warning-color); }
+        .indicator-low { background: var(--safe-color); }
+
+        .progress-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+        }
+
+        .progress-safe {
+            background: linear-gradient(90deg, var(--safe-color), #66bb6a);
+        }
+
+        .progress-caution {
+            background: linear-gradient(90deg, var(--warning-color), #ffb74d);
+        }
+
+        .progress-danger {
+            background: linear-gradient(90deg, var(--error-color), #ef5350);
+        }
+
+        .risk-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .risk-count {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .count-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .count-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .count-high .count-number { color: var(--error-color); }
+        .count-medium .count-number { color: var(--warning-color); }
+        .count-low .count-number { color: var(--safe-color); }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .risk-assessment {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 3px solid;
+        }
+
+        .assessment-safe {
+            border-color: var(--safe-color);
+            background: #e8f5e8;
+            color: var(--safe-color);
+        }
+
+        .assessment-caution {
+            border-color: var(--warning-color);
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .assessment-danger {
+            border-color: var(--error-color);
+            background: #ffebee;
+            color: var(--error-color);
+        }
+
+        .assessment-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .assessment-description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .recommendations {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            margin-top: 2rem;
+        }
+
+        .recommendations h3 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #bbdefb;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .recommendations li:before {
+            content: "📋";
+            position: absolute;
+            left: 0;
+        }
+
+        .company-info {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .company-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .disclaimer {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .disclaimer h5 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            color: #d84315;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .assessment-form {
+                padding: 1.5rem;
+            }
+
+            .checklist-group {
+                grid-template-columns: 1fr;
+            }
+
+            .risk-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">术前风险评估清单</h1>
+            <p class="subtitle">专业安全筛查系统 - 绛唇解语花医学美容安全保障</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="assessment-form" id="riskAssessment">
+            <!-- 实时风险监控 -->
+            <div class="progress-section">
+                <div class="progress-title">实时风险评估状态</div>
+                <div class="progress-bar">
+                    <div class="progress-fill progress-safe" id="riskProgressFill" style="width: 0%"></div>
+                </div>
+                <div class="risk-summary">
+                    <div class="risk-count count-high">
+                        <div class="count-number" id="highRiskCount">0</div>
+                        <div class="count-label">高风险</div>
+                    </div>
+                    <div class="risk-count count-medium">
+                        <div class="count-number" id="mediumRiskCount">0</div>
+                        <div class="count-label">中风险</div>
+                    </div>
+                    <div class="risk-count count-low">
+                        <div class="count-number" id="lowRiskCount">0</div>
+                        <div class="count-label">已筛查</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 医疗风险评估 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🏥</span>
+                    医疗风险评估
+                </h2>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        既往病史筛查
+                        <span class="risk-level risk-high">高风险</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">自身免疫性疾病（系统性红斑狼疮、类风湿关节炎等）</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">凝血障碍或出血性疾病</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">严重过敏史（药物、食物、材料过敏）</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">未控制的糖尿病（血糖>11.1mmol/L）</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">严重心血管疾病（心衰、心梗史、严重心律不齐）</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        用药情况评估
+                        <span class="risk-level risk-medium">中风险</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">正在使用抗凝药物（华法林、肝素等）</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">免疫抑制剂治疗中</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">长期服用激素类药物</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">阿司匹林或其他抗血小板药物</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        生理指标检测
+                        <span class="risk-level risk-low">基础筛查</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">血压检测正常（90-140/60-90mmHg）</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">血糖水平正常（空腹3.9-6.1mmol/L）</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">凝血功能检查正常</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">肝肾功能正常</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 心理评估 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🧠</span>
+                    心理状态评估
+                </h2>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        期望与认知评估
+                        <span class="risk-level risk-medium">中风险</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">对手术结果有不切实际的过高期望</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">存在严重的焦虑或抑郁症状</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">对美学标准理解存在偏差</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">体像障碍或完美主义倾向</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">已充分了解治疗风险和局限性</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">心理状态稳定，期望合理</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生活方式评估 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🏃</span>
+                    生活方式评估
+                </h2>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        行为风险因素
+                        <span class="risk-level risk-medium">中风险</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">重度吸烟（每日>20支）</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="medium">
+                            <div class="checkbox"></div>
+                            <div class="item-text">过量饮酒习惯</div>
+                            <div class="risk-indicator indicator-medium"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">规律作息，充足睡眠</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">营养状况良好</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                        <label class="checklist-item" data-risk="low">
+                            <div class="checkbox"></div>
+                            <div class="item-text">有良好的卫生习惯</div>
+                            <div class="risk-indicator indicator-low"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特殊情况评估 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">⚠️</span>
+                    特殊情况评估
+                </h2>
+
+                <div class="risk-category">
+                    <div class="category-title">
+                        禁忌症筛查
+                        <span class="risk-level risk-high">绝对禁忌</span>
+                    </div>
+                    <div class="checklist-group">
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">妊娠期或哺乳期</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">注射部位存在活动性感染</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">对透明质酸或利多卡因过敏</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">恶性肿瘤活动期</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                        <label class="checklist-item high-risk" data-risk="high">
+                            <div class="checkbox"></div>
+                            <div class="item-text">严重瘢痕体质</div>
+                            <div class="risk-indicator indicator-high"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="submit-section">
+                <button type="button" class="submit-btn" onclick="generateRiskReport()" id="assessBtn">
+                    生成风险评估报告
+                </button>
+                <button type="button" class="submit-btn" onclick="resetAssessment()" style="background: #666;">
+                    重新评估
+                </button>
+            </div>
+        </form>
+
+        <!-- 结果显示区域 -->
+        <div class="results-section" id="resultsSection">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                风险评估报告
+            </h2>
+
+            <div class="risk-assessment" id="overallAssessment">
+                <!-- 动态生成整体风险评估 -->
+            </div>
+
+            <div class="recommendations" id="recommendations">
+                <!-- 动态生成专业建议 -->
+            </div>
+
+            <!-- 公司信息和免责声明 -->
+            <div class="company-info">
+                <h4>📍 机构信息</h4>
+                <p><strong>重庆联合丽格科技有限公司</strong></p>
+                <p>📍 地址：重庆市渝中区临江支路28号</p>
+                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
+                <p>📄 渝 ICP 备 2024023473 号</p>
+            </div>
+
+            <div class="disclaimer">
+                <h5>⚠️ 重要声明</h5>
+                <p>
+                    本风险评估工具仅供医疗专业人士参考使用，不能替代专业医学判断。
+                    任何医疗决策都应基于全面的临床评估和专业医生的综合判断。
+                    如发现高风险因素，建议推迟治疗或转诊专科处理。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let riskCounts = { high: 0, medium: 0, low: 0 };
+
+        // 监听复选框变化
+        document.addEventListener('DOMContentLoaded', function() {
+            const checklistItems = document.querySelectorAll('.checklist-item');
+
+            checklistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const riskLevel = this.dataset.risk;
+
+                    if (this.classList.contains('checked')) {
+                        this.classList.remove('checked');
+                        riskCounts[riskLevel]--;
+                    } else {
+                        this.classList.add('checked');
+                        riskCounts[riskLevel]++;
+                    }
+
+                    updateRiskDisplay();
+                });
+            });
+        });
+
+        // 更新风险显示
+        function updateRiskDisplay() {
+            document.getElementById('highRiskCount').textContent = riskCounts.high;
+            document.getElementById('mediumRiskCount').textContent = riskCounts.medium;
+            document.getElementById('lowRiskCount').textContent = riskCounts.low;
+
+            // 更新进度条
+            const progressFill = document.getElementById('riskProgressFill');
+            const totalChecked = riskCounts.high + riskCounts.medium + riskCounts.low;
+            const totalItems = document.querySelectorAll('.checklist-item').length;
+            const progress = (totalChecked / totalItems) * 100;
+
+            progressFill.style.width = progress + '%';
+
+            // 根据风险等级改变进度条颜色
+            if (riskCounts.high > 0) {
+                progressFill.className = 'progress-fill progress-danger';
+            } else if (riskCounts.medium > 2) {
+                progressFill.className = 'progress-fill progress-caution';
+            } else {
+                progressFill.className = 'progress-fill progress-safe';
+            }
+        }
+
+        // 生成风险评估报告
+        function generateRiskReport() {
+            const overallAssessment = document.getElementById('overallAssessment');
+            const recommendations = document.getElementById('recommendations');
+
+            // 确定整体风险等级
+            let riskLevel, riskClass, riskIcon, riskTitle, riskDescription;
+
+            if (riskCounts.high > 0) {
+                riskLevel = 'danger';
+                riskClass = 'assessment-danger';
+                riskIcon = '🚨';
+                riskTitle = '高风险 - 建议推迟治疗';
+                riskDescription = '检测到' + riskCounts.high + '项高风险因素，建议在专科医生评估后再考虑治疗';
+            } else if (riskCounts.medium > 3) {
+                riskLevel = 'caution';
+                riskClass = 'assessment-caution';
+                riskIcon = '⚠️';
+                riskTitle = '中等风险 - 需要谨慎评估';
+                riskDescription = '存在' + riskCounts.medium + '项中等风险因素，需要制定特殊的安全预案';
+            } else {
+                riskLevel = 'safe';
+                riskClass = 'assessment-safe';
+                riskIcon = '✅';
+                riskTitle = '低风险 - 可以安全进行';
+                riskDescription = '风险因素较少，在标准操作流程下可以安全进行治疗';
+            }
+
+            // 生成整体评估
+            overallAssessment.className = `risk-assessment ${riskClass}`;
+            overallAssessment.innerHTML = `
+                <div class="assessment-icon">${riskIcon}</div>
+                <div class="assessment-title">${riskTitle}</div>
+                <div class="assessment-description">${riskDescription}</div>
+            `;
+
+            // 生成专业建议
+            let recommendationText = '<h3>📋 专业处理建议</h3><ul>';
+
+            if (riskLevel === 'danger') {
+                recommendationText += '<li>立即停止治疗计划，详细评估高风险因素</li>';
+                recommendationText += '<li>必要时转诊相关专科医生进行会诊</li>';
+                recommendationText += '<li>待风险因素解除或控制后再重新评估</li>';
+                recommendationText += '<li>建立完整的医疗记录和风险档案</li>';
+            } else if (riskLevel === 'caution') {
+                recommendationText += '<li>制定详细的风险管控预案</li>';
+                recommendationText += '<li>准备相应的应急处理措施和药物</li>';
+                recommendationText += '<li>考虑分阶段进行治疗，密切监测</li>';
+                recommendationText += '<li>获得患者的详细知情同意</li>';
+            } else {
+                recommendationText += '<li>按照标准操作流程进行治疗</li>';
+                recommendationText += '<li>保持常规的安全监测和记录</li>';
+                recommendationText += '<li>做好术后随访和护理指导</li>';
+                recommendationText += '<li>建立良好的医患沟通</li>';
+            }
+
+            // 根据具体风险因素给出针对性建议
+            if (riskCounts.high > 0) {
+                recommendationText += '<li>重点关注已识别的高风险因素，制定针对性预防措施</li>';
+            }
+            if (riskCounts.medium > 0) {
+                recommendationText += '<li>加强对中等风险因素的监测和管理</li>';
+            }
+
+            recommendationText += '<li>定期更新风险评估，根据情况调整治疗方案</li>';
+            recommendationText += '</ul>';
+
+            // 添加风险因素详情
+            recommendationText += '<h3>🔍 风险因素详情</h3><ul>';
+            recommendationText += `<li>高风险因素：${riskCounts.high} 项</li>`;
+            recommendationText += `<li>中等风险因素：${riskCounts.medium} 项</li>`;
+            recommendationText += `<li>已完成筛查：${riskCounts.low} 项</li>`;
+            recommendationText += '</ul>';
+
+            recommendations.innerHTML = recommendationText;
+
+            // 显示结果区域
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 重置评估
+        function resetAssessment() {
+            // 重置所有复选框
+            document.querySelectorAll('.checklist-item').forEach(item => {
+                item.classList.remove('checked');
+            });
+
+            // 重置计数
+            riskCounts = { high: 0, medium: 0, low: 0 };
+            updateRiskDisplay();
+
+            // 隐藏结果区域
+            document.getElementById('resultsSection').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

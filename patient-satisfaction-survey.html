@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>患者满意度调查问卷 - 绛唇解语花</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --primary-light: #D2B48C;
+            --primary-dark: #654321;
+            --secondary-color: #CD853F;
+            --accent-color: #F4A460;
+            --bg-primary: #FFF8DC;
+            --bg-secondary: #FFFEF7;
+            --text-primary: #2F1B14;
+            --text-secondary: #8B4513;
+            --text-light: #A0522D;
+            --border-color: #DEB887;
+            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
+            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .survey-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .question-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .rating-option:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .rating-option input[type="radio"] {
+            display: none;
+        }
+
+        .rating-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--text-secondary);
+        }
+
+        .rating-option input[type="radio"]:checked + .rating-circle {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .rating-label {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            text-align: center;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: var(--bg-primary);
+            border-color: var(--secondary-color);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 0.8rem;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .textarea-field {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .textarea-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .preview-btn {
+            background: var(--text-light);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .total-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .score-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .score-item-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .score-item-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .recommendations {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            margin-top: 2rem;
+        }
+
+        .recommendations h3 {
+            color: #2e7d2e;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #c8e6c9;
+        }
+
+        .recommendations li:before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .survey-form {
+                padding: 1.5rem;
+            }
+
+            .rating-scale {
+                justify-content: center;
+            }
+
+            .rating-circle {
+                width: 35px;
+                height: 35px;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .required {
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">患者满意度调查问卷</h1>
+            <p class="subtitle">绛唇解语花 - 专业唇部美学治疗效果评估</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="survey-form" id="satisfactionSurvey">
+            <!-- 进度条 -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+                完成进度: <span id="progressText">0%</span>
+            </p>
+
+            <!-- 基本信息 -->
+            <div class="section">
+                <h2 class="section-title">📋 基本信息</h2>
+                <div class="question-group">
+                    <div class="question">治疗日期 <span class="required">*</span></div>
+                    <input type="date" name="treatmentDate" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 6px; font-size: 1rem;" required>
+                </div>
+                <div class="question-group">
+                    <div class="question">治疗类型 <span class="required">*</span></div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="treatment1" name="treatmentType" value="唇部填充">
+                            <label for="treatment1">唇部填充</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="treatment2" name="treatmentType" value="唇形修复">
+                            <label for="treatment2">唇形修复</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="treatment3" name="treatmentType" value="唇部年轻化">
+                            <label for="treatment3">唇部年轻化</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="treatment4" name="treatmentType" value="唇纹改善">
+                            <label for="treatment4">唇纹改善</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 整体满意度评分 -->
+            <div class="section">
+                <h2 class="section-title">⭐ 整体满意度评分 (1-10分)</h2>
+
+                <div class="question-group">
+                    <div class="question">1. 治疗效果是否符合预期？ <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="q1_1" name="expectation" value="1" required>
+                            <label for="q1_1" class="rating-circle">1</label>
+                            <div class="rating-label">完全不符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_2" name="expectation" value="2">
+                            <label for="q1_2" class="rating-circle">2</label>
+                            <div class="rating-label">不太符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_3" name="expectation" value="3">
+                            <label for="q1_3" class="rating-circle">3</label>
+                            <div class="rating-label">一般</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_4" name="expectation" value="4">
+                            <label for="q1_4" class="rating-circle">4</label>
+                            <div class="rating-label">较符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_5" name="expectation" value="5">
+                            <label for="q1_5" class="rating-circle">5</label>
+                            <div class="rating-label">符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_6" name="expectation" value="6">
+                            <label for="q1_6" class="rating-circle">6</label>
+                            <div class="rating-label">比较符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_7" name="expectation" value="7">
+                            <label for="q1_7" class="rating-circle">7</label>
+                            <div class="rating-label">很符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_8" name="expectation" value="8">
+                            <label for="q1_8" class="rating-circle">8</label>
+                            <div class="rating-label">非常符合</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_9" name="expectation" value="9">
+                            <label for="q1_9" class="rating-circle">9</label>
+                            <div class="rating-label">超出预期</div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q1_10" name="expectation" value="10">
+                            <label for="q1_10" class="rating-circle">10</label>
+                            <div class="rating-label">完美</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">2. 医疗团队服务质量如何？ <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="q2_1" name="service" value="1" required>
+                            <label for="q2_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_2" name="service" value="2">
+                            <label for="q2_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_3" name="service" value="3">
+                            <label for="q2_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_4" name="service" value="4">
+                            <label for="q2_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_5" name="service" value="5">
+                            <label for="q2_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_6" name="service" value="6">
+                            <label for="q2_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_7" name="service" value="7">
+                            <label for="q2_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_8" name="service" value="8">
+                            <label for="q2_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_9" name="service" value="9">
+                            <label for="q2_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q2_10" name="service" value="10">
+                            <label for="q2_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>很差</span>
+                        <span>优秀</span>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">3. 恢复过程舒适度如何？ <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="q3_1" name="comfort" value="1" required>
+                            <label for="q3_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_2" name="comfort" value="2">
+                            <label for="q3_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_3" name="comfort" value="3">
+                            <label for="q3_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_4" name="comfort" value="4">
+                            <label for="q3_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_5" name="comfort" value="5">
+                            <label for="q3_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_6" name="comfort" value="6">
+                            <label for="q3_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_7" name="comfort" value="7">
+                            <label for="q3_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_8" name="comfort" value="8">
+                            <label for="q3_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_9" name="comfort" value="9">
+                            <label for="q3_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q3_10" name="comfort" value="10">
+                            <label for="q3_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>很不舒适</span>
+                        <span>非常舒适</span>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">4. 价格与效果比例合理性？ <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="q4_1" name="value" value="1" required>
+                            <label for="q4_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_2" name="value" value="2">
+                            <label for="q4_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_3" name="value" value="3">
+                            <label for="q4_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_4" name="value" value="4">
+                            <label for="q4_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_5" name="value" value="5">
+                            <label for="q4_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_6" name="value" value="6">
+                            <label for="q4_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_7" name="value" value="7">
+                            <label for="q4_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_8" name="value" value="8">
+                            <label for="q4_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_9" name="value" value="9">
+                            <label for="q4_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q4_10" name="value" value="10">
+                            <label for="q4_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>不合理</span>
+                        <span>非常合理</span>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">5. 是否愿意推荐给他人？ <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="q5_1" name="recommend" value="1" required>
+                            <label for="q5_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_2" name="recommend" value="2">
+                            <label for="q5_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_3" name="recommend" value="3">
+                            <label for="q5_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_4" name="recommend" value="4">
+                            <label for="q5_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_5" name="recommend" value="5">
+                            <label for="q5_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_6" name="recommend" value="6">
+                            <label for="q5_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_7" name="recommend" value="7">
+                            <label for="q5_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_8" name="recommend" value="8">
+                            <label for="q5_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_9" name="recommend" value="9">
+                            <label for="q5_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="q5_10" name="recommend" value="10">
+                            <label for="q5_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>绝不推荐</span>
+                        <span>强烈推荐</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 详细评价维度 -->
+            <div class="section">
+                <h2 class="section-title">📊 详细评价维度</h2>
+
+                <div class="question-group">
+                    <div class="question">美学效果满意度 (1-10分) <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_1" name="aesthetic" value="1" required>
+                            <label for="aesthetic_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_2" name="aesthetic" value="2">
+                            <label for="aesthetic_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_3" name="aesthetic" value="3">
+                            <label for="aesthetic_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_4" name="aesthetic" value="4">
+                            <label for="aesthetic_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_5" name="aesthetic" value="5">
+                            <label for="aesthetic_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_6" name="aesthetic" value="6">
+                            <label for="aesthetic_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_7" name="aesthetic" value="7">
+                            <label for="aesthetic_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_8" name="aesthetic" value="8">
+                            <label for="aesthetic_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_9" name="aesthetic" value="9">
+                            <label for="aesthetic_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="aesthetic_10" name="aesthetic" value="10">
+                            <label for="aesthetic_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">医疗专业性评价 (1-10分) <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="professional_1" name="professional" value="1" required>
+                            <label for="professional_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_2" name="professional" value="2">
+                            <label for="professional_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_3" name="professional" value="3">
+                            <label for="professional_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_4" name="professional" value="4">
+                            <label for="professional_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_5" name="professional" value="5">
+                            <label for="professional_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_6" name="professional" value="6">
+                            <label for="professional_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_7" name="professional" value="7">
+                            <label for="professional_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_8" name="professional" value="8">
+                            <label for="professional_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_9" name="professional" value="9">
+                            <label for="professional_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="professional_10" name="professional" value="10">
+                            <label for="professional_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">沟通质量评价 (1-10分) <span class="required">*</span></div>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" id="communication_1" name="communication" value="1" required>
+                            <label for="communication_1" class="rating-circle">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_2" name="communication" value="2">
+                            <label for="communication_2" class="rating-circle">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_3" name="communication" value="3">
+                            <label for="communication_3" class="rating-circle">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_4" name="communication" value="4">
+                            <label for="communication_4" class="rating-circle">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_5" name="communication" value="5">
+                            <label for="communication_5" class="rating-circle">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_6" name="communication" value="6">
+                            <label for="communication_6" class="rating-circle">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_7" name="communication" value="7">
+                            <label for="communication_7" class="rating-circle">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_8" name="communication" value="8">
+                            <label for="communication_8" class="rating-circle">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_9" name="communication" value="9">
+                            <label for="communication_9" class="rating-circle">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="communication_10" name="communication" value="10">
+                            <label for="communication_10" class="rating-circle">10</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 开放性问题 -->
+            <div class="section">
+                <h2 class="section-title">💬 意见反馈</h2>
+
+                <div class="question-group">
+                    <div class="question">您认为我们在哪些方面做得最好？</div>
+                    <textarea name="strengths" class="textarea-field" placeholder="请详细描述您满意的方面..."></textarea>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">您认为我们还有哪些需要改进的地方？</div>
+                    <textarea name="improvements" class="textarea-field" placeholder="请提出您的建议和意见..."></textarea>
+                </div>
+
+                <div class="question-group">
+                    <div class="question">您还有其他意见或建议吗？</div>
+                    <textarea name="additional" class="textarea-field" placeholder="其他意见和建议..."></textarea>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="submit-section">
+                <button type="button" class="submit-btn preview-btn" onclick="previewResults()">预览结果</button>
+                <button type="submit" class="submit-btn">提交问卷</button>
+            </div>
+        </form>
+
+        <!-- 结果显示区域 -->
+        <div class="results-section" id="resultsSection">
+            <h2 class="section-title">📈 评估结果</h2>
+
+            <div class="score-display">
+                <div class="total-score" id="totalScore">0</div>
+                <div class="score-label">总体满意度评分</div>
+            </div>
+
+            <div class="score-breakdown" id="scoreBreakdown">
+                <!-- 动态生成评分明细 -->
+            </div>
+
+            <div class="recommendations" id="recommendations">
+                <!-- 动态生成建议 -->
+            </div>
+
+            <!-- 公司信息和免责声明 -->
+            <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; margin-top: 30px;">
+                <h4 style="color: var(--primary-color); margin-bottom: 15px;">📍 机构信息</h4>
+                <p><strong>重庆联合丽格科技有限公司</strong></p>
+                <p>📍 地址：重庆市渝中区临江支路28号</p>
+                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
+                <p>📄 渝 ICP 备 2024023473 号</p>
+            </div>
+
+            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ff9800;">
+                <h5 style="color: #e65100; margin-bottom: 10px;">⚠️ 重要声明</h5>
+                <p style="color: #d84315; font-size: 0.9rem; line-height: 1.5;">
+                    本问卷结果仅供医疗服务质量改进参考。如有医疗问题，请及时咨询专业医生。
+                    我们严格保护您的隐私信息，问卷数据仅用于服务质量提升。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 实时更新进度
+        function updateProgress() {
+            const form = document.getElementById('satisfactionSurvey');
+            const requiredFields = form.querySelectorAll('[required]');
+            const completedFields = Array.from(requiredFields).filter(field => {
+                if (field.type === 'radio') {
+                    return form.querySelector(`input[name="${field.name}"]:checked`);
+                }
+                return field.value.trim() !== '';
+            });
+
+            const progress = (completedFields.length / requiredFields.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+        }
+
+        // 监听表单变化
+        document.getElementById('satisfactionSurvey').addEventListener('change', updateProgress);
+        document.getElementById('satisfactionSurvey').addEventListener('input', updateProgress);
+
+        // 预览结果功能
+        function previewResults() {
+            const form = document.getElementById('satisfactionSurvey');
+            const formData = new FormData(form);
+
+            // 计算各项评分
+            const scores = {
+                expectation: parseInt(formData.get('expectation')) || 0,
+                service: parseInt(formData.get('service')) || 0,
+                comfort: parseInt(formData.get('comfort')) || 0,
+                value: parseInt(formData.get('value')) || 0,
+                recommend: parseInt(formData.get('recommend')) || 0,
+                aesthetic: parseInt(formData.get('aesthetic')) || 0,
+                professional: parseInt(formData.get('professional')) || 0,
+                communication: parseInt(formData.get('communication')) || 0
+            };
+
+            // 计算总分 (满分80分，转换为100分制)
+            const totalRawScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+            const totalScore = Math.round((totalRawScore / 80) * 100);
+
+            // 显示总分
+            document.getElementById('totalScore').textContent = totalScore;
+
+            // 生成评分明细
+            const breakdown = document.getElementById('scoreBreakdown');
+            breakdown.innerHTML = `
+                <div class="score-item">
+                    <div class="score-item-value">${scores.expectation}/10</div>
+                    <div class="score-item-label">效果符合预期</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.service}/10</div>
+                    <div class="score-item-label">服务质量</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.comfort}/10</div>
+                    <div class="score-item-label">恢复舒适度</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.value}/10</div>
+                    <div class="score-item-label">价格合理性</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.recommend}/10</div>
+                    <div class="score-item-label">推荐意愿</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.aesthetic}/10</div>
+                    <div class="score-item-label">美学效果</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.professional}/10</div>
+                    <div class="score-item-label">专业性</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-item-value">${scores.communication}/10</div>
+                    <div class="score-item-label">沟通质量</div>
+                </div>
+            `;
+
+            // 生成建议
+            const recommendations = document.getElementById('recommendations');
+            let recommendationText = '<h3>📋 评估建议</h3><ul>';
+
+            if (totalScore >= 90) {
+                recommendationText += '<li>您的整体满意度非常高，感谢您的信任和支持</li>';
+                recommendationText += '<li>建议您按照医嘱进行后续护理，定期复查</li>';
+                recommendationText += '<li>欢迎您向朋友推荐我们的专业服务</li>';
+            } else if (totalScore >= 80) {
+                recommendationText += '<li>您的满意度较高，我们会继续努力提供优质服务</li>';
+                recommendationText += '<li>如有任何疑问，请及时与我们联系</li>';
+                recommendationText += '<li>请严格按照术后护理指导进行恢复</li>';
+            } else if (totalScore >= 70) {
+                recommendationText += '<li>感谢您的反馈，我们会根据您的建议持续改进</li>';
+                recommendationText += '<li>如对治疗效果有疑虑，建议预约复查</li>';
+                recommendationText += '<li>我们将加强服务质量管理</li>';
+            } else {
+                recommendationText += '<li>我们非常重视您的意见，会立即安排专人跟进</li>';
+                recommendationText += '<li>建议您尽快联系我们的客服团队</li>';
+                recommendationText += '<li>我们将制定针对性的改进措施</li>';
+            }
+
+            // 根据具体评分给出针对性建议
+            if (scores.aesthetic < 7) {
+                recommendationText += '<li>针对美学效果，建议预约专家面诊评估</li>';
+            }
+            if (scores.comfort < 7) {
+                recommendationText += '<li>如有不适，请及时告知医护团队</li>';
+            }
+            if (scores.communication < 7) {
+                recommendationText += '<li>我们将加强医患沟通培训</li>';
+            }
+
+            recommendationText += '</ul>';
+            recommendations.innerHTML = recommendationText;
+
+            // 显示结果区域
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 表单提交处理
+        document.getElementById('satisfactionSurvey').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 显示提交成功消息
+            alert('问卷提交成功！感谢您的宝贵意见。我们会认真对待每一条反馈，持续改进服务质量。');
+
+            // 这里可以添加实际的数据提交逻辑
+            // 例如发送到服务器、保存到数据库等
+            console.log('问卷数据:', new FormData(this));
+
+            // 自动预览结果
+            previewResults();
+        });
+
+        // 页面加载时初始化进度
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

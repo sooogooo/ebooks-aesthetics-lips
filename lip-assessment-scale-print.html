@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唇部美学标准化评估量表 - 打印版</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            body {
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'SimSun', sans-serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .org-info {
+            font-size: 9pt;
+            color: #888;
+        }
+
+        .basic-info {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        .basic-info h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .info-label {
+            font-weight: bold;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+
+        .info-input {
+            flex: 1;
+            border-bottom: 1px solid #333;
+            min-height: 20px;
+            padding: 2px 5px;
+        }
+
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-left: 4px solid #666;
+        }
+
+        .assessment-item {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        .item-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .scoring-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .score-option {
+            display: flex;
+            align-items: center;
+            min-width: 150px;
+            margin-bottom: 5px;
+        }
+
+        .score-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .score-text {
+            font-size: 11pt;
+            line-height: 1.2;
+        }
+
+        .score-value {
+            font-weight: bold;
+            color: #666;
+            margin-left: 5px;
+        }
+
+        .total-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #333;
+            background: #f9f9f9;
+        }
+
+        .total-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .score-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #666;
+            background: white;
+        }
+
+        .score-label {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .score-box {
+            font-size: 16pt;
+            font-weight: bold;
+            border: 2px solid #333;
+            width: 60px;
+            height: 40px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .evaluation-criteria {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .criteria-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .criteria-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 10pt;
+        }
+
+        .criteria-item {
+            padding: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .signature-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .date-label {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #0056b3;
+        }
+
+        @media screen {
+            .form-container {
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ 打印表格</button>
+
+    <div class="form-container">
+        <!-- 表头 -->
+        <div class="header">
+            <div class="title">唇部美学标准化评估量表</div>
+            <div class="subtitle">Standardized Lip Aesthetic Assessment Scale</div>
+            <div class="org-info">重庆联合丽格科技有限公司 | www.bccsw.cn | 023-68726872</div>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="basic-info avoid-break">
+            <h3>📋 基本信息 / Basic Information</h3>
+            <div class="info-row">
+                <div class="info-label">患者姓名:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">性别:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">年龄:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">评估日期:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">评估医生:</div>
+                <div class="info-input"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">病历号:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">评估目的:</div>
+                <div class="info-input"></div>
+            </div>
+        </div>
+
+        <!-- 评估项目 -->
+        <div class="section avoid-break">
+            <div class="section-title">⚖️ 一、唇部对称性评估 (0-20分)</div>
+            <div class="assessment-item">
+                <div class="item-title">评估标准：观察上下唇的对称性，包括轮廓、体积、位置等</div>
+                <div class="scoring-options">
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">完全对称，左右唇形完美匹配<span class="score-value">(20分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">轻微不对称，肉眼难以察觉<span class="score-value">(15分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">轻微不对称，仔细观察可见<span class="score-value">(10分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">明显不对称，影响美观<span class="score-value">(5分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">严重不对称，需要矫正<span class="score-value">(0分)</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <strong>得分：</strong>
+                    <div class="score-box" style="margin-left: 10px; width: 80px; height: 30px; font-size: 14pt;"></div>
+                    <span style="margin-left: 10px;">分</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section avoid-break">
+            <div class="section-title">📐 二、唇部比例评估 (0-25分)</div>
+            <div class="assessment-item">
+                <div class="item-title">评估标准：上下唇比例是否符合黄金比例标准 (1:1.618)</div>
+                <div class="scoring-options">
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">完全符合黄金比例，上下唇比例理想<span class="score-value">(25分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">接近黄金比例，比例协调美观<span class="score-value">(20分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">基本符合比例，略有偏差<span class="score-value">(15分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">比例失调，但不严重<span class="score-value">(10分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">严重不符合黄金比例<span class="score-value">(0分)</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <strong>得分：</strong>
+                    <div class="score-box" style="margin-left: 10px; width: 80px; height: 30px; font-size: 14pt;"></div>
+                    <span style="margin-left: 10px;">分</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section avoid-break">
+            <div class="section-title">💎 三、唇珠形态评估 (0-15分)</div>
+            <div class="assessment-item">
+                <div class="item-title">评估标准：唇珠的形态、清晰度和美观程度</div>
+                <div class="scoring-options">
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">自然圆润，形态完美无瑕疵<span class="score-value">(15分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">形态良好，有轻微不完美<span class="score-value">(12分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">轻微缺陷，需要微调<span class="score-value">(8分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">明显变形，影响整体美观<span class="score-value">(5分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">严重缺陷或完全缺失<span class="score-value">(0分)</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <strong>得分：</strong>
+                    <div class="score-box" style="margin-left: 10px; width: 80px; height: 30px; font-size: 14pt;"></div>
+                    <span style="margin-left: 10px;">分</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section avoid-break">
+            <div class="section-title">🌟 四、皮肤质地评估 (0-20分)</div>
+            <div class="assessment-item">
+                <div class="item-title">评估标准：唇部皮肤的光滑度、细腻程度和质感</div>
+                <div class="scoring-options">
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">光滑细腻，质感优秀<span class="score-value">(20分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">整体良好，有轻微纹理<span class="score-value">(15分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">轻微皱纹，质地一般<span class="score-value">(10分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">明显纹理不佳，需要改善<span class="score-value">(5分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">质地粗糙，严重老化<span class="score-value">(0分)</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <strong>得分：</strong>
+                    <div class="score-box" style="margin-left: 10px; width: 80px; height: 30px; font-size: 14pt;"></div>
+                    <span style="margin-left: 10px;">分</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section avoid-break">
+            <div class="section-title">🎨 五、颜色均匀度评估 (0-20分)</div>
+            <div class="assessment-item">
+                <div class="item-title">评估标准：唇部颜色的均匀程度和自然度</div>
+                <div class="scoring-options">
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">色泽均匀自然，颜色理想<span class="score-value">(20分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">整体均匀，有轻微色差<span class="score-value">(15分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">轻微色差，不太明显<span class="score-value">(10分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">明显色彩不均，影响美观<span class="score-value">(5分)</span></div>
+                    </div>
+                    <div class="score-option">
+                        <div class="score-checkbox"></div>
+                        <div class="score-text">严重色差或色素沉着<span class="score-value">(0分)</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; display: flex; align-items: center;">
+                    <strong>得分：</strong>
+                    <div class="score-box" style="margin-left: 10px; width: 80px; height: 30px; font-size: 14pt;"></div>
+                    <span style="margin-left: 10px;">分</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 总分统计 -->
+        <div class="total-section avoid-break">
+            <div class="total-title">📊 评估结果汇总</div>
+            <div class="score-summary">
+                <div class="score-item">
+                    <div class="score-label">对称性得分</div>
+                    <div class="score-box">___ / 20</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">比例得分</div>
+                    <div class="score-box">___ / 25</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">唇珠得分</div>
+                    <div class="score-box">___ / 15</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">质地得分</div>
+                    <div class="score-box">___ / 20</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">颜色得分</div>
+                    <div class="score-box">___ / 20</div>
+                </div>
+                <div class="score-item" style="background: #f0f0f0;">
+                    <div class="score-label" style="font-weight: bold;">总分</div>
+                    <div class="score-box" style="border: 3px solid #333; font-size: 18pt;">___ / 100</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 评估等级标准 -->
+        <div class="evaluation-criteria avoid-break">
+            <div class="criteria-title">🏆 评估等级标准</div>
+            <div class="criteria-list">
+                <div class="criteria-item" style="background: #e8f5e8;">
+                    <strong>优秀 (80-100分)</strong><br>
+                    唇部美学状态优良，无需特殊处理
+                </div>
+                <div class="criteria-item" style="background: #fff3e0;">
+                    <strong>良好 (60-79分)</strong><br>
+                    整体状态良好，可考虑轻微改善
+                </div>
+                <div class="criteria-item" style="background: #ffebee;">
+                    <strong>需改善 (0-59分)</strong><br>
+                    建议制定专业改善方案
+                </div>
+            </div>
+        </div>
+
+        <!-- 医生意见 -->
+        <div class="section avoid-break">
+            <div class="section-title">💭 专业评估意见</div>
+            <div style="border: 1px solid #ccc; min-height: 80px; padding: 10px; background: white;">
+                <!-- 空白区域供手写 -->
+            </div>
+        </div>
+
+        <!-- 签名区域 -->
+        <div class="signature-section avoid-break">
+            <div class="signature-box">
+                <div class="signature-label">评估医生签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-label">患者确认签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <div style="text-align: center;">
+                <strong>重庆联合丽格科技有限公司</strong><br>
+                地址：重庆市渝中区临江支路28号 | 电话：023-68726872 | 网站：www.bccsw.cn<br>
+                渝 ICP 备 2024023473 号
+            </div>
+            <div style="margin-top: 10px; text-align: center; font-size: 8pt; color: #888;">
+                本量表仅供医疗专业人士使用，具体治疗方案请遵医嘱
+            </div>
+        </div>
+    </div>
+</body>
+</html>

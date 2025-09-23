@@ -1,0 +1,213 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/lib/python3.12/http/server.py", line 1314, in <module>
+    test(
+  File "/usr/lib/python3.12/http/server.py", line 1261, in test
+    with ServerClass(addr, HandlerClass) as httpd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socketserver.py", line 457, in __init__
+    self.server_bind()
+  File "/usr/lib/python3.12/http/server.py", line 1308, in server_bind
+    return super().server_bind()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/serv139.162.123.73 - - [21/Sep/2025 16:40:54] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 16:41:05] "GET /reader.html?chapter=01_cultural_aesthetics_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 16:41:54] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 16:42:01] "GET /reader.html?chapter=04_technical_mastery_international.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:42:46] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [21/Sep/2025 16:44:48] "GET /test.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:44:56] "GET /00_preface.md HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:45:47] "GET /reader.html?chapter=00_preface.md HTTP/1.1" 200 -
+180.101.244.15 - - [21/Sep/2025 16:47:43] "GET / HTTP/1.1" 200 -
+180.101.244.15 - - [21/Sep/2025 16:47:45] "GET / HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:48:48] "GET / HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:48:52] "GET /reader.html?chapter=01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:48:53] "GET /01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:49:11] "GET /test.html HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:49:12] code 404, message File not found
+139.162.123.73 - - [21/Sep/2025 16:49:12] "GET /favicon.ico HTTP/1.1" 404 -
+139.162.123.73 - - [21/Sep/2025 16:49:30] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 16:49:46] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:49:46] "GET /digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:29] "GET /reader.html?chapter=global_partnership.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:29] "GET /global_partnership.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:41] "GET /reader.html?chapter=blockchain_certification.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:42] "GET /blockchain_certification.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:52] "GET /reader.html?chapter=vr_ar_training.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:50:53] "GET /vr_ar_training.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:51:25] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 304 -
+127.0.0.1 - - [21/Sep/2025 16:51:31] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:51:42] "GET /digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:51:45] "GET /reader.html?chapter=visual_design_guide.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:51:46] "GET /visual_design_guide.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:52:02] "GET /reader.html?chapter=ai_assessment_system.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:52:02] "GET /ai_assessment_system.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:52:32] "GET /reader.html?chapter=10_risk_aesthetics.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 16:52:33] "GET /10_risk_aesthetics.md HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:53:08] "GET /test-digital.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Sep/2025 16:53:39] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:23:56] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:24:29] "GET /reader.html?chapter=03_case_studies.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:24:30] "GET /03_case_studies.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:24:52] "GET /reader.html?chapter=07_doctor_selection.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:24:53] "GET /07_doctor_selection.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:24:58] "GET /08_cosmetics_tattoo.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:50:34] "GET / HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:50:41] "GET /reader.html?chapter=01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:50:42] "GET /01_cultural_aesthetics_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:50:58] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:50:59] "GET /digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:51:08] "GET /reader.html?chapter=ai_assessment_system.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:51:10] "GET /ai_assessment_system.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:51:19] "GET /reader.html?chapter=visual_design_guide.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:51:20] "GET /visual_design_guide.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:52:18] "GET /reader.html?chapter=vr_ar_training.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:52:19] "GET /vr_ar_training.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:52:25] "GET /reader.html?chapter=blockchain_certification.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:52:26] "GET /blockchain_certification.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:52:36] "GET /reader.html?chapter=global_partnership.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 18:52:36] "GET /global_partnership.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 18:56:56] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:00:31] "GET /reader.html?chapter=digital_ecosystem.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:00:43] "GET /reader.html?chapter=10_risk_aesthetics.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:00:43] "GET /10_risk_aesthetics.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:05:08] "GET / HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:12:01] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:18:17] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:18:26] "GET /reader.html?chapter=04_technical_mastery_international.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:18:27] "GET /04_technical_mastery_international.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:19:18] "GET /05_comprehensive_strategy.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:23:54] "GET /reader.html?chapter=05_comprehensive_strategy.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:24:10] "GET /reader.html?chapter=visual_design_guide.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:24:10] "GET /visual_design_guide.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:24:28] "GET /digital_ecosystem.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:24:40] "GET /reader.html?chapter=ai_assessment_system.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:24:41] "GET /ai_assessment_system.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:24:49] "GET /reader.html?chapter=06_functional_reconstruction.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:24:49] "GET /06_functional_reconstruction.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:28:04] "GET / HTTP/1.1" 200 -
+180.163.29.212 - - [21/Sep/2025 19:28:04] "GET /05_comprehensive_strategy.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:28:43] "GET /reader.html?chapter=08_cosmetics_tattoo.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:28:44] "GET /08_cosmetics_tattoo.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:36:53] "GET / HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:36:57] "GET /reader.html?chapter=07_doctor_selection.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:36:58] "GET /07_doctor_selection.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:37:17] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:37:18] "GET /11_appendix_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 19:44:01] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:44:11] "GET /ai_assessment_system.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:56:02] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:56:22] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 19:56:22] "GET /11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:09:20] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:09:50] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:14:43] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:15:34] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:17:51] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:17:51] "GET /11_appendix_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:18:01] "GET /lip-assessment-test.html HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:18:30] "GET /patient-satisfaction-survey.html HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:20:01] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:26:52] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:26:54] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:26:55] "GET /11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:27:16] "GET /ai_assessment_system.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:27:25] "GET /visual_design_guide.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:27:36] "GET /00_preface.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:27:43] "GET /01_cultural_aesthetics_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:29:24] "GET /02_scientific_principles.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:30:45] "GET /03_case_studies.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:30:49] "GET /04_technical_mastery_international.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:31:00] "GET /05_comprehensive_strategy.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:31:06] "GET /06_functional_reconstruction.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:31:27] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:31:33] "GET /reader.html?chapter=10_risk_aesthetics.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:31:33] "GET /10_risk_aesthetics.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:39:57] "GET /07_doctor_selection.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:40:01] "GET /08_cosmetics_tattoo.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:40:03] "GET /09_aftercare.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:40:07] "GET /10_risk_aesthetics.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:40:12] "GET /11_appendix_enhanced.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:40:26] "GET /reader.html?chapter=10_risk_aesthetics.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:43:24] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:43:39] "GET /reader.html?chapter=05_comprehensive_strategy.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:43:55] "GET /reader.html?chapter=04_technical_mastery_international.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:44:10] "GET /reader.html?chapter=03_case_studies.md HTTP/1.1" 200 -
+139.162.123.73 - - [21/Sep/2025 20:48:41] "GET / HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:51:17] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:51:17] "GET /11_appendix_enhanced.md HTTP/1.1" 304 -
+139.162.123.73 - - [21/Sep/2025 20:51:55] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 304 -
+113.248.52.92 - - [22/Sep/2025 03:48:27] "GET / HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:48:33] "GET /reader.html?chapter=00_preface.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:48:34] "GET /00_preface.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:48:40] "GET /reader.html?chapter=01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:48:41] "GET /01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:48:52] "GET /02_scientific_principles.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:02] "GET /03_case_studies.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:06] "GET /04_technical_mastery_international.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:32] "GET /05_comprehensive_strategy.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:37] "GET /06_functional_reconstruction.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:41] "GET /07_doctor_selection.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:45] "GET /08_cosmetics_tattoo.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:51] "GET /09_aftercare.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:49:54] "GET /10_risk_aesthetics.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:50:00] "GET /11_appendix_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:50:11] "GET /preoperative-risk-assessment.html HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:50:24] "GET /ai_assessment_system.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:50:36] "GET /visual_design_guide.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:50:46] "GET /digital_ecosystem.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:51:39] "GET /reader.html?chapter=10_risk_aesthetics.md HTTP/1.1" 200 -
+59.83.208.108 - - [22/Sep/2025 03:56:50] "GET / HTTP/1.1" 200 -
+59.83.208.106 - - [22/Sep/2025 03:57:00] "GET / HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 03:57:05] "GET /reader.html?chapter=04_technical_mastery_international.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:15:24] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:15:31] "GET /patient-satisfaction-survey-print.html HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:16:03] "GET /doctor-skill-assessment.html HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:16:21] "GET /emergency-response-simulation.html HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:21:58] "GET /reader.html?chapter=08_cosmetics_tattoo.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:26:07] "GET /reader.html?chapter=06_functional_reconstruction.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:27:00] "GET / HTTP/1.1" 304 -
+113.248.52.92 - - [22/Sep/2025 04:29:06] "GET / HTTP/1.1" 304 -
+113.248.52.92 - - [22/Sep/2025 04:31:27] "GET /reader.html?chapter=07_doctor_selection.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:47:55] "GET /reader.html?chapter=04_technical_mastery_international.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:47:55] "GET /04_technical_mastery_international.md HTTP/1.1" 304 -
+113.248.52.92 - - [22/Sep/2025 04:51:37] "GET /reader.html?chapter=01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 04:51:38] "GET /01_cultural_aesthetics_enhanced.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 05:18:18] "GET /reader.html?chapter=02_scientific_principles.md HTTP/1.1" 200 -
+113.248.52.92 - - [22/Sep/2025 05:18:19] "GET /02_scientific_principles.md HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('69.164.217.245', 57009)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/http/server.py", line 1311, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "/usr/lib/python3.12/http/server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+69.164.217.245 - - [22/Sep/2025 11:32:07] "GET / HTTP/1.1" 200 -
+172.235.40.131 - - [22/Sep/2025 11:32:14] "GET / HTTP/1.1" 200 -
+106.92.140.198 - - [22/Sep/2025 16:47:47] "GET / HTTP/1.1" 200 -
+106.92.140.198 - - [22/Sep/2025 16:47:48] "GET / HTTP/1.1" 200 -
+106.92.141.106 - - [23/Sep/2025 10:29:53] "GET / HTTP/1.1" 200 -
+220.196.160.61 - - [23/Sep/2025 10:37:11] "GET / HTTP/1.1" 200 -
+220.196.160.151 - - [23/Sep/2025 10:37:13] "GET / HTTP/1.1" 200 -
+172.105.197.166 - - [23/Sep/2025 12:28:42] "GET / HTTP/1.1" 200 -
+172.105.197.166 - - [23/Sep/2025 18:21:55] "GET / HTTP/1.1" 200 -
+172.105.197.166 - - [24/Sep/2025 00:31:21] "GET / HTTP/1.1" 200 -
+172.105.197.166 - - [24/Sep/2025 00:31:36] "GET /reader.html?chapter=11_appendix_enhanced.md HTTP/1.1" 200 -
+172.105.197.166 - - [24/Sep/2025 00:31:37] "GET /11_appendix_enhanced.md HTTP/1.1" 200 -
+220.196.160.61 - - [24/Sep/2025 00:37:13] "GET / HTTP/1.1" 200 -
+220.196.160.75 - - [24/Sep/2025 00:37:41] "GET / HTTP/1.1" 200 -

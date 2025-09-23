@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>术前风险评估清单 - 打印版</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            body {
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'SimSun', sans-serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .org-info {
+            font-size: 9pt;
+            color: #888;
+        }
+
+        .basic-info {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        .basic-info h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .info-label {
+            font-weight: bold;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+
+        .info-input {
+            flex: 1;
+            border-bottom: 1px solid #333;
+            min-height: 20px;
+            padding: 2px 5px;
+        }
+
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-left: 4px solid #666;
+        }
+
+        .risk-category {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        .category-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .risk-level {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: bold;
+            color: white;
+        }
+
+        .risk-high {
+            background: #d32f2f;
+        }
+
+        .risk-medium {
+            background: #ff9800;
+        }
+
+        .risk-low {
+            background: #4caf50;
+        }
+
+        .checklist-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+            min-height: 40px;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .item-text {
+            flex: 1;
+            font-size: 11pt;
+            line-height: 1.3;
+        }
+
+        .risk-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .indicator-high {
+            background: #d32f2f;
+        }
+
+        .indicator-medium {
+            background: #ff9800;
+        }
+
+        .indicator-low {
+            background: #4caf50;
+        }
+
+        .assessment-summary {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #333;
+            background: #f9f9f9;
+        }
+
+        .summary-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .risk-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .risk-count {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #666;
+            background: white;
+        }
+
+        .count-label {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .count-box {
+            font-size: 16pt;
+            font-weight: bold;
+            border: 2px solid #333;
+            width: 60px;
+            height: 40px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .evaluation-notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .notes-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .notes-content {
+            min-height: 80px;
+            border: 1px solid #ccc;
+            background: white;
+            padding: 10px;
+        }
+
+        .recommendations-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+        }
+
+        .recommendations-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e65100;
+            text-align: center;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 10pt;
+        }
+
+        .recommendation-item {
+            padding: 8px;
+            border: 1px solid #ffcc02;
+            background: white;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .signature-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .date-label {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #9a0007;
+        }
+
+        @media screen {
+            .form-container {
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ 打印表格</button>
+
+    <div class="form-container">
+        <!-- 表头 -->
+        <div class="header">
+            <div class="title">术前风险评估清单</div>
+            <div class="subtitle">Preoperative Risk Assessment Checklist</div>
+            <div class="org-info">重庆联合丽格科技有限公司 | www.bccsw.cn | 023-68726872</div>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="basic-info avoid-break">
+            <h3>📋 基本信息 / Basic Information</h3>
+            <div class="info-row">
+                <div class="info-label">患者姓名:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">性别:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">年龄:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">评估日期:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">评估医生:</div>
+                <div class="info-input"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">病历号:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">拟行手术:</div>
+                <div class="info-input"></div>
+            </div>
+        </div>
+
+        <!-- 医疗风险评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🏥 一、医疗风险评估</div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    既往病史筛查
+                    <span class="risk-level risk-high">高风险</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">自身免疫性疾病（系统性红斑狼疮、类风湿关节炎等）</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">凝血障碍或出血性疾病</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">严重过敏史（药物、食物、材料过敏）</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">未控制的糖尿病（血糖>11.1mmol/L）</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">严重心血管疾病（心衰、心梗史、严重心律不齐）</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">恶性肿瘤活动期</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    用药情况评估
+                    <span class="risk-level risk-medium">中风险</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">正在使用抗凝药物（华法林、肝素等）</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">免疫抑制剂治疗中</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">长期服用激素类药物</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">阿司匹林或其他抗血小板药物</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    生理指标检测
+                    <span class="risk-level risk-low">基础筛查</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">血压检测正常（90-140/60-90mmHg）</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">血糖水平正常（空腹3.9-6.1mmol/L）</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">凝血功能检查正常</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">肝肾功能正常</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 心理状态评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🧠 二、心理状态评估</div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    期望与认知评估
+                    <span class="risk-level risk-medium">中风险</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">对手术结果有不切实际的过高期望</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">存在严重的焦虑或抑郁症状</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">对美学标准理解存在偏差</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">体像障碍或完美主义倾向</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">已充分了解治疗风险和局限性</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">心理状态稳定，期望合理</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 生活方式评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🏃 三、生活方式评估</div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    行为风险因素
+                    <span class="risk-level risk-medium">中风险</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">重度吸烟（每日>20支）</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">过量饮酒习惯</div>
+                        <div class="risk-indicator indicator-medium"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">规律作息，充足睡眠</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">营养状况良好</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">有良好的卫生习惯</div>
+                        <div class="risk-indicator indicator-low"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特殊情况评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">⚠️ 四、特殊情况评估</div>
+
+            <div class="risk-category">
+                <div class="category-title">
+                    禁忌症筛查
+                    <span class="risk-level risk-high">绝对禁忌</span>
+                </div>
+                <div class="checklist-group">
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">妊娠期或哺乳期</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">注射部位存在活动性感染</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">对透明质酸或利多卡因过敏</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <div class="item-text">严重瘢痕体质</div>
+                        <div class="risk-indicator indicator-high"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 风险评估汇总 -->
+        <div class="assessment-summary avoid-break">
+            <div class="summary-title">📊 风险评估汇总</div>
+            <div class="risk-summary">
+                <div class="risk-count">
+                    <div class="count-label">高风险因素</div>
+                    <div class="count-box">___</div>
+                </div>
+                <div class="risk-count">
+                    <div class="count-label">中风险因素</div>
+                    <div class="count-box">___</div>
+                </div>
+                <div class="risk-count">
+                    <div class="count-label">已完成筛查</div>
+                    <div class="count-box">___</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 风险等级判定标准 -->
+        <div class="recommendations-section avoid-break">
+            <div class="recommendations-title">🏆 风险等级判定标准</div>
+            <div class="recommendations-grid">
+                <div class="recommendation-item" style="background: #ffebee;">
+                    <strong>高风险 (≥1项高风险)</strong><br>
+                    建议推迟治疗，专科会诊
+                </div>
+                <div class="recommendation-item" style="background: #fff3e0;">
+                    <strong>中等风险 (≥3项中风险)</strong><br>
+                    谨慎评估，制定特殊预案
+                </div>
+                <div class="recommendation-item" style="background: #e8f5e8;">
+                    <strong>低风险 (<3项中风险)</strong><br>
+                    可以安全进行治疗
+                </div>
+            </div>
+        </div>
+
+        <!-- 评估意见 -->
+        <div class="evaluation-notes avoid-break">
+            <div class="notes-title">💭 专业评估意见</div>
+            <div class="notes-content">
+                <!-- 空白区域供手写 -->
+            </div>
+        </div>
+
+        <!-- 签名区域 -->
+        <div class="signature-section avoid-break">
+            <div class="signature-box">
+                <div class="signature-label">评估医生签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-label">患者确认签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <div style="text-align: center;">
+                <strong>重庆联合丽格科技有限公司</strong><br>
+                地址：重庆市渝中区临江支路28号 | 电话：023-68726872 | 网站：www.bccsw.cn<br>
+                渝 ICP 备 2024023473 号
+            </div>
+            <div style="margin-top: 10px; text-align: center; font-size: 8pt; color: #888;">
+                本评估表仅供医疗专业人士使用，具体治疗方案请遵医嘱
+            </div>
+        </div>
+    </div>
+</body>
+</html>

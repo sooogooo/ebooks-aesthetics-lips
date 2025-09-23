@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应急处理流程模拟测试 - 专业培训系统</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <style>
+        :root {
+            --primary-color: #ff1744;
+            --primary-light: #ff5983;
+            --primary-dark: #c4001d;
+            --secondary-color: #ff6f00;
+            --accent-color: #ff9800;
+            --bg-primary: #fff5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --text-light: #7f8c8d;
+            --border-color: #bdc3c7;
+            --shadow-light: 0 2px 8px rgba(255, 23, 68, 0.1);
+            --shadow-medium: 0 4px 16px rgba(255, 23, 68, 0.15);
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+            --urgent-color: #e91e63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .training-interface {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .scenario-selector {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .scenario-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .scenario-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-btn {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .scenario-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .scenario-btn.active {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #fff5f8, #ffebee);
+        }
+
+        .scenario-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .scenario-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .scenario-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .simulation-area {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .simulation-area.active {
+            display: block;
+        }
+
+        .case-presentation {
+            background: #ffebee;
+            border: 2px solid var(--urgent-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .case-title {
+            font-size: 1.3rem;
+            color: var(--urgent-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .case-icon {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .case-details {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .timer-section {
+            background: var(--urgent-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .timer-display {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .action-steps {
+            margin: 2rem 0;
+        }
+
+        .step-group {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        .action-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-option {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .action-option:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .action-option.selected {
+            border-color: var(--primary-color);
+            background: #fff5f8;
+        }
+
+        .action-option.correct {
+            border-color: var(--success-color);
+            background: #e8f5e8;
+        }
+
+        .action-option.incorrect {
+            border-color: var(--error-color);
+            background: #ffebee;
+        }
+
+        .option-text {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .option-feedback {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 23, 68, 0.3);
+        }
+
+        .action-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .performance-summary {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 3px solid;
+        }
+
+        .summary-excellent {
+            border-color: var(--success-color);
+            background: #e8f5e8;
+            color: var(--success-color);
+        }
+
+        .summary-good {
+            border-color: var(--warning-color);
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .summary-poor {
+            border-color: var(--error-color);
+            background: #ffebee;
+            color: var(--error-color);
+        }
+
+        .summary-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-score {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .detailed-feedback {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            margin-top: 2rem;
+        }
+
+        .detailed-feedback h3 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feedback-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #bbdefb;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feedback-list li:before {
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .feedback-correct:before {
+            content: "✅";
+        }
+
+        .feedback-incorrect:before {
+            content: "❌";
+        }
+
+        .feedback-improvement:before {
+            content: "💡";
+        }
+
+        .company-info {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .company-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .disclaimer {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .disclaimer h5 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            color: #d84315;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .training-interface {
+                padding: 1.5rem;
+            }
+
+            .scenario-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .action-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="title">应急处理流程模拟测试</h1>
+            <p class="subtitle">专业培训系统 - 绛唇解语花医学美容应急响应训练</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="training-interface">
+            <!-- 场景选择 -->
+            <div class="scenario-selector">
+                <h2 class="scenario-title">选择应急场景进行模拟训练</h2>
+                <div class="scenario-buttons">
+                    <div class="scenario-btn" onclick="selectScenario('vascular')">
+                        <span class="scenario-icon">🚨</span>
+                        <div class="scenario-name">血管栓塞</div>
+                        <div class="scenario-description">最严重的并发症之一</div>
+                    </div>
+                    <div class="scenario-btn" onclick="selectScenario('allergy')">
+                        <span class="scenario-icon">⚠️</span>
+                        <div class="scenario-name">过敏反应</div>
+                        <div class="scenario-description">可能危及生命</div>
+                    </div>
+                    <div class="scenario-btn" onclick="selectScenario('infection')">
+                        <span class="scenario-icon">🦠</span>
+                        <div class="scenario-name">感染处理</div>
+                        <div class="scenario-description">需要及时干预</div>
+                    </div>
+                    <div class="scenario-btn" onclick="selectScenario('hematoma')">
+                        <span class="scenario-icon">🩸</span>
+                        <div class="scenario-name">血肿形成</div>
+                        <div class="scenario-description">出血性并发症</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 血管栓塞场景 -->
+            <div class="simulation-area" id="vascular">
+                <div class="case-presentation">
+                    <div class="case-title">
+                        <span class="case-icon">🚨</span>
+                        紧急情况：疑似血管栓塞
+                    </div>
+                    <div class="case-details">
+                        患者，女性，28岁，刚完成上唇填充注射。注射后5分钟，患者突然报告剧烈疼痛，疼痛性质为"撕裂样"。
+                        检查发现上唇中央区域迅速出现苍白，边界清楚，伴有网状青斑样改变。患者表情痛苦，要求立即处理。
+                        <br><br>
+                        <strong>关键体征：</strong><br>
+                        • 剧烈疼痛（9/10分）<br>
+                        • 皮肤苍白，边界清楚<br>
+                        • 网状青斑<br>
+                        • 局部皮温下降<br>
+                        • 患者焦虑不安
+                    </div>
+                </div>
+
+                <div class="timer-section">
+                    <div>黄金救治时间</div>
+                    <div class="timer-display" id="vascularTimer">05:00</div>
+                    <div>分秒必争，立即行动！</div>
+                </div>
+
+                <div class="action-steps">
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">1</span>
+                            立即识别和初步处理（0-2分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">立即停止注射，确认诊断</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">继续完成注射后再处理</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">立即开始轻柔按摩患处</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">观察10分钟再决定</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">2</span>
+                            紧急药物干预（2-5分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">立即注射透明质酸酶150-300单位</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">先使用止痛药缓解疼痛</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">在栓塞区域及周围广泛注射</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">等待观察是否自行缓解</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">3</span>
+                            辅助治疗措施（同时进行）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">热敷改善局部血循环</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">冷敷减少炎症反应</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">考虑使用硝酸甘油软膏</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">联系高压氧治疗中心</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 过敏反应场景 -->
+            <div class="simulation-area" id="allergy">
+                <div class="case-presentation">
+                    <div class="case-title">
+                        <span class="case-icon">⚠️</span>
+                        紧急情况：严重过敏反应
+                    </div>
+                    <div class="case-details">
+                        患者，男性，35岁，唇部填充注射后15分钟。患者突然出现全身皮疹、瘙痒，随后出现呼吸困难、胸闷。
+                        检查发现面部肿胀、呼吸急促、血压下降（90/60mmHg），心率增快（120次/分）。
+                        <br><br>
+                        <strong>关键体征：</strong><br>
+                        • 全身荨麻疹样皮疹<br>
+                        • 呼吸困难、胸闷<br>
+                        • 血压下降<br>
+                        • 心率增快<br>
+                        • 面部水肿<br>
+                        • 患者焦虑、恐惧
+                    </div>
+                </div>
+
+                <div class="timer-section">
+                    <div>生命救治时间</div>
+                    <div class="timer-display" id="allergyTimer">03:00</div>
+                    <div>严重过敏，刻不容缓！</div>
+                </div>
+
+                <div class="action-steps">
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">1</span>
+                            立即评估和生命支持（0-1分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">立即评估气道、呼吸、循环</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">先询问病史和过敏原</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">建立静脉通道</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">给予高流量吸氧</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">2</span>
+                            肾上腺素急救（1-2分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">肌注肾上腺素0.3-0.5mg</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">先使用抗组胺药物</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">必要时5-15分钟重复给药</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">等待自然缓解</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">3</span>
+                            综合治疗和监护（同时进行）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">静推甲泼尼龙1-2mg/kg</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">H1受体阻滞剂（苯海拉明）</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">快速液体复苏</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">持续监测生命体征</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 感染处理场景 -->
+            <div class="simulation-area" id="infection">
+                <div class="case-presentation">
+                    <div class="case-title">
+                        <span class="case-icon">🦠</span>
+                        情况：术后感染征象
+                    </div>
+                    <div class="case-details">
+                        患者，女性，32岁，唇部填充术后3天来诊。主诉注射部位持续疼痛加重，伴有发热（38.2°C）。
+                        检查发现注射部位红肿明显，皮温增高，有压痛，可见少量脓性分泌物。
+                        <br><br>
+                        <strong>关键体征：</strong><br>
+                        • 局部红、肿、热、痛<br>
+                        • 发热 38.2°C<br>
+                        • 脓性分泌物<br>
+                        • 白细胞计数升高<br>
+                        • 患者全身不适
+                    </div>
+                </div>
+
+                <div class="timer-section">
+                    <div>感染控制时间窗</div>
+                    <div class="timer-display" id="infectionTimer">10:00</div>
+                    <div>及时处理，防止扩散</div>
+                </div>
+
+                <div class="action-steps">
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">1</span>
+                            诊断确认和采样（0-3分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">详细检查感染范围和程度</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">采集分泌物做细菌培养</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">立即进行大量冲洗</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">评估全身感染征象</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">2</span>
+                            局部处理和引流（3-8分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">无菌清创和脓肿引流</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">只使用抗生素不做引流</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">生理盐水彻底冲洗</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">必要时切开引流</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">3</span>
+                            抗生素治疗和随访（持续）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">经验性广谱抗生素治疗</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">等待培养结果再用药</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">根据药敏调整抗生素</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">密切随访，监测疗效</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 血肿形成场景 -->
+            <div class="simulation-area" id="hematoma">
+                <div class="case-presentation">
+                    <div class="case-title">
+                        <span class="case-icon">🩸</span>
+                        情况：术后血肿形成
+                    </div>
+                    <div class="case-details">
+                        患者，女性，45岁，唇部填充术后30分钟。患者反映注射部位疼痛逐渐加重，肿胀明显。
+                        检查发现下唇局部肿胀显著，皮肤紧张发亮，触诊有波动感，局部皮温正常。
+                        <br><br>
+                        <strong>关键体征：</strong><br>
+                        • 局部肿胀明显<br>
+                        • 皮肤紧张发亮<br>
+                        • 触诊有波动感<br>
+                        • 疼痛逐渐加重<br>
+                        • 可见瘀斑扩大
+                    </div>
+                </div>
+
+                <div class="timer-section">
+                    <div>出血控制时间</div>
+                    <div class="timer-display" id="hematomaTimer">15:00</div>
+                    <div>控制出血，预防并发症</div>
+                </div>
+
+                <div class="action-steps">
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">1</span>
+                            立即止血措施（0-5分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">立即直接压迫止血</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">热敷促进血液循环</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">冷敷减少出血</div>
+                            </div>
+                            <div class="action-option" data-step="1" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">立即按摩散血</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">2</span>
+                            血肿处理决策（5-10分钟）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">评估血肿大小和张力</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">大血肿需要抽吸引流</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">所有血肿都保守观察</div>
+                            </div>
+                            <div class="action-option" data-step="2" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">小血肿可以保守治疗</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-group">
+                        <div class="step-title">
+                            <span class="step-number">3</span>
+                            后续治疗和监护（持续）
+                        </div>
+                        <div class="action-options">
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">持续加压包扎</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">监测血肿是否增大</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="false" onclick="selectAction(this)">
+                                <div class="option-text">立即恢复正常活动</div>
+                            </div>
+                            <div class="action-option" data-step="3" data-correct="true" onclick="selectAction(this)">
+                                <div class="option-text">24-48小时后温热敷</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 进度和控制 -->
+            <div class="progress-section">
+                <div class="progress-title">训练进度</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overallProgress"></div>
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <span id="progressText">选择场景开始训练</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn" onclick="startSimulation()" id="startBtn" disabled>开始模拟训练</button>
+                <button class="action-btn" onclick="submitAnswers()" id="submitBtn" disabled>提交答案</button>
+                <button class="action-btn" onclick="resetSimulation()" style="background: #666;">重新开始</button>
+            </div>
+        </div>
+
+        <!-- 结果显示区域 -->
+        <div class="results-section" id="resultsSection">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                应急处理能力评估报告
+            </h2>
+
+            <div class="performance-summary" id="performanceSummary">
+                <!-- 动态生成表现总结 -->
+            </div>
+
+            <div class="detailed-feedback" id="detailedFeedback">
+                <!-- 动态生成详细反馈 -->
+            </div>
+
+            <!-- 公司信息和免责声明 -->
+            <div class="company-info">
+                <h4>📍 机构信息</h4>
+                <p><strong>重庆联合丽格科技有限公司</strong></p>
+                <p>📍 地址：重庆市渝中区临江支路28号</p>
+                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
+                <p>📄 渝 ICP 备 2024023473 号</p>
+            </div>
+
+            <div class="disclaimer">
+                <h5>⚠️ 培训声明</h5>
+                <p>
+                    本模拟培训系统仅供医疗专业人士学习和训练使用。
+                    真实的应急情况处理需要根据具体病情和现场条件进行判断。
+                    建议定期进行应急培训，熟练掌握各种并发症的处理流程。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentScenario = null;
+        let simulationActive = false;
+        let timerInterval = null;
+        let userAnswers = {};
+        let timeRemaining = 0;
+
+        // 场景数据
+        const scenarios = {
+            vascular: { name: '血管栓塞', time: 300, steps: 3 },
+            allergy: { name: '过敏反应', time: 180, steps: 3 },
+            infection: { name: '感染处理', time: 600, steps: 3 },
+            hematoma: { name: '血肿形成', time: 900, steps: 3 }
+        };
+
+        // 选择场景
+        function selectScenario(scenarioId) {
+            // 清除之前的选择
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.simulation-area').forEach(area => {
+                area.classList.remove('active');
+            });
+
+            // 激活新选择
+            event.target.closest('.scenario-btn').classList.add('active');
+            document.getElementById(scenarioId).classList.add('active');
+
+            currentScenario = scenarioId;
+            timeRemaining = scenarios[scenarioId].time;
+            updateTimerDisplay();
+
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('progressText').textContent = '已选择：' + scenarios[scenarioId].name;
+        }
+
+        // 开始模拟
+        function startSimulation() {
+            if (!currentScenario) return;
+
+            simulationActive = true;
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('submitBtn').disabled = false;
+
+            // 开始计时
+            startTimer();
+            updateProgress(0);
+        }
+
+        // 开始计时器
+        function startTimer() {
+            const timerElement = document.getElementById(currentScenario + 'Timer');
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    // 时间到，自动提交
+                    submitAnswers();
+                }
+            }, 1000);
+        }
+
+        // 更新计时器显示
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (currentScenario) {
+                document.getElementById(currentScenario + 'Timer').textContent = timeString;
+            }
+        }
+
+        // 选择行动
+        function selectAction(element) {
+            if (!simulationActive) return;
+
+            const step = element.dataset.step;
+            const stepActions = document.querySelectorAll(`[data-step="${step}"]`);
+
+            // 如果已经选择过，取消选择
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                delete userAnswers[`${currentScenario}_step${step}_${Array.from(stepActions).indexOf(element)}`];
+            } else {
+                element.classList.add('selected');
+                userAnswers[`${currentScenario}_step${step}_${Array.from(stepActions).indexOf(element)}`] = {
+                    correct: element.dataset.correct === 'true',
+                    text: element.querySelector('.option-text').textContent
+                };
+            }
+
+            updateProgress();
+        }
+
+        // 更新进度
+        function updateProgress(customProgress = null) {
+            let progress;
+
+            if (customProgress !== null) {
+                progress = customProgress;
+            } else {
+                const totalOptions = document.querySelectorAll(`#${currentScenario} .action-option`).length;
+                const selectedOptions = Object.keys(userAnswers).filter(key => key.startsWith(currentScenario)).length;
+                progress = (selectedOptions / totalOptions) * 100;
+            }
+
+            document.getElementById('overallProgress').style.width = progress + '%';
+
+            if (progress === 100) {
+                document.getElementById('progressText').textContent = '训练完成，请提交答案';
+            } else {
+                document.getElementById('progressText').textContent = `完成进度: ${Math.round(progress)}%`;
+            }
+        }
+
+        // 提交答案
+        function submitAnswers() {
+            if (!currentScenario) return;
+
+            simulationActive = false;
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // 显示正确答案
+            showCorrectAnswers();
+
+            // 计算得分
+            calculateScore();
+
+            // 显示结果
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 显示正确答案
+        function showCorrectAnswers() {
+            const allOptions = document.querySelectorAll(`#${currentScenario} .action-option`);
+
+            allOptions.forEach(option => {
+                const isCorrect = option.dataset.correct === 'true';
+                const isSelected = option.classList.contains('selected');
+
+                if (isCorrect) {
+                    option.classList.add('correct');
+                    option.querySelector('.option-feedback').innerHTML = '✅';
+                } else if (isSelected) {
+                    option.classList.add('incorrect');
+                    option.querySelector('.option-feedback').innerHTML = '❌';
+                }
+            });
+        }
+
+        // 计算得分
+        function calculateScore() {
+            const scenarioAnswers = Object.entries(userAnswers).filter(([key]) => key.startsWith(currentScenario));
+            const correctAnswers = scenarioAnswers.filter(([key, value]) => value.correct);
+            const totalCorrectOptions = document.querySelectorAll(`#${currentScenario} .action-option[data-correct="true"]`).length;
+
+            const score = (correctAnswers.length / totalCorrectOptions) * 100;
+            const timeTaken = scenarios[currentScenario].time - timeRemaining;
+
+            // 生成表现总结
+            generatePerformanceSummary(score, timeTaken);
+
+            // 生成详细反馈
+            generateDetailedFeedback(scenarioAnswers);
+        }
+
+        // 生成表现总结
+        function generatePerformanceSummary(score, timeTaken) {
+            const summary = document.getElementById('performanceSummary');
+            let summaryClass, icon, title, description;
+
+            if (score >= 80) {
+                summaryClass = 'summary-excellent';
+                icon = '🏆';
+                title = '优秀表现';
+                description = '应急处理能力优秀，能够快速准确地识别和处理紧急情况';
+            } else if (score >= 60) {
+                summaryClass = 'summary-good';
+                icon = '👍';
+                title = '良好表现';
+                description = '应急处理能力良好，但还有提升空间';
+            } else {
+                summaryClass = 'summary-poor';
+                icon = '⚠️';
+                title = '需要提升';
+                description = '应急处理能力需要加强训练和学习';
+            }
+
+            const timeMinutes = Math.floor(timeTaken / 60);
+            const timeSeconds = timeTaken % 60;
+
+            summary.className = `performance-summary ${summaryClass}`;
+            summary.innerHTML = `
+                <div class="summary-icon">${icon}</div>
+                <div class="summary-title">${title}</div>
+                <div class="summary-score">得分: ${Math.round(score)}分</div>
+                <div>用时: ${timeMinutes}分${timeSeconds}秒</div>
+            `;
+        }
+
+        // 生成详细反馈
+        function generateDetailedFeedback(scenarioAnswers) {
+            const feedback = document.getElementById('detailedFeedback');
+            let feedbackHTML = '<h3>📋 详细反馈分析</h3><ul class="feedback-list">';
+
+            // 正确的选择
+            const correctAnswers = scenarioAnswers.filter(([key, value]) => value.correct);
+            correctAnswers.forEach(([key, value]) => {
+                feedbackHTML += `<li class="feedback-correct">${value.text}</li>`;
+            });
+
+            // 错误的选择
+            const incorrectAnswers = scenarioAnswers.filter(([key, value]) => !value.correct);
+            incorrectAnswers.forEach(([key, value]) => {
+                feedbackHTML += `<li class="feedback-incorrect">${value.text}</li>`;
+            });
+
+            // 改进建议
+            feedbackHTML += `</ul><h3>💡 改进建议</h3><ul class="feedback-list">`;
+
+            if (correctAnswers.length < scenarioAnswers.length * 0.8) {
+                feedbackHTML += `<li class="feedback-improvement">建议加强${scenarios[currentScenario].name}的理论学习和实践训练</li>`;
+            }
+
+            feedbackHTML += `<li class="feedback-improvement">定期参加应急处理培训，保持技能熟练度</li>`;
+            feedbackHTML += `<li class="feedback-improvement">建立标准化的应急处理流程和检查清单</li>`;
+            feedbackHTML += `<li class="feedback-improvement">与团队进行定期应急演练</li>`;
+            feedbackHTML += `</ul>`;
+
+            feedback.innerHTML = feedbackHTML;
+        }
+
+        // 重置模拟
+        function resetSimulation() {
+            // 清理状态
+            simulationActive = false;
+            currentScenario = null;
+            userAnswers = {};
+            timeRemaining = 0;
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // 重置界面
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.simulation-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            document.querySelectorAll('.action-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                option.querySelector('.option-feedback').innerHTML = '';
+            });
+
+            // 重置按钮状态
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+
+            // 隐藏结果
+            document.getElementById('resultsSection').style.display = 'none';
+
+            // 重置进度
+            document.getElementById('overallProgress').style.width = '0%';
+            document.getElementById('progressText').textContent = '选择场景开始训练';
+
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有选项添加反馈元素
+            document.querySelectorAll('.action-option').forEach(option => {
+                const feedback = document.createElement('span');
+                feedback.className = 'option-feedback';
+                option.appendChild(feedback);
+            });
+        });
+    </script>
+</body>
+</html>

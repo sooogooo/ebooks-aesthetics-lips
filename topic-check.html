@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题内容检查 - 绛唇解语花</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .check-section { background: #f9f9f9; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .check-title { color: #E91E63; font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .test-card { background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #E91E63; }
+        .btn { padding: 10px 20px; background: #E91E63; color: white; border: none; border-radius: 6px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #AD1457; }
+        .status { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; margin: 5px 0; }
+        .success { background: #e8f5e8; color: #2e7d2e; }
+        .error { background: #ffebee; color: #c62828; }
+        .info { background: #e3f2fd; color: #1976d2; }
+        .results { margin-top: 15px; padding: 15px; background: #f5f5f5; border-radius: 6px; }
+        .removed-notice { background: #fff3e0; border: 1px solid #ffb74d; padding: 15px; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>📋 扩展专题内容检查</h1>
+
+    <div class="removed-notice">
+        <h3>🗑️ 已移除的专题</h3>
+        <p>根据要求，已从系统中移除以下三个扩展专题：</p>
+        <ul>
+            <li>❌ <strong>VR/AR培训</strong> - 虚拟现实医疗培训系统</li>
+            <li>❌ <strong>区块链认证</strong> - 医疗资质区块链认证体系</li>
+            <li>❌ <strong>全球合作</strong> - 国际医疗美学合作网络</li>
+        </ul>
+        <p><strong>当前剩余专题：</strong>3个（AI评估系统、视觉设计指南、数字生态系统）</p>
+    </div>
+
+    <div class="check-section">
+        <div class="check-title">🔍 剩余专题检查</div>
+        <div class="test-grid">
+            <div class="test-card">
+                <h4>🤖 AI评估系统</h4>
+                <p>检查AI智能评估系统的markdown排版和内容结构</p>
+                <button class="btn" onclick="checkChapter('ai_assessment_system.md', 'ai-results')">检查排版</button>
+                <button class="btn" onclick="openChapter('ai_assessment_system.md')">预览内容</button>
+                <div id="ai-results" class="results" style="display: none;"></div>
+            </div>
+
+            <div class="test-card">
+                <h4>🎨 视觉设计指南</h4>
+                <p>检查视觉设计指南的markdown排版和标题层次</p>
+                <button class="btn" onclick="checkChapter('visual_design_guide.md', 'visual-results')">检查排版</button>
+                <button class="btn" onclick="openChapter('visual_design_guide.md')">预览内容</button>
+                <div id="visual-results" class="results" style="display: none;"></div>
+            </div>
+
+            <div class="test-card">
+                <h4>🌐 数字生态系统</h4>
+                <p>检查数字化生态系统的markdown排版和结构</p>
+                <button class="btn" onclick="checkChapter('digital_ecosystem.md', 'digital-results')">检查排版</button>
+                <button class="btn" onclick="openChapter('digital_ecosystem.md')">预览内容</button>
+                <div id="digital-results" class="results" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="check-section">
+        <div class="check-title">📊 整体检查报告</div>
+        <button class="btn" onclick="checkAllChapters()">检查所有剩余专题</button>
+        <button class="btn" onclick="verifyRemovals()">验证移除效果</button>
+        <div id="overall-results" class="results"></div>
+    </div>
+
+    <div class="check-section">
+        <div class="check-title">🎯 快速访问</div>
+        <p>点击下方按钮直接访问相关页面：</p>
+        <button class="btn" onclick="window.open('index.html', '_blank')">📚 主页</button>
+        <button class="btn" onclick="window.open('reader.html', '_blank')">📖 阅读器</button>
+        <button class="btn" onclick="window.open('../lips-aesthetics/fix_report.html', '_blank')">📋 修复报告</button>
+    </div>
+
+    <script>
+        // 修复后的Markdown转换函数
+        function convertMarkdownToHTML(markdown) {
+            let html = markdown;
+
+            // 标题 - 从最多的#开始处理，避免部分匹配
+            html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // 粗体和斜体
+            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+            return html;
+        }
+
+        async function checkChapter(filename, resultId) {
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="info">正在检查 ' + filename + '...</div>';
+
+            try {
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const markdown = await response.text();
+
+                // 检查文件大小
+                const fileSize = markdown.length;
+
+                // 检查标题结构
+                const headings = markdown.match(/^#+\s+.*/gm) || [];
+                const h1Count = (markdown.match(/^#\s+/gm) || []).length;
+                const h2Count = (markdown.match(/^##\s+/gm) || []).length;
+                const h3Count = (markdown.match(/^###\s+/gm) || []).length;
+                const h4Count = (markdown.match(/^####\s+/gm) || []).length;
+                const h5Count = (markdown.match(/^#####\s+/gm) || []).length;
+
+                // 测试markdown转换
+                const sample = markdown.substring(0, 2000);
+                const html = convertMarkdownToHTML(sample);
+
+                // 检查是否有裸露的#符号
+                const rawHashes = html.match(/[^<>]#+[^<>]/g);
+
+                let report = `
+                    <div class="success">✅ 文件加载成功</div>
+                    <strong>文件信息：</strong><br>
+                    • 文件大小: ${fileSize} 字符<br>
+                    • 总标题数: ${headings.length}<br>
+                    • 标题分布: H1(${h1Count}) H2(${h2Count}) H3(${h3Count}) H4(${h4Count}) H5(${h5Count})<br><br>
+                `;
+
+                if (rawHashes && rawHashes.length > 0) {
+                    report += `<div class="error">❌ 发现 ${rawHashes.length} 个裸露的#符号</div>`;
+                } else {
+                    report += `<div class="success">✅ 无#符号外露问题</div>`;
+                }
+
+                resultDiv.innerHTML = report;
+
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ 检查失败: ${error.message}</div>`;
+            }
+        }
+
+        function openChapter(filename) {
+            window.open(`reader.html?chapter=${filename}`, '_blank');
+        }
+
+        async function checkAllChapters() {
+            const resultDiv = document.getElementById('overall-results');
+            const chapters = [
+                'ai_assessment_system.md',
+                'visual_design_guide.md',
+                'digital_ecosystem.md'
+            ];
+
+            resultDiv.innerHTML = '<div class="info">正在检查所有剩余专题...</div>';
+
+            let allGood = true;
+            let totalIssues = 0;
+            let report = '<h4>📊 检查结果汇总：</h4>';
+
+            for (const chapter of chapters) {
+                try {
+                    const response = await fetch(chapter);
+                    if (response.ok) {
+                        const markdown = await response.text();
+                        const sample = markdown.substring(0, 2000);
+                        const html = convertMarkdownToHTML(sample);
+                        const rawHashes = html.match(/[^<>]#+[^<>]/g);
+
+                        if (rawHashes && rawHashes.length > 0) {
+                            allGood = false;
+                            totalIssues += rawHashes.length;
+                            report += `<div class="error">❌ ${chapter}: ${rawHashes.length}个问题</div>`;
+                        } else {
+                            report += `<div class="success">✅ ${chapter}: 排版正常</div>`;
+                        }
+                    } else {
+                        report += `<div class="error">❌ ${chapter}: 文件无法访问</div>`;
+                    }
+                } catch (error) {
+                    report += `<div class="error">❌ ${chapter}: ${error.message}</div>`;
+                }
+            }
+
+            if (allGood) {
+                report += '<div class="success"><strong>🎉 所有剩余专题排版检查通过！</strong></div>';
+            } else {
+                report += `<div class="error"><strong>⚠️ 发现${totalIssues}个排版问题需要修复</strong></div>`;
+            }
+
+            resultDiv.innerHTML = report;
+        }
+
+        function verifyRemovals() {
+            const resultDiv = document.getElementById('overall-results');
+            const removedFiles = [
+                'vr_ar_training.md',
+                'blockchain_certification.md',
+                'global_partnership.md'
+            ];
+
+            resultDiv.innerHTML = '<div class="info">正在验证移除效果...</div>';
+
+            let report = '<h4>🗑️ 移除验证结果：</h4>';
+
+            removedFiles.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            report += `<div class="error">⚠️ ${file}: 文件仍然存在（可能需要手动删除）</div>`;
+                        } else {
+                            report += `<div class="success">✅ ${file}: 已成功移除访问</div>`;
+                        }
+                    })
+                    .catch(() => {
+                        report += `<div class="success">✅ ${file}: 已成功移除访问</div>`;
+                    })
+                    .finally(() => {
+                        resultDiv.innerHTML = report + '<br><div class="info">📝 注意：文件可能仍存在于服务器上，但已从导航中移除</div>';
+                    });
+            });
+        }
+
+        // 页面加载时显示当前状态
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ 专题内容检查页面已加载');
+            console.log('📊 当前剩余专题：3个');
+            console.log('🗑️ 已移除专题：3个');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读器测试 - 绛唇解语花</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test-item { background: #f9f9f9; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .btn { padding: 10px 20px; background: #E91E63; color: white; border: none; border-radius: 6px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #AD1457; }
+        .result { margin-top: 10px; padding: 10px; border-radius: 4px; }
+        .success { background: #e8f5e8; color: #2e7d2e; }
+        .error { background: #ffebee; color: #c62828; }
+    </style>
+</head>
+<body>
+    <h1>📖 阅读器功能测试</h1>
+
+    <div class="test-item">
+        <h3>主页按钮测试</h3>
+        <button class="btn" onclick="testIndexButtons()">测试主页按钮</button>
+        <div id="index-result" class="result"></div>
+    </div>
+
+    <div class="test-item">
+        <h3>文件存在性测试</h3>
+        <button class="btn" onclick="testFileExistence()">测试文件存在</button>
+        <div id="file-result" class="result"></div>
+    </div>
+
+    <div class="test-item">
+        <h3>阅读器直接测试</h3>
+        <button class="btn" onclick="openReader('ai_assessment_system.md')">AI评估系统</button>
+        <button class="btn" onclick="openReader('visual_design_guide.md')">视觉设计指南</button>
+        <button class="btn" onclick="openReader('digital_ecosystem.md')">数字生态系统</button>
+        <button class="btn" onclick="openReader('vr_ar_training.md')">VR/AR培训</button>
+        <button class="btn" onclick="openReader('global_partnership.md')">全球合作</button>
+        <div id="reader-result" class="result"></div>
+    </div>
+
+    <div class="test-item">
+        <h3>Markdown加载测试</h3>
+        <button class="btn" onclick="testMarkdownLoad()">测试Markdown加载</button>
+        <div id="markdown-result" class="result"></div>
+    </div>
+
+    <script>
+        function testIndexButtons() {
+            const result = document.getElementById('index-result');
+            try {
+                // 检查是否可以访问主页
+                result.innerHTML = '<div class="success">✅ 准备测试主页按钮...</div>';
+                window.open('index.html', '_blank');
+                result.innerHTML = '<div class="success">✅ 主页已在新窗口打开，请测试按钮功能</div>';
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ 错误: ${error.message}</div>`;
+            }
+        }
+
+        function testFileExistence() {
+            const files = [
+                'ai_assessment_system.md',
+                'visual_design_guide.md',
+                'digital_ecosystem.md',
+                'vr_ar_training.md',
+                'global_partnership.md'
+            ];
+
+            const result = document.getElementById('file-result');
+            result.innerHTML = '<div>正在检查文件...</div>';
+
+            let html = '';
+            let completed = 0;
+
+            files.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            html += `<div class="success">✅ ${file} - 存在</div>`;
+                        } else {
+                            html += `<div class="error">❌ ${file} - 不存在 (${response.status})</div>`;
+                        }
+                    })
+                    .catch(error => {
+                        html += `<div class="error">❌ ${file} - 错误: ${error.message}</div>`;
+                    })
+                    .finally(() => {
+                        completed++;
+                        if (completed === files.length) {
+                            result.innerHTML = html;
+                        }
+                    });
+            });
+        }
+
+        function openReader(filename) {
+            const result = document.getElementById('reader-result');
+            try {
+                const url = `reader.html?chapter=${filename}`;
+                result.innerHTML = `<div class="success">✅ 正在打开: ${filename}</div>`;
+                window.open(url, '_blank');
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ 错误: ${error.message}</div>`;
+            }
+        }
+
+        async function testMarkdownLoad() {
+            const result = document.getElementById('markdown-result');
+            result.innerHTML = '<div>正在测试Markdown加载...</div>';
+
+            try {
+                const response = await fetch('ai_assessment_system.md');
+                if (response.ok) {
+                    const text = await response.text();
+                    result.innerHTML = `<div class="success">✅ 成功加载 ai_assessment_system.md<br>文件大小: ${text.length} 字符<br>开头内容: ${text.substring(0, 100)}...</div>`;
+                } else {
+                    result.innerHTML = `<div class="error">❌ 加载失败: HTTP ${response.status} ${response.statusText}</div>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ 加载错误: ${error.message}</div>`;
+            }
+        }
+
+        // 页面加载时运行基础检查
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('阅读器测试页面已加载');
+            console.log('当前位置:', window.location.href);
+        });
+    </script>
+</body>
+</html>

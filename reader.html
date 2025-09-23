@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>章节阅读器 - 绛唇解语花</title>
+    <meta name="description" content="医学专著章节在线阅读">
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --primary-light: #D2B48C;
+            --primary-dark: #654321;
+            --secondary-color: #CD853F;
+            --accent-color: #F4A460;
+            --bg-primary: #FFF8DC;
+            --bg-secondary: #FFFEF7;
+            --text-primary: #2F1B14;
+            --text-secondary: #8B4513;
+            --text-light: #A0522D;
+            --border-color: #DEB887;
+            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
+            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-light);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .book-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .chapter-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .chapter-select {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: white;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .chapter-number {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .chapter-meta {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .markdown-content {
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        .markdown-content h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .markdown-content h2 {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .markdown-content h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin: 1.2rem 0 0.8rem 0;
+        }
+
+        .markdown-content p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .markdown-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .markdown-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-light);
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+        }
+
+        .markdown-content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .markdown-content pre {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .markdown-content th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        .navigation-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .error {
+            text-align: center;
+            padding: 3rem;
+            color: #d32f2f;
+            background: #ffebee;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .toc h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 0.3rem 0;
+        }
+
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.2rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .chapter-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .chapter-title {
+                font-size: 2rem;
+            }
+
+            .navigation-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media print {
+            .header,
+            .navigation-footer,
+            .nav-button {
+                display: none;
+            }
+
+            .content {
+                box-shadow: none;
+                border: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="book-info">
+                <span>📚</span>
+                <span class="book-title">绛唇解语花</span>
+            </div>
+            <nav class="chapter-nav">
+                <button class="nav-button" onclick="goBack()">← 返回目录</button>
+                <select class="chapter-select" id="chapter-select" onchange="changeChapter()">
+                    <option value="">选择章节...</option>
+                </select>
+                <button class="nav-button" onclick="printChapter()">🖨️ 打印</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="chapter-header" id="chapter-header">
+            <div class="chapter-number" id="chapter-number">加载中...</div>
+            <h1 class="chapter-title" id="chapter-title">章节加载中</h1>
+            <div class="chapter-meta" id="chapter-meta">正在获取章节信息...</div>
+        </div>
+
+        <div class="toc" id="toc-container" style="display: none;">
+            <h3>📖 本章目录</h3>
+            <ul id="toc-list"></ul>
+        </div>
+
+        <div class="content">
+            <div class="markdown-content" id="content">
+                <div class="loading">
+                    <p>📖 正在加载章节内容...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-footer">
+            <button class="nav-button" id="prev-chapter" onclick="previousChapter()">← 上一章</button>
+            <span id="chapter-info">章节信息</span>
+            <button class="nav-button" id="next-chapter" onclick="nextChapter()">下一章 →</button>
+        </div>
+
+        <!-- 添加免责声明和公司信息 -->
+        <div style="background: white; border-radius: 12px; padding: 20px; margin-top: 20px; box-shadow: var(--shadow-light); border: 1px solid var(--border-color);">
+            <!-- 公司信息 -->
+            <div style="margin-bottom: 20px; padding: 15px; background: var(--bg-secondary); border-radius: 8px;">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">📍 机构信息</h4>
+                <p><strong>重庆联合丽格科技有限公司</strong></p>
+                <p>📍 地址：重庆市渝中区临江支路28号</p>
+                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
+                <p>📄 渝 ICP 备 2024023473 号</p>
+            </div>
+
+            <!-- 医疗内容免责声明 -->
+            <div style="margin-bottom: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <h4 style="color: #e65100; margin-bottom: 10px;">⚠️ 医疗内容免责声明</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: #d84315;">
+                    本书内容仅供专业医学参考，不构成具体医疗建议。任何医疗决策应咨询具有相关资质的专业医生。个体差异显著，治疗效果因人而异。请在专业医生指导下进行任何医疗美容操作。本机构不对基于本书内容做出的任何医疗决策承担责任。
+                </p>
+            </div>
+
+            <!-- AI内容标识 -->
+            <div style="margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
+                <h4 style="color: #1565c0; margin-bottom: 10px;">🤖 AI内容标识</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: #1976d2;">
+                    本书部分内容在编写过程中使用了人工智能技术辅助生成和优化。所有AI生成内容均经过专业医学审核和人工校验。AI技术仅作为辅助工具，最终内容的准确性和适用性由专业医学团队负责。
+                </p>
+            </div>
+
+            <!-- 隐私保护声明 -->
+            <div style="margin-bottom: 20px; padding: 15px; background: #e8f5e8; border-radius: 8px; border-left: 4px solid #4caf50;">
+                <h4 style="color: #2e7d2e; margin-bottom: 10px;">🔒 隐私保护声明</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; color: #388e3c;">
+                    我们严格保护用户隐私信息，遵循相关法律法规。本平台不收集个人身份信息，仅记录必要的访问统计数据。如有隐私问题或数据删除需求，请联系：bccsw@cqlhlg.work
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 章节配置
+        const chapters = [
+            { file: '00_preface.md', title: '前言', number: '序言' },
+            { file: '01_cultural_aesthetics_enhanced.md', title: '文化美学', number: '第一章' },
+            { file: '02_scientific_principles.md', title: '科学原理', number: '第二章' },
+            { file: '03_case_studies.md', title: '案例研究', number: '第三章' },
+            { file: '04_technical_mastery_international.md', title: '技术精进', number: '第四章' },
+            { file: '05_comprehensive_strategy.md', title: '综合策略', number: '第五章' },
+            { file: '06_functional_reconstruction.md', title: '功能重建', number: '第六章' },
+            { file: '07_doctor_selection.md', title: '医生选择', number: '第七章' },
+            { file: '08_cosmetics_tattoo.md', title: '唇部纹绣', number: '第八章' },
+            { file: '09_aftercare.md', title: '术后护理', number: '第九章' },
+            { file: '10_risk_aesthetics.md', title: '风险美学', number: '第十章' },
+            { file: '11_appendix_enhanced.md', title: '参考资料', number: '附录' },
+            { file: 'ai_assessment_system.md', title: 'AI评估系统', number: '专题一' },
+            { file: 'visual_design_guide.md', title: '视觉设计指南', number: '专题二' },
+            { file: 'digital_ecosystem.md', title: '数字生态系统', number: '专题三' }
+        ];
+
+        let currentChapterIndex = 0;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            populateChapterSelect();
+            loadChapterFromURL();
+            setupScrollProgress();
+        });
+
+        // 填充章节选择器
+        function populateChapterSelect() {
+            const select = document.getElementById('chapter-select');
+            chapters.forEach((chapter, index) => {
+                const option = document.createElement('option');
+                option.value = chapter.file;
+                option.textContent = `${chapter.number} - ${chapter.title}`;
+                select.appendChild(option);
+            });
+        }
+
+        // 从URL加载章节
+        function loadChapterFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapterFile = urlParams.get('chapter');
+
+            if (chapterFile) {
+                const chapterIndex = chapters.findIndex(ch => ch.file === chapterFile);
+                if (chapterIndex !== -1) {
+                    currentChapterIndex = chapterIndex;
+                    loadChapter(chapterFile);
+                }
+            } else {
+                loadChapter(chapters[0].file);
+            }
+        }
+
+        // 加载章节内容
+        async function loadChapter(filename) {
+            try {
+                console.log('开始加载章节:', filename);
+
+                const chapterIndex = chapters.findIndex(ch => ch.file === filename);
+                if (chapterIndex !== -1) {
+                    currentChapterIndex = chapterIndex;
+                }
+
+                const chapter = chapters[currentChapterIndex];
+                console.log('当前章节:', chapter);
+
+                // 更新URL
+                window.history.pushState({}, '', `?chapter=${filename}`);
+
+                // 更新页面标题
+                document.title = `${chapter.title} - 绛唇解语花`;
+
+                // 更新章节信息
+                updateChapterInfo(chapter);
+
+                // 显示加载状态
+                document.getElementById('content').innerHTML = `
+                    <div class="loading">
+                        <p>📖 正在加载《${chapter.title}》...</p>
+                    </div>
+                `;
+
+                console.log('开始获取文件:', filename);
+
+                // 加载markdown内容
+                const response = await fetch(filename);
+                console.log('获取响应:', response.status, response.statusText);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const markdownText = await response.text();
+                console.log('获取到文本长度:', markdownText.length);
+
+                if (markdownText.length === 0) {
+                    throw new Error('文件内容为空');
+                }
+
+                console.log('开始转换Markdown...');
+                const htmlContent = convertMarkdownToHTML(markdownText);
+                console.log('转换完成，HTML长度:', htmlContent.length);
+
+                document.getElementById('content').innerHTML = htmlContent;
+
+                // 生成目录
+                generateTOC();
+
+                // 更新导航状态
+                updateNavigation();
+
+                // 滚动到顶部
+                window.scrollTo(0, 0);
+
+                console.log('章节加载完成');
+
+            } catch (error) {
+                console.error('加载章节失败:', error);
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <h3>❌ 章节加载失败</h3>
+                        <p>无法加载章节 "${filename}"</p>
+                        <p><strong>错误信息:</strong> ${error.message}</p>
+                        <p><strong>文件路径:</strong> ${window.location.origin}/${filename}</p>
+                        <button class="nav-button" onclick="goBack()">返回目录</button>
+                        <button class="nav-button" onclick="location.reload()">重新加载</button>
+                    </div>
+                `;
+            }
+        }
+
+        // 更新章节信息
+        function updateChapterInfo(chapter) {
+            document.getElementById('chapter-number').textContent = chapter.number;
+            document.getElementById('chapter-title').textContent = chapter.title;
+            document.getElementById('chapter-meta').textContent = `医学专著章节 · 在线阅读`;
+            document.getElementById('chapter-select').value = chapter.file;
+            document.getElementById('chapter-info').textContent = `${currentChapterIndex + 1} / ${chapters.length}`;
+        }
+
+        // 简化的Markdown转HTML
+        function convertMarkdownToHTML(markdown) {
+            let html = markdown;
+
+            // 标题 - 从最多的#开始处理，避免部分匹配
+            html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // 粗体和斜体
+            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+            // 代码
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // 链接
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+            // 列表项
+            html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
+            html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+
+            // 包装连续的列表项为ul
+            html = html.replace(/((<li>.*?<\/li>\s*)+)/gs, '<ul>$1</ul>');
+
+            // 引用块
+            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+            // 段落处理
+            const lines = html.split('\n');
+            const processedLines = [];
+            let inList = false;
+            let inBlockquote = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+
+                if (line === '') {
+                    if (!inList && !inBlockquote) {
+                        processedLines.push('</p><p>');
+                    }
+                    continue;
+                }
+
+                if (line.startsWith('<ul>') || line.startsWith('<ol>')) {
+                    inList = true;
+                } else if (line.startsWith('</ul>') || line.startsWith('</ol>')) {
+                    inList = false;
+                }
+
+                if (line.startsWith('<blockquote>')) {
+                    inBlockquote = true;
+                } else if (line.startsWith('</blockquote>')) {
+                    inBlockquote = false;
+                }
+
+                processedLines.push(line);
+            }
+
+            html = processedLines.join('\n');
+
+            // 包装段落
+            if (!html.startsWith('<h') && !html.startsWith('<ul') && !html.startsWith('<ol') && !html.startsWith('<blockquote')) {
+                html = '<p>' + html + '</p>';
+            }
+
+            // 清理多余的空段落和格式问题
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>\s*<h/g, '<h');
+            html = html.replace(/<\/h([1-6])>\s*<\/p>/g, '</h$1>');
+            html = html.replace(/<p>\s*<ul>/g, '<ul>');
+            html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
+            html = html.replace(/<p>\s*<blockquote>/g, '<blockquote>');
+            html = html.replace(/<\/blockquote>\s*<\/p>/g, '</blockquote>');
+
+            return html;
+        }
+
+        // 生成目录
+        function generateTOC() {
+            const content = document.getElementById('content');
+            const headings = content.querySelectorAll('h1, h2, h3');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            tocList.innerHTML = '';
+
+            if (headings.length > 0) {
+                headings.forEach((heading, index) => {
+                    // 添加ID到标题
+                    heading.id = `heading-${index}`;
+
+                    // 创建目录项
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `#heading-${index}`;
+                    a.textContent = heading.textContent;
+                    a.style.paddingLeft = (parseInt(heading.tagName[1]) - 1) * 1 + 'rem';
+
+                    li.appendChild(a);
+                    tocList.appendChild(li);
+                });
+
+                tocContainer.style.display = 'block';
+            } else {
+                tocContainer.style.display = 'none';
+            }
+        }
+
+        // 更新导航按钮
+        function updateNavigation() {
+            const prevButton = document.getElementById('prev-chapter');
+            const nextButton = document.getElementById('next-chapter');
+
+            prevButton.disabled = currentChapterIndex === 0;
+            nextButton.disabled = currentChapterIndex === chapters.length - 1;
+
+            if (currentChapterIndex > 0) {
+                prevButton.textContent = `← ${chapters[currentChapterIndex - 1].title}`;
+            }
+
+            if (currentChapterIndex < chapters.length - 1) {
+                nextButton.textContent = `${chapters[currentChapterIndex + 1].title} →`;
+            }
+        }
+
+        // 设置滚动进度
+        function setupScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                document.getElementById('reading-progress').style.width = Math.min(scrolled, 100) + '%';
+            });
+        }
+
+        // 导航函数
+        function goBack() {
+            window.close();
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '/';
+            }
+        }
+
+        function changeChapter() {
+            const select = document.getElementById('chapter-select');
+            if (select.value) {
+                loadChapter(select.value);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapterIndex > 0) {
+                loadChapter(chapters[currentChapterIndex - 1].file);
+            }
+        }
+
+        function nextChapter() {
+            if (currentChapterIndex < chapters.length - 1) {
+                loadChapter(chapters[currentChapterIndex + 1].file);
+            }
+        }
+
+        function printChapter() {
+            window.print();
+        }
+
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) {
+                previousChapter();
+            } else if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) {
+                nextChapter();
+            } else if (e.key === 'Escape') {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医生技能自评体系 - 打印版</title>
+    <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            body {
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+            .no-print {
+                display: none;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'SimSun', sans-serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .org-info {
+            font-size: 9pt;
+            color: #888;
+        }
+
+        .basic-info {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        .basic-info h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .info-label {
+            font-weight: bold;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+
+        .info-input {
+            flex: 1;
+            border-bottom: 1px solid #333;
+            min-height: 20px;
+            padding: 2px 5px;
+        }
+
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .question-group {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        .question-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-number {
+            background: #2c5aa0;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .skill-category {
+            background: #4a90e2;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 9pt;
+            margin-left: auto;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .scale-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .scale-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11pt;
+            background: white;
+            margin-bottom: 5px;
+        }
+
+        .scale-label {
+            font-size: 9pt;
+            text-align: center;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .scale-extremes {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9pt;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .evaluation-summary {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #333;
+            background: #f9f9f9;
+        }
+
+        .summary-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .skill-radar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #666;
+            background: white;
+        }
+
+        .skill-label {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .skill-score-box {
+            font-size: 16pt;
+            font-weight: bold;
+            border: 2px solid #333;
+            width: 80px;
+            height: 40px;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .skill-max {
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .total-score-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e8f4fd;
+            border: 2px solid #2c5aa0;
+            border-radius: 10px;
+        }
+
+        .total-score-label {
+            font-size: 12pt;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .total-score-box {
+            font-size: 24pt;
+            font-weight: bold;
+            border: 3px solid #2c5aa0;
+            width: 120px;
+            height: 60px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .level-criteria {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .criteria-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 10pt;
+        }
+
+        .criteria-item {
+            padding: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            text-align: center;
+        }
+
+        .expert-level {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .skilled-level {
+            background: #fff3e0;
+            border-color: #ff9800;
+        }
+
+        .developing-level {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .notes-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }
+
+        .notes-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .notes-content {
+            min-height: 80px;
+            border: 1px solid #ccc;
+            background: white;
+            padding: 10px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .signature-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .date-label {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #1e3f70;
+        }
+
+        @media screen {
+            .form-container {
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ 打印表格</button>
+
+    <div class="form-container">
+        <!-- 表头 -->
+        <div class="header">
+            <div class="title">医生技能自评体系</div>
+            <div class="subtitle">Doctor Skill Self-Assessment System</div>
+            <div class="org-info">重庆联合丽格科技有限公司 | www.bccsw.cn | 023-68726872</div>
+        </div>
+
+        <!-- 基本信息 -->
+        <div class="basic-info avoid-break">
+            <h3>📋 基本信息 / Basic Information</h3>
+            <div class="info-row">
+                <div class="info-label">医生姓名:</div>
+                <div class="info-input"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">职称:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">从业年限:</div>
+                <div class="info-input" style="max-width: 100px;"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">评估日期:</div>
+                <div class="info-input" style="max-width: 150px;"></div>
+                <div style="margin: 0 20px;"></div>
+                <div class="info-label">所在科室:</div>
+                <div class="info-input"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">专业方向:</div>
+                <div class="info-input"></div>
+            </div>
+        </div>
+
+        <!-- 手术技巧评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🔬 一、手术技巧评估 (0-25分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    注射精准度 - 您能否准确控制注射部位和剂量？
+                    <span class="skill-category">技术技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+                <div class="scale-extremes">
+                    <span>需要大量练习</span>
+                    <span>完全掌握</span>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    微创水平 - 您能否最小化创伤，减少患者痛苦？
+                    <span class="skill-category">技术技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    个性化设计能力 - 您能否根据患者特点制定专属方案？
+                    <span class="skill-category">设计技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 审美水平评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🎨 二、审美水平评估 (0-20分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    黄金比例把控 - 您对面部黄金比例的理解和应用能力？
+                    <span class="skill-category">美学技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">5</span>
+                    自然和谐程度 - 您的作品看起来自然协调的程度？
+                    <span class="skill-category">美学技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 风险管理评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">🛡️ 三、风险管理评估 (0-20分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">6</span>
+                    术前评估能力 - 您能否全面准确地评估患者风险？
+                    <span class="skill-category">安全技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">7</span>
+                    应急处理能力 - 遇到并发症时您的处理能力如何？
+                    <span class="skill-category">安全技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 沟通能力评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">💬 四、沟通能力评估 (0-15分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">8</span>
+                    患者解释清晰度 - 您能否清楚地向患者解释治疗方案？
+                    <span class="skill-category">沟通技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">9</span>
+                    同理心表现 - 您能否理解并关心患者的感受？
+                    <span class="skill-category">沟通技能</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 持续学习评估 -->
+        <div class="section avoid-break">
+            <div class="section-title">📚 五、持续学习评估 (0-20分)</div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">10</span>
+                    新技术掌握程度 - 您对行业新技术的学习和掌握能力？
+                    <span class="skill-category">学习能力</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">
+                    <span class="question-number">11</span>
+                    学术交流参与度 - 您参与专业学术活动的积极程度？
+                    <span class="skill-category">学习能力</span>
+                </div>
+                <div class="rating-scale">
+                    <div class="scale-option">
+                        <div class="scale-circle">1</div>
+                        <div class="scale-label">新手</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">2</div>
+                        <div class="scale-label">初级</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">3</div>
+                        <div class="scale-label">中等</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">4</div>
+                        <div class="scale-label">熟练</div>
+                    </div>
+                    <div class="scale-option">
+                        <div class="scale-circle">5</div>
+                        <div class="scale-label">专家级</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 评估结果汇总 -->
+        <div class="evaluation-summary avoid-break">
+            <div class="summary-title">📊 技能评估结果汇总</div>
+
+            <div class="skill-radar">
+                <div class="skill-item">
+                    <div class="skill-label">手术技巧</div>
+                    <div class="skill-score-box">___ / 25</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-label">审美水平</div>
+                    <div class="skill-score-box">___ / 20</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-label">风险管理</div>
+                    <div class="skill-score-box">___ / 20</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-label">沟通能力</div>
+                    <div class="skill-score-box">___ / 15</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-label">持续学习</div>
+                    <div class="skill-score-box">___ / 20</div>
+                </div>
+            </div>
+
+            <div class="total-score-section">
+                <div class="total-score-label">综合技能评分</div>
+                <div class="total-score-box">___ / 100</div>
+            </div>
+        </div>
+
+        <!-- 技能等级标准 -->
+        <div class="level-criteria avoid-break">
+            <div class="criteria-title">🏆 技能等级判定标准</div>
+            <div class="criteria-grid">
+                <div class="criteria-item expert-level">
+                    <strong>专家级医生 (80-100分)</strong><br>
+                    技能全面，可承担教学指导工作
+                </div>
+                <div class="criteria-item skilled-level">
+                    <strong>熟练级医生 (60-79分)</strong><br>
+                    技能良好，需重点提升薄弱环节
+                </div>
+                <div class="criteria-item developing-level">
+                    <strong>发展中医生 (0-59分)</strong><br>
+                    需制定系统性提升计划
+                </div>
+            </div>
+        </div>
+
+        <!-- 自我评估意见 -->
+        <div class="notes-section avoid-break">
+            <div class="notes-title">💭 自我评估总结与发展计划</div>
+            <div class="notes-content">
+                <!-- 空白区域供手写 -->
+            </div>
+        </div>
+
+        <!-- 签名区域 -->
+        <div class="signature-section avoid-break">
+            <div class="signature-box">
+                <div class="signature-label">评估医生签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-label">科室主任签名</div>
+                <div class="signature-line"></div>
+                <div class="date-label">日期：____ 年 ____ 月 ____ 日</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <div style="text-align: center;">
+                <strong>重庆联合丽格科技有限公司</strong><br>
+                地址：重庆市渝中区临江支路28号 | 电话：023-68726872 | 网站：www.bccsw.cn<br>
+                渝 ICP 备 2024023473 号
+            </div>
+            <div style="margin-top: 10px; text-align: center; font-size: 8pt; color: #888;">
+                本自评表仅供医疗专业人士进行技能评估和职业发展规划参考
+            </div>
+        </div>
+    </div>
+</body>
+</html>
