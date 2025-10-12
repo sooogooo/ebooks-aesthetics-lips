@@ -1,0 +1,58 @@
+{
+  "name": "lips-aesthetics-book",
+  "version": "1.0.0",
+  "description": "《绛唇解语花》医美专业指导书 - 交互式电子书系统",
+  "keywords": [
+    "医美",
+    "唇部美学",
+    "电子书",
+    "医疗美容",
+    "美学指导"
+  ],
+  "author": {
+    "name": "重庆联合丽格科技有限公司",
+    "email": "bccsw@cqlhlg.work",
+    "url": "https://www.bccsw.cn"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sooogooo/ebooks-aesthetics-lips.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sooogooo/ebooks-aesthetics-lips/issues",
+    "email": "bccsw@cqlhlg.work"
+  },
+  "homepage": "https://github.com/sooogooo/ebooks-aesthetics-lips#readme",
+  "scripts": {
+    "serve": "python3 -m http.server 28100",
+    "serve:bg": "nohup python3 -m http.server 28100 > book_server.log 2>&1 &",
+    "stop": "pkill -f 'python3 -m http.server 28100' || echo 'No server running'",
+    "status": "ps aux | grep 'http.server 28100' | grep -v grep || echo 'Server not running'",
+    "check-port": "lsof -i :28100 || echo 'Port 28100 is available'",
+    "minify:html": "echo 'HTML minification - requires html-minifier-terser'",
+    "minify:css": "echo 'CSS minification - requires clean-css-cli'",
+    "optimize": "echo 'Run optimization tasks - requires build tools'",
+    "validate": "echo 'Validate HTML/CSS - requires validators'",
+    "lint:md": "echo 'Markdown linting - requires markdownlint-cli'",
+    "test": "echo 'No tests configured yet'",
+    "build": "echo 'Static files - no build step required'",
+    "deploy:gh-pages": "echo 'Deploy to GitHub Pages - requires gh-pages package'",
+    "deploy:vercel": "echo 'Deploy to Vercel - requires vercel CLI'"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "clean-css-cli": "^5.6.3",
+    "markdownlint-cli": "^0.37.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "config": {
+    "port": 28100,
+    "host": "0.0.0.0"
+  }
+}
