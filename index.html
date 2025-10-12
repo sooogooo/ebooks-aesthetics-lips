@@ -8,6 +8,7 @@
     <meta name="keywords" content="唇部美学,医学专著,美容医学,电子书,在线阅读">
     <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
     <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <link rel="stylesheet" href="css/navigation.css">
     <style>
         :root {
             --primary-color: #8B4513;
@@ -432,13 +433,13 @@
                     </div>
                 </div>
 
-                <div class="chapter-card" onclick="openChapter('01_cultural_aesthetics_enhanced.md')">
+                <div class="chapter-card" onclick="openChapter('01_cultural_aesthetics.md')">
                     <div class="chapter-number">第一章</div>
                     <h3 class="chapter-title">文化美学</h3>
                     <p class="chapter-desc">东西方唇部美学理念对比 - 深入分析不同文化背景下的美学标准</p>
                     <div class="chapter-meta">
                         <span>🌍 文化维度</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
+                        <a href="#" class="read-button" onclick="openChapter('01_cultural_aesthetics.md'); return false;">开始阅读</a>
                     </div>
                 </div>
 
@@ -532,13 +533,13 @@
                     </div>
                 </div>
 
-                <div class="chapter-card" onclick="openChapter('11_appendix_enhanced.md')">
+                <div class="chapter-card" onclick="openChapter('11_appendix.md')">
                     <div class="chapter-number">附录</div>
                     <h3 class="chapter-title">参考资料</h3>
                     <p class="chapter-desc">参考资料与技术规范 - 相关标准和参考文献</p>
                     <div class="chapter-meta">
                         <span>📑 参考资料</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
+                        <a href="#" class="read-button" onclick="openChapter('11_appendix.md'); return false;">开始阅读</a>
                     </div>
                 </div>
             </div>
@@ -640,7 +641,7 @@
             // 更新所有读按钮的onclick
             const chapters = [
                 { button: 0, file: '00_preface.md' },
-                { button: 1, file: '01_cultural_aesthetics_enhanced.md' },
+                { button: 1, file: '01_cultural_aesthetics.md' },
                 { button: 2, file: '02_scientific_principles.md' },
                 { button: 3, file: '03_case_studies.md' },
                 { button: 4, file: '04_technical_mastery_international.md' },
@@ -650,7 +651,7 @@
                 { button: 8, file: '08_cosmetics_tattoo.md' },
                 { button: 9, file: '09_aftercare.md' },
                 { button: 10, file: '10_risk_aesthetics.md' },
-                { button: 11, file: '11_appendix_enhanced.md' }
+                { button: 11, file: '11_appendix.md' }
             ];
 
             const readButtons = document.querySelectorAll('.read-button');
@@ -741,5 +742,6 @@
             });
         });
     </script>
+    <script src="js/navigation.js"></script>
 </body>
 </html>
