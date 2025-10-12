@@ -1,0 +1,80 @@
+# 《绛唇解语花》项目 .gitignore
+
+# 日志文件
+*.log
+book_server.log
+nohup.out
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 虚拟环境
+venv/
+ENV/
+env/
+.venv
+
+# Node.js 依赖（如果将来添加构建系统）
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# 构建输出
+dist/
+build/
+*.min.js
+*.min.css
+
+# 编辑器和 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.bak
+*.backup
+.cache/
+.temp/
+
+# 测试和调试文件
+test.html
+test-*.html
+debug.html
+*-test.html
+*-debug.html
+
+# 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+desktop.ini
+$RECYCLE.BIN/
+
+# 压缩文件（通常是临时的）
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 敏感信息
+.env
+.env.local
+.env.*.local
+secrets.*
+credentials.*
+
+# 其他
+*.pid
+.lock
