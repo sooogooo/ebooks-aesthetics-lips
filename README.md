@@ -165,6 +165,35 @@
 - **跨平台支持**: Windows、macOS、Linux、iOS、Android
 - **离线功能**: 支持离线阅读和打印
 
+## 部署和访问
+
+### 在线访问
+- **GitHub Pages**: https://sooogooo.github.io/ebooks-aesthetics-lips/
+- 本项目支持自动部署，推送代码即可自动更新
+
+### 本地运行
+```bash
+# 安装依赖（首次运行）
+npm install
+
+# 启动本地服务器
+npm run serve
+
+# 或后台运行
+npm run serve:bg
+
+# 检查服务器状态
+npm run status
+
+# 停止服务器
+npm run stop
+```
+
+访问 `http://localhost:28100` 查看网站。
+
+### 部署指南
+详细的部署配置和说明请参考 [DEPLOYMENT.md](DEPLOYMENT.md)。
+
 ## 版权声明
 
 本书内容受版权保护，仅供学习和研究使用。商业使用请获得相应授权。
@@ -172,6 +201,8 @@
 **作者**: 医美专业团队
 **版本**: v1.0.0
 **发布日期**: 2024年9月
+**公司**: 重庆联合丽格科技有限公司
+**联系方式**: bccsw@cqlhlg.work
 
 ---
 
