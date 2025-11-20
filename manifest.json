@@ -1,0 +1,29 @@
+{
+  "name": "绛唇解语花",
+  "short_name": "唇部美学",
+  "description": "《绛唇解语花》医美专业指导书 - 完整的唇部美学医学专著",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8DC",
+  "theme_color": "#8B4513",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://docs.bccsw.cn/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://docs.bccsw.cn/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["medical", "education", "books"],
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

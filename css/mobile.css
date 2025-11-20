@@ -1,0 +1,626 @@
+/**
+ * 移动端优化样式
+ * Mobile Optimization Styles for 《绛唇解语花》
+ *
+ * 确保在移动设备上获得最佳的阅读和交互体验
+ */
+
+/* ========================================
+   移动端基础优化
+   ======================================== */
+
+/* 触摸优化 - 提升触摸响应速度 */
+body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 可选择的内容区域 */
+.markdown-content,
+.intro-text,
+.chapter-desc,
+p, span, a {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* 提升滚动性能 */
+body, html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   移动端排版优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 基础字体大小调整 */
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* 标题大小调整 */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+    h5 { font-size: 1rem; }
+    h6 { font-size: 0.9rem; }
+
+    /* 段落间距优化 */
+    p {
+        margin-bottom: 1rem;
+        text-align: justify;
+        word-break: break-word;
+    }
+
+    /* 列表优化 */
+    ul, ol {
+        padding-left: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+    }
+}
+
+/* ========================================
+   移动端布局优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 容器内边距 */
+    .container {
+        padding: 1rem 1rem;
+    }
+
+    /* 卡片间距 */
+    .chapter-card,
+    .extended-card,
+    .stats-section {
+        margin-bottom: 1rem;
+    }
+
+    /* 网格布局 */
+    .chapters-grid,
+    .extended-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* 响应式图片 */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* 表格横向滚动 */
+    .markdown-content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+}
+
+/* ========================================
+   移动端按钮优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 增大可点击区域 - 至少44x44px (Apple HIG) */
+    .read-button,
+    .nav-button,
+    .nav-action-btn,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    /* 按钮全宽布局（某些情况） */
+    .nav-action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 触摸反馈 */
+    .read-button:active,
+    .nav-button:active,
+    button:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+/* ========================================
+   移动端导航优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 头部导航 */
+    .header {
+        padding: 1.5rem 0;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .book-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .book-subtitle {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .book-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    /* 章节导航 */
+    .chapter-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .chapter-select {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* 底部导航 */
+    .navigation-footer {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .navigation-footer button {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   移动端表单优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 输入框优化 */
+    input[type="text"],
+    input[type="email"],
+    input[type="search"],
+    textarea,
+    select {
+        font-size: 16px; /* 防止 iOS 自动缩放 */
+        padding: 0.75rem;
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    /* 搜索框 */
+    .nav-menu-search input {
+        font-size: 16px;
+    }
+
+    /* 复选框和单选按钮 */
+    input[type="checkbox"],
+    input[type="radio"] {
+        min-width: 24px;
+        min-height: 24px;
+        margin-right: 0.5rem;
+    }
+}
+
+/* ========================================
+   移动端模态框优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 全屏模态框 */
+    .navigation-menu {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .shortcuts-content {
+        width: 95%;
+        max-height: 90vh;
+        margin: 1rem;
+    }
+
+    .shortcuts-body {
+        padding: 1.5rem 1rem;
+    }
+
+    /* 模态框按钮 */
+    .shortcuts-close,
+    .nav-close-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* ========================================
+   移动端卡片优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    .chapter-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .chapter-number {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .chapter-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .chapter-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .chapter-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+/* ========================================
+   移动端阅读器优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 内容区域 */
+    .content {
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+    }
+
+    /* Markdown 内容 */
+    .markdown-content {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .markdown-content h1 {
+        font-size: 1.6rem;
+        margin: 1.5rem 0 1rem 0;
+    }
+
+    .markdown-content h2 {
+        font-size: 1.3rem;
+        margin: 1.2rem 0 0.8rem 0;
+    }
+
+    .markdown-content h3 {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.6rem 0;
+    }
+
+    /* 代码块 */
+    .markdown-content pre {
+        padding: 1rem;
+        font-size: 0.85rem;
+        overflow-x: auto;
+    }
+
+    .markdown-content code {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    /* 引用块 */
+    .markdown-content blockquote {
+        padding: 0.75rem 1rem;
+        margin: 1rem 0;
+        border-left-width: 3px;
+    }
+}
+
+/* ========================================
+   移动端目录优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    .toc {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .toc h3 {
+        font-size: 1rem;
+    }
+
+    .toc a {
+        padding: 0.5rem 0;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   移动端统计数据优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    .stats-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+}
+
+/* ========================================
+   移动端底部信息优化
+   ======================================== */
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-content {
+        padding: 0;
+    }
+
+    .footer div {
+        padding: 1rem !important;
+        margin: 1rem 0 !important;
+        font-size: 0.9rem;
+    }
+
+    .footer h4 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .footer p {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+    }
+}
+
+/* ========================================
+   横屏模式优化
+   ======================================== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    /* 减少垂直内边距 */
+    .header {
+        padding: 1rem 0;
+    }
+
+    .container {
+        padding: 0.75rem 1rem;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    /* 紧凑的导航 */
+    .navigation-footer {
+        padding: 1rem;
+    }
+
+    /* 减少字体大小 */
+    .book-title {
+        font-size: 1.5rem;
+    }
+
+    .chapter-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================================
+   小屏幕优化 (< 375px)
+   ======================================== */
+
+@media (max-width: 374px) {
+    html {
+        font-size: 13px;
+    }
+
+    .container {
+        padding: 0.75rem 0.75rem;
+    }
+
+    .chapter-card {
+        padding: 1rem;
+    }
+
+    .read-button,
+    .nav-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .floating-nav-button {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+/* ========================================
+   平板优化 (768px - 1024px)
+   ======================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 720px;
+        padding: 2rem 1.5rem;
+    }
+
+    .chapters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .extended-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================
+   触摸设备特定优化
+   ======================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* 移除 hover 效果，改用 active */
+    .chapter-card:hover,
+    .extended-card:hover,
+    .read-button:hover,
+    .nav-button:hover {
+        transform: none;
+    }
+
+    .chapter-card:active,
+    .extended-card:active {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    /* 增大可点击区域 */
+    a, button, .chapter-card, .extended-card {
+        position: relative;
+    }
+
+    a::before,
+    button::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+}
+
+/* ========================================
+   性能优化
+   ======================================== */
+
+/* 使用 GPU 加速 */
+.chapter-card,
+.extended-card,
+.floating-nav-button,
+.navigation-menu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* 减少重绘 */
+@media (max-width: 768px) {
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* ========================================
+   打印优化 (移动端)
+   ======================================== */
+
+@media print {
+    /* 移除移动端特定元素 */
+    .floating-nav-button,
+    .navigation-menu,
+    .nav-button,
+    .read-button {
+        display: none !important;
+    }
+
+    /* 优化打印布局 */
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    .chapter-card {
+        page-break-inside: avoid;
+    }
+
+    /* 显示链接 URL */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+}
+
+/* ========================================
+   暗色模式支持 (移动端)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+    /* 将在未来版本中实现 */
+    /* 当前保持浅色主题以确保最佳可读性 */
+}
+
+/* ========================================
+   减少动画 (移动端省电模式)
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) and (max-width: 768px) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reading-progress {
+        transition: none;
+    }
+
+    .floating-nav-button {
+        animation: none;
+    }
+}
