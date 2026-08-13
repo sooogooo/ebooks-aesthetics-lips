@@ -2,28 +2,39 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医生技能自评体系 - 专业能力测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
+    <title>医生技能评估 — 绛唇解语花</title>
     <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
     <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/share.css">
     <style>
+        /* 棕色变量映射到新墨黑+绛红 token */
         :root {
-            --primary-color: #2c5aa0;
-            --primary-light: #6a85c1;
-            --primary-dark: #1e3f70;
-            --secondary-color: #4a90e2;
-            --accent-color: #7bb3f0;
-            --bg-primary: #f8fafe;
-            --bg-secondary: #ffffff;
-            --text-primary: #2c3e50;
-            --text-secondary: #34495e;
-            --text-light: #7f8c8d;
-            --border-color: #bdc3c7;
-            --shadow-light: 0 2px 8px rgba(44, 90, 160, 0.1);
-            --shadow-medium: 0 4px 16px rgba(44, 90, 160, 0.15);
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --error-color: #e74c3c;
+            --primary-color: var(--crimson);
+            --primary-light: var(--crimson-soft);
+            --primary-dark: var(--crimson-deep);
+            --secondary-color: var(--ink);
+            --accent-color: var(--gold);
+            --bg-primary: var(--paper);
+            --bg-secondary: var(--paper-elevated);
+            --text-primary: var(--ink);
+            --text-secondary: var(--ink-soft);
+            --text-light: var(--ink-muted);
+            --border-color: var(--line);
+            --shadow-light: var(--shadow-sm);
+            --shadow-medium: var(--shadow-md);
+            --shadow-heavy: var(--shadow-lg);
+            --success-color: var(--success);
+            --warning-color: var(--warning);
+            --error-color: var(--danger);
         }
 
         * {
@@ -33,8 +44,8 @@
         }
 
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            font-family: var(--font-sans);
+            background: var(--paper);
             color: var(--text-primary);
             line-height: 1.6;
             font-size: 16px;
@@ -42,14 +53,16 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--paper-elevated);
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--ink);
             padding: 2rem 0;
             text-align: center;
             box-shadow: var(--shadow-medium);
         }
 
         .header-content {
+            position: relative;
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -241,7 +254,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             color: white;
             padding: 1rem 3rem;
             border: none;
@@ -363,7 +376,7 @@
         }
 
         .recommendations li:before {
-            content: "💡";
+            content: "";
             position: absolute;
             left: 0;
         }
@@ -439,6 +452,12 @@
         <div class="header-content">
             <h1 class="title">医生技能自评体系</h1>
             <p class="subtitle">专业能力评估与提升指导 - 绛唇解语花医学美容培训系统</p>
+        <button class="btn-icon" data-share-trigger aria-label="分享" style="position:absolute;top:1rem;right:1rem;color:var(--ink-muted);">
+                <i data-icon="share"></i>
+            </button>
+            <a href="index.html" class="btn-icon" aria-label="返回首页" style="position:absolute;top:1rem;left:1rem;color:var(--ink-muted);text-decoration:none;">
+                <i data-icon="home"></i>
+            </a>
         </div>
     </header>
 
@@ -455,7 +474,6 @@
             <!-- 手术技巧评估 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🔬</span>
                     手术技巧评估 (0-25分)
                 </h2>
 
@@ -602,7 +620,6 @@
             <!-- 审美水平评估 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🎨</span>
                     审美水平评估 (0-20分)
                 </h2>
 
@@ -700,7 +717,6 @@
             <!-- 风险管理评估 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🛡️</span>
                     风险管理评估 (0-20分)
                 </h2>
 
@@ -798,7 +814,6 @@
             <!-- 沟通能力评估 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">💬</span>
                     沟通能力评估 (0-15分)
                 </h2>
 
@@ -896,7 +911,6 @@
             <!-- 持续学习评估 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">📚</span>
                     持续学习评估 (0-20分)
                 </h2>
 
@@ -1005,7 +1019,6 @@
         <!-- 结果显示区域 -->
         <div class="results-section" id="resultsSection">
             <h2 class="section-title">
-                <span class="section-icon">📊</span>
                 专业技能评估报告
             </h2>
 
@@ -1025,16 +1038,16 @@
 
             <!-- 公司信息和免责声明 -->
             <div class="company-info">
-                <h4>📍 机构信息</h4>
+                <h4>机构信息</h4>
                 <p><strong>重庆联合丽格科技有限公司</strong></p>
-                <p>📍 地址：重庆市渝中区临江支路28号</p>
-                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
-                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
-                <p>📄 渝 ICP 备 2024023473 号</p>
+                <p>地址：重庆市渝中区临江支路28号</p>
+                <p>网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>电话：023-68726872 | 邮箱：bccsw@cqlhlg.work</p>
+                <p>渝 ICP 备 2024023473 号</p>
             </div>
 
             <div class="disclaimer">
-                <h5>⚠️ 评估说明</h5>
+                <h5>评估说明</h5>
                 <p>
                     本自评工具仅供医疗专业人士进行自我技能评估和职业发展规划参考。
                     评估结果应结合实际临床经验和同行评议进行综合判断。
@@ -1159,7 +1172,7 @@
 
             // 生成专业建议
             const recommendations = document.getElementById('recommendations');
-            let recommendationText = '<h3>🎯 专业发展建议</h3><ul>';
+            let recommendationText = '<h3>专业发展建议</h3><ul>';
 
             if (totalScore >= 80) {
                 recommendationText += '<li>您已达到专家级水平，建议承担教学和指导责任</li>';
@@ -1213,5 +1226,7 @@
             updateProgress();
         });
     </script>
+    <script src="js/icons.js"></script>
+    <script src="js/share.js"></script>
 </body>
 </html>

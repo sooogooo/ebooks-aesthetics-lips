@@ -2,25 +2,39 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>患者满意度调查问卷 - 绛唇解语花</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
+    <title>患者满意度调查 — 绛唇解语花</title>
     <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
     <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/share.css">
     <style>
+        /* 棕色变量映射到新墨黑+绛红 token */
         :root {
-            --primary-color: #8B4513;
-            --primary-light: #D2B48C;
-            --primary-dark: #654321;
-            --secondary-color: #CD853F;
-            --accent-color: #F4A460;
-            --bg-primary: #FFF8DC;
-            --bg-secondary: #FFFEF7;
-            --text-primary: #2F1B14;
-            --text-secondary: #8B4513;
-            --text-light: #A0522D;
-            --border-color: #DEB887;
-            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
-            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
+            --primary-color: var(--crimson);
+            --primary-light: var(--crimson-soft);
+            --primary-dark: var(--crimson-deep);
+            --secondary-color: var(--ink);
+            --accent-color: var(--gold);
+            --bg-primary: var(--paper);
+            --bg-secondary: var(--paper-elevated);
+            --text-primary: var(--ink);
+            --text-secondary: var(--ink-soft);
+            --text-light: var(--ink-muted);
+            --border-color: var(--line);
+            --shadow-light: var(--shadow-sm);
+            --shadow-medium: var(--shadow-md);
+            --shadow-heavy: var(--shadow-lg);
+            --success-color: var(--success);
+            --warning-color: var(--warning);
+            --error-color: var(--danger);
         }
 
         * {
@@ -30,8 +44,8 @@
         }
 
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            font-family: var(--font-sans);
+            background: var(--paper);
             color: var(--text-primary);
             line-height: 1.6;
             font-size: 16px;
@@ -39,14 +53,16 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--paper-elevated);
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--ink);
             padding: 2rem 0;
             text-align: center;
             box-shadow: var(--shadow-medium);
         }
 
         .header-content {
+            position: relative;
             max-width: 800px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -230,7 +246,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             color: white;
             padding: 1rem 3rem;
             border: none;
@@ -388,6 +404,12 @@
         <div class="header-content">
             <h1 class="title">患者满意度调查问卷</h1>
             <p class="subtitle">绛唇解语花 - 专业唇部美学治疗效果评估</p>
+        <button class="btn-icon" data-share-trigger aria-label="分享" style="position:absolute;top:1rem;right:1rem;color:var(--ink-muted);">
+                <i data-icon="share"></i>
+            </button>
+            <a href="index.html" class="btn-icon" aria-label="返回首页" style="position:absolute;top:1rem;left:1rem;color:var(--ink-muted);text-decoration:none;">
+                <i data-icon="home"></i>
+            </a>
         </div>
     </header>
 
@@ -403,7 +425,7 @@
 
             <!-- 基本信息 -->
             <div class="section">
-                <h2 class="section-title">📋 基本信息</h2>
+                <h2 class="section-title">基本信息</h2>
                 <div class="question-group">
                     <div class="question">治疗日期 <span class="required">*</span></div>
                     <input type="date" name="treatmentDate" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 6px; font-size: 1rem;" required>
@@ -433,7 +455,7 @@
 
             <!-- 整体满意度评分 -->
             <div class="section">
-                <h2 class="section-title">⭐ 整体满意度评分 (1-10分)</h2>
+                <h2 class="section-title">整体满意度评分 (1-10分)</h2>
 
                 <div class="question-group">
                     <div class="question">1. 治疗效果是否符合预期？ <span class="required">*</span></div>
@@ -694,7 +716,7 @@
 
             <!-- 详细评价维度 -->
             <div class="section">
-                <h2 class="section-title">📊 详细评价维度</h2>
+                <h2 class="section-title">详细评价维度</h2>
 
                 <div class="question-group">
                     <div class="question">美学效果满意度 (1-10分) <span class="required">*</span></div>
@@ -837,7 +859,7 @@
 
             <!-- 开放性问题 -->
             <div class="section">
-                <h2 class="section-title">💬 意见反馈</h2>
+                <h2 class="section-title">意见反馈</h2>
 
                 <div class="question-group">
                     <div class="question">您认为我们在哪些方面做得最好？</div>
@@ -864,7 +886,7 @@
 
         <!-- 结果显示区域 -->
         <div class="results-section" id="resultsSection">
-            <h2 class="section-title">📈 评估结果</h2>
+            <h2 class="section-title">评估结果</h2>
 
             <div class="score-display">
                 <div class="total-score" id="totalScore">0</div>
@@ -881,16 +903,16 @@
 
             <!-- 公司信息和免责声明 -->
             <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                <h4 style="color: var(--primary-color); margin-bottom: 15px;">📍 机构信息</h4>
+                <h4 style="color: var(--primary-color); margin-bottom: 15px;">机构信息</h4>
                 <p><strong>重庆联合丽格科技有限公司</strong></p>
-                <p>📍 地址：重庆市渝中区临江支路28号</p>
-                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
-                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
-                <p>📄 渝 ICP 备 2024023473 号</p>
+                <p>地址：重庆市渝中区临江支路28号</p>
+                <p>网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>电话：023-68726872 | 邮箱：bccsw@cqlhlg.work</p>
+                <p>渝 ICP 备 2024023473 号</p>
             </div>
 
             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ff9800;">
-                <h5 style="color: #e65100; margin-bottom: 10px;">⚠️ 重要声明</h5>
+                <h5 style="color: #e65100; margin-bottom: 10px;">重要声明</h5>
                 <p style="color: #d84315; font-size: 0.9rem; line-height: 1.5;">
                     本问卷结果仅供医疗服务质量改进参考。如有医疗问题，请及时咨询专业医生。
                     我们严格保护您的隐私信息，问卷数据仅用于服务质量提升。
@@ -983,7 +1005,7 @@
 
             // 生成建议
             const recommendations = document.getElementById('recommendations');
-            let recommendationText = '<h3>📋 评估建议</h3><ul>';
+            let recommendationText = '<h3>评估建议</h3><ul>';
 
             if (totalScore >= 90) {
                 recommendationText += '<li>您的整体满意度非常高，感谢您的信任和支持</li>';
@@ -1042,5 +1064,7 @@
             updateProgress();
         });
     </script>
+    <script src="js/icons.js"></script>
+    <script src="js/share.js"></script>
 </body>
 </html>

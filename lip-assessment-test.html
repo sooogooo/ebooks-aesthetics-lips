@@ -2,69 +2,78 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>唇部美学标准化评估量表 - 专业测试版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
+    <title>唇部美学标准化评估 — 绛唇解语花</title>
     <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
     <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/share.css">
     <style>
+        /* 棕色变量映射到新墨黑+绛红 token（保持页面其余 CSS 不变） */
         :root {
-            --primary-color: #8B4513;
-            --primary-light: #D2B48C;
-            --primary-dark: #654321;
-            --secondary-color: #CD853F;
-            --accent-color: #F4A460;
-            --bg-primary: #FFF8DC;
-            --bg-secondary: #FFFEF7;
-            --text-primary: #2F1B14;
-            --text-secondary: #8B4513;
-            --text-light: #A0522D;
-            --border-color: #DEB887;
-            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
-            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
-            --success-color: #4CAF50;
-            --warning-color: #FF9800;
-            --error-color: #F44336;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --primary-color: var(--crimson);
+            --primary-light: var(--crimson-soft);
+            --primary-dark: var(--crimson-deep);
+            --secondary-color: var(--ink);
+            --accent-color: var(--gold);
+            --bg-primary: var(--paper);
+            --bg-secondary: var(--paper-elevated);
+            --text-primary: var(--ink);
+            --text-secondary: var(--ink-soft);
+            --text-light: var(--ink-muted);
+            --border-color: var(--line);
+            --shadow-light: var(--shadow-sm);
+            --shadow-medium: var(--shadow-md);
+            --success-color: var(--success);
+            --warning-color: var(--warning);
+            --error-color: var(--danger);
         }
 
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            font-family: var(--font-sans);
+            background: var(--paper);
             color: var(--text-primary);
             line-height: 1.6;
             font-size: 16px;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--paper-elevated);
+            color: var(--ink);
             padding: 2rem 0;
             text-align: center;
-            box-shadow: var(--shadow-medium);
+            border-bottom: 1px solid var(--line-soft);
+            box-shadow: none;
         }
 
         .header-content {
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
         }
 
         .title {
-            font-size: 2.5rem;
-            font-weight: 300;
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: var(--weight-medium);
             margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            letter-spacing: var(--tracking-cjk);
+            color: var(--ink);
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            color: var(--ink-muted);
         }
 
         .container {
@@ -426,6 +435,12 @@
         <div class="header-content">
             <h1 class="title">唇部美学标准化评估量表</h1>
             <p class="subtitle">专业互动测试版 - 绛唇解语花医学美容评估系统</p>
+            <button class="btn-icon" data-share-trigger aria-label="分享" style="position:absolute;top:1rem;right:1rem;color:var(--ink-muted);">
+                <i data-icon="share"></i>
+            </button>
+            <a href="index.html" class="btn-icon" aria-label="返回首页" style="position:absolute;top:1rem;left:1rem;color:var(--ink-muted);text-decoration:none;">
+                <i data-icon="home"></i>
+            </a>
         </div>
     </header>
 
@@ -442,7 +457,6 @@
             <!-- 第一部分：唇部对称性 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">⚖️</span>
                     唇部对称性评估 (0-20分)
                 </h2>
                 <div class="question-group">
@@ -493,7 +507,6 @@
             <!-- 第二部分：唇部比例 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">📐</span>
                     唇部比例评估 (0-25分)
                 </h2>
                 <div class="question-group">
@@ -544,7 +557,6 @@
             <!-- 第三部分：唇珠形态 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">💎</span>
                     唇珠形态评估 (0-15分)
                 </h2>
                 <div class="question-group">
@@ -595,7 +607,6 @@
             <!-- 第四部分：皮肤质地 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🌟</span>
                     皮肤质地评估 (0-20分)
                 </h2>
                 <div class="question-group">
@@ -646,7 +657,6 @@
             <!-- 第五部分：颜色均匀度 -->
             <div class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🎨</span>
                     颜色均匀度评估 (0-20分)
                 </h2>
                 <div class="question-group">
@@ -708,7 +718,6 @@
         <!-- 结果显示区域 -->
         <div class="results-section" id="resultsSection">
             <h2 class="section-title">
-                <span class="section-icon">📊</span>
                 评估结果分析
             </h2>
 
@@ -728,16 +737,16 @@
 
             <!-- 公司信息和免责声明 -->
             <div class="company-info">
-                <h4>📍 机构信息</h4>
+                <h4>机构信息</h4>
                 <p><strong>重庆联合丽格科技有限公司</strong></p>
-                <p>📍 地址：重庆市渝中区临江支路28号</p>
-                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
-                <p>📞 电话：023-68726872 | 📧 邮箱：bccsw@cqlhlg.work</p>
-                <p>📄 渝 ICP 备 2024023473 号</p>
+                <p>地址：重庆市渝中区临江支路28号</p>
+                <p>网站：<a href="https://www.bccsw.cn" style="color: var(--primary-color);">https://www.bccsw.cn</a></p>
+                <p>电话：023-68726872 | 邮箱：bccsw@cqlhlg.work</p>
+                <p>渝 ICP 备 2024023473 号</p>
             </div>
 
             <div class="disclaimer">
-                <h5>⚠️ 专业声明</h5>
+                <h5>专业声明</h5>
                 <p>
                     本评估工具仅供医疗专业人士参考使用，不能替代专业医学诊断。
                     评估结果应结合临床经验和患者个体情况进行综合判断。
@@ -832,7 +841,7 @@
 
             // 生成专业建议
             const recommendations = document.getElementById('recommendations');
-            let recommendationText = '<h3>📋 专业建议</h3><ul>';
+            let recommendationText = '<h3>专业建议</h3><ul>';
 
             if (totalScore >= 80) {
                 recommendationText += '<li>整体评估结果优秀，唇部美学状态良好</li>';
@@ -886,5 +895,7 @@
             updateProgress();
         });
     </script>
+    <script src="js/icons.js"></script>
+    <script src="js/share.js"></script>
 </body>
 </html>
