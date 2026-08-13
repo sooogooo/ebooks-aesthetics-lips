@@ -10,6 +10,12 @@
     box-sizing: border-box;
 }
 
+/* hidden 属性必须胜过任何 display 声明，否则全屏遮罩层
+   （navigation-menu / shortcuts-panel / share-sheet）会拦截所有点击 */
+[hidden] {
+    display: none !important;
+}
+
 html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
