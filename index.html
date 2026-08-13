@@ -488,6 +488,7 @@
     </header>
 
     <main>
+        <div id="__version__" data-v="2026-08-13-linkfix" hidden></div>
         <!-- ============ Hero ============ -->
         <section class="hero">
             <div class="hero-eyebrow">唇部美学医学专著</div>
@@ -789,6 +790,24 @@
         /* ---- 目录触发器：打开导航抽屉 ---- */
         document.getElementById('nav-trigger').addEventListener('click', () => {
             if (window.BookNavigation) window.BookNavigation.toggleMenu();
+        });
+
+        /* ---- 链接点击兜底：确保所有 <a> 在任何环境下都能跳转 ----
+           某些环境（微信内置浏览器、部分 webview）会拦截 <a> 默认导航，
+           尤其 target=_blank。这里用事件委托强制 location 跳转。 */
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a');
+            if (!link) return;
+            var href = link.getAttribute('href');
+            if (!href || href.charAt(0) === '#' || href.startsWith('javascript:')) return;
+            // 外链放行原生行为；本站链接强制跳转
+            if (link.target === '_blank') {
+                // 工具页：尝试新窗口，失败则本页打开
+                e.preventDefault();
+                var w = window.open(href, '_blank');
+                if (!w) window.location.href = href;
+            }
+            // 普通链接（本页跳转）让浏览器原生处理，不干预
         });
     </script>
 </body>
