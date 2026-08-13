@@ -82,7 +82,7 @@
                     <ul class="nav-list">${chapterList('core')}</ul>
                 </div>
                 <div class="nav-section">
-                    <h4 class="nav-section-title">扩展专题</h4>
+                    <h4 class="nav-section-title">配套资料</h4>
                     <ul class="nav-list">${chapterList('extended')}</ul>
                 </div>
                 <div class="nav-section">
