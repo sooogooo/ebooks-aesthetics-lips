@@ -800,14 +800,12 @@
             if (!link) return;
             var href = link.getAttribute('href');
             if (!href || href.charAt(0) === '#' || href.startsWith('javascript:')) return;
-            // 外链放行原生行为；本站链接强制跳转
-            if (link.target === '_blank') {
-                // 工具页：尝试新窗口，失败则本页打开
+            // 同站链接（reader.html / 工具页）：强制 location 跳转，绕过任何 webview 拦截
+            if (href.indexOf('reader.html') === 0 || /\.(html)$/.test(href) || href.indexOf('index.html') === 0) {
                 e.preventDefault();
-                var w = window.open(href, '_blank');
-                if (!w) window.location.href = href;
+                window.location.href = href;
+                return;
             }
-            // 普通链接（本页跳转）让浏览器原生处理，不干预
         });
     </script>
 </body>

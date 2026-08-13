@@ -724,6 +724,18 @@
             if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) previousChapter();
             else if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) nextChapter();
         });
+
+        /* ---- 链接点击兜底：同站链接强制 location 跳转 ---- */
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a');
+            if (!link) return;
+            var href = link.getAttribute('href');
+            if (!href || href.charAt(0) === '#' || href.startsWith('javascript:')) return;
+            if (href.indexOf('reader.html') === 0 || href.indexOf('index.html') === 0 || /\.(html)$/.test(href)) {
+                e.preventDefault();
+                window.location.href = href;
+            }
+        });
     </script>
 </body>
 </html>
