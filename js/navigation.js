@@ -1,473 +1,274 @@
 /**
- * 全局导航系统
- * Global Navigation System for 《绛唇解语花》
+ * 全局导航系统 Global Navigation
+ * 《绛唇解语花》—— 抽屉式目录、搜索、快捷键、面包屑
  *
- * 功能特性 Features:
- * - 浮动导航菜单 Floating navigation menu
- * - 章节快速跳转 Chapter quick jump
- * - 键盘快捷键 Keyboard shortcuts
- * - 面包屑导航 Breadcrumb navigation
- * - 阅读进度追踪 Reading progress tracking
- * - 响应式设计 Responsive design
+ * 图标改用 js/icons.js 的 SVG（icon 字段为图标名）
  */
 
 (function() {
     'use strict';
 
-    // ============================================
-    // 章节配置 Chapter Configuration
-    // ============================================
     const CHAPTERS = [
-        { id: '00', file: '00_preface.md', title: '前言', number: '序言', category: 'core', icon: '📖' },
-        { id: '01', file: '01_cultural_aesthetics.md', title: '文化美学', number: '第一章', category: 'core', icon: '🌍' },
-        { id: '02', file: '02_scientific_principles.md', title: '科学原理', number: '第二章', category: 'core', icon: '🔬' },
-        { id: '03', file: '03_case_studies.md', title: '案例研究', number: '第三章', category: 'core', icon: '📋' },
-        { id: '04', file: '04_technical_mastery_international.md', title: '技术精进', number: '第四章', category: 'core', icon: '⚡' },
-        { id: '05', file: '05_comprehensive_strategy.md', title: '综合策略', number: '第五章', category: 'core', icon: '🎯' },
-        { id: '06', file: '06_functional_reconstruction.md', title: '功能重建', number: '第六章', category: 'core', icon: '🔧' },
-        { id: '07', file: '07_doctor_selection.md', title: '医生选择', number: '第七章', category: 'core', icon: '👨‍⚕️' },
-        { id: '08', file: '08_cosmetics_tattoo.md', title: '唇部纹绣', number: '第八章', category: 'core', icon: '🎨' },
-        { id: '09', file: '09_aftercare.md', title: '术后护理', number: '第九章', category: 'core', icon: '💊' },
-        { id: '10', file: '10_risk_aesthetics.md', title: '风险美学', number: '第十章', category: 'core', icon: '⚠️' },
-        { id: '11', file: '11_appendix.md', title: '参考资料', number: '附录', category: 'core', icon: '📑' },
-        { id: 'ai', file: 'ai_assessment_system.md', title: 'AI评估系统', number: '专题一', category: 'extended', icon: '🤖' },
-        { id: 'visual', file: 'visual_design_guide.md', title: '视觉设计指南', number: '专题二', category: 'extended', icon: '🎭' },
-        { id: 'digital', file: 'digital_ecosystem.md', title: '数字生态系统', number: '专题三', category: 'extended', icon: '🌐' }
+        { id: '00', file: '00_preface.md', title: '前言', number: '序言', category: 'core', icon: 'book' },
+        { id: '01', file: '01_cultural_aesthetics.md', title: '文化美学', number: '第一章', category: 'core', icon: 'globe' },
+        { id: '02', file: '02_scientific_principles.md', title: '科学原理', number: '第二章', category: 'core', icon: 'flask' },
+        { id: '03', file: '03_case_studies.md', title: '案例研究', number: '第三章', category: 'core', icon: 'clipboard' },
+        { id: '04', file: '04_technical_mastery_international.md', title: '技术精进', number: '第四章', category: 'core', icon: 'zap' },
+        { id: '05', file: '05_comprehensive_strategy.md', title: '综合策略', number: '第五章', category: 'core', icon: 'target' },
+        { id: '06', file: '06_functional_reconstruction.md', title: '功能重建', number: '第六章', category: 'core', icon: 'wrench' },
+        { id: '07', file: '07_doctor_selection.md', title: '医生选择', number: '第七章', category: 'core', icon: 'stethoscope' },
+        { id: '08', file: '08_cosmetics_tattoo.md', title: '唇部纹绣', number: '第八章', category: 'core', icon: 'palette' },
+        { id: '09', file: '09_aftercare.md', title: '术后护理', number: '第九章', category: 'core', icon: 'pill' },
+        { id: '10', file: '10_risk_aesthetics.md', title: '风险美学', number: '第十章', category: 'core', icon: 'shield' },
+        { id: '11', file: '11_appendix.md', title: '参考资料', number: '附录', category: 'core', icon: 'fileText' },
+        { id: 'ai', file: 'ai_assessment_system.md', title: 'AI评估系统', number: '专题一', category: 'extended', icon: 'robot' },
+        { id: 'visual', file: 'visual_design_guide.md', title: '视觉设计指南', number: '专题二', category: 'extended', icon: 'palette' },
+        { id: 'digital', file: 'digital_ecosystem.md', title: '数字生态系统', number: '专题三', category: 'extended', icon: 'layers' }
     ];
 
-    // 交互式工具配置
     const TOOLS = [
-        { id: 'lip-assessment', file: 'lip-assessment-test.html', title: '唇部美学评估', icon: '💄' },
-        { id: 'doctor-skill', file: 'doctor-skill-assessment.html', title: '医生技能测试', icon: '👨‍⚕️' },
-        { id: 'risk-assessment', file: 'preoperative-risk-assessment.html', title: '风险评估', icon: '⚕️' },
-        { id: 'emergency', file: 'emergency-response-simulation.html', title: '应急响应', icon: '🚨' },
-        { id: 'survey', file: 'patient-satisfaction-survey.html', title: '满意度调查', icon: '📊' }
+        { id: 'lip-assessment', file: 'lip-assessment-test.html', title: '唇部美学评估', icon: 'lipAssess' },
+        { id: 'doctor-skill', file: 'doctor-skill-assessment.html', title: '医生技能测试', icon: 'stethoscope' },
+        { id: 'risk-assessment', file: 'preoperative-risk-assessment.html', title: '术前风险评估', icon: 'alertMedical' },
+        { id: 'emergency', file: 'emergency-response-simulation.html', title: '应急响应模拟', icon: 'siren' },
+        { id: 'survey', file: 'patient-satisfaction-survey.html', title: '满意度调查', icon: 'smile' }
     ];
 
-    // ============================================
-    // 导航状态管理 Navigation State Management
-    // ============================================
-    let navState = {
-        currentChapter: null,
-        isMenuOpen: false,
-        isSidebarOpen: false,
-        readingProgress: 0,
-        lastScrollPos: 0
-    };
+    let navState = { isMenuOpen: false, isShortcutsOpen: false };
 
-    // ============================================
-    // 创建浮动导航按钮 Create Floating Nav Button
-    // ============================================
-    function createFloatingNavButton() {
-        const button = document.createElement('button');
-        button.id = 'floating-nav-button';
-        button.className = 'floating-nav-button';
-        button.innerHTML = '☰';
-        button.setAttribute('aria-label', '打开导航菜单');
-        button.setAttribute('title', '导航菜单 (快捷键: N)');
-
-        button.addEventListener('click', toggleNavigationMenu);
-
-        return button;
+    /** 图标 helper */
+    function icon(name) {
+        return window.Icons ? Icons.get(name) : '';
     }
 
-    // ============================================
-    // 创建导航菜单 Create Navigation Menu
-    // ============================================
-    function createNavigationMenu() {
+    function iconI(name) {
+        return `<i class="icon" data-icon="${name}"></i>`;
+    }
+
+    // ---- 浮动按钮（移动端兜底，桌面端可用 header 内的触发器） ----
+    function createFloatingButton() {
+        const btn = document.createElement('button');
+        btn.id = 'floating-nav-button';
+        btn.className = 'floating-nav-button';
+        btn.setAttribute('aria-label', '打开目录');
+        btn.innerHTML = icon('menu');
+        btn.addEventListener('click', toggleMenu);
+        return btn;
+    }
+
+    function createMenu() {
         const menu = document.createElement('div');
         menu.id = 'navigation-menu';
         menu.className = 'navigation-menu';
-        menu.style.display = 'none';
+        menu.setAttribute('hidden', '');
 
         menu.innerHTML = `
             <div class="nav-menu-header">
-                <h3>📚 书籍导航</h3>
-                <button class="nav-close-button" onclick="window.BookNavigation.closeMenu()" aria-label="关闭菜单">✕</button>
+                <div class="nav-menu-brand">
+                    <span class="site-brand-mark">绛</span>
+                    <span>目录</span>
+                </div>
+                <button class="nav-close" data-nav-close aria-label="关闭">${icon('close')}</button>
             </div>
 
             <div class="nav-menu-search">
-                <input type="text" id="nav-search" placeholder="🔍 搜索章节..." aria-label="搜索章节">
+                <span class="nav-search-icon">${icon('search')}</span>
+                <input type="text" id="nav-search" placeholder="搜索章节…" aria-label="搜索章节">
             </div>
 
-            <div class="nav-menu-content">
+            <div class="nav-menu-body">
                 <div class="nav-section">
-                    <h4 class="nav-section-title">📖 核心章节</h4>
-                    <ul class="nav-chapter-list" id="core-chapters-list">
-                        ${generateChapterList('core')}
-                    </ul>
+                    <h4 class="nav-section-title">核心章节</h4>
+                    <ul class="nav-list">${chapterList('core')}</ul>
                 </div>
-
                 <div class="nav-section">
-                    <h4 class="nav-section-title">🔬 扩展专题</h4>
-                    <ul class="nav-chapter-list" id="extended-chapters-list">
-                        ${generateChapterList('extended')}
-                    </ul>
+                    <h4 class="nav-section-title">扩展专题</h4>
+                    <ul class="nav-list">${chapterList('extended')}</ul>
                 </div>
-
                 <div class="nav-section">
-                    <h4 class="nav-section-title">🛠️ 交互式工具</h4>
-                    <ul class="nav-tool-list">
-                        ${generateToolList()}
-                    </ul>
+                    <h4 class="nav-section-title">交互式工具</h4>
+                    <ul class="nav-list">${toolList()}</ul>
                 </div>
-
                 <div class="nav-section">
-                    <h4 class="nav-section-title">⚡ 快捷操作</h4>
-                    <div class="nav-quick-actions">
-                        <button onclick="window.location.href='index.html'" class="nav-action-btn">
-                            🏠 返回首页
-                        </button>
-                        <button onclick="window.print()" class="nav-action-btn">
-                            🖨️ 打印当前页
-                        </button>
-                        <button onclick="window.BookNavigation.showShortcuts()" class="nav-action-btn">
-                            ⌨️ 快捷键
-                        </button>
+                    <h4 class="nav-section-title">快捷操作</h4>
+                    <div class="nav-actions">
+                        <button class="nav-action" data-nav-home>${icon('home')}<span>返回首页</span></button>
+                        <button class="nav-action" data-nav-print>${icon('print')}<span>打印当前页</span></button>
+                        <button class="nav-action" data-nav-share>${icon('share')}<span>分享本页</span></button>
+                        <button class="nav-action" data-nav-help>${icon('keyboard')}<span>快捷键帮助</span></button>
                     </div>
                 </div>
             </div>
 
             <div class="nav-menu-footer">
-                <small>提示: 按 ESC 关闭菜单 | 按 N 打开菜单</small>
+                <small>按 Esc 关闭 · 按 N 打开 · 按 S 搜索</small>
             </div>
         `;
 
-        // 添加搜索功能
-        setTimeout(() => {
-            const searchInput = document.getElementById('nav-search');
-            if (searchInput) {
-                searchInput.addEventListener('input', handleSearch);
-            }
-        }, 100);
+        // 事件绑定
+        menu.querySelector('[data-nav-close]').addEventListener('click', closeMenu);
+        menu.querySelector('[data-nav-home]').addEventListener('click', () => { location.href = 'index.html'; });
+        menu.querySelector('[data-nav-print]').addEventListener('click', () => { closeMenu(); window.print(); });
+        menu.querySelector('[data-nav-share]').addEventListener('click', () => {
+            closeMenu();
+            const t = document.querySelector('[data-share-trigger]');
+            if (t) t.click();
+            else if (window.BookShare) window.BookShare.open();
+        });
+        menu.querySelector('[data-nav-help]').addEventListener('click', showShortcuts);
+        menu.querySelector('#nav-search').addEventListener('input', handleSearch);
 
         return menu;
     }
 
-    // ============================================
-    // 生成章节列表 Generate Chapter List
-    // ============================================
-    function generateChapterList(category) {
-        return CHAPTERS
-            .filter(ch => ch.category === category)
-            .map(ch => `
-                <li class="nav-chapter-item" data-chapter-id="${ch.id}">
-                    <a href="reader.html?chapter=${ch.file}" class="nav-chapter-link">
-                        <span class="nav-chapter-icon">${ch.icon}</span>
-                        <span class="nav-chapter-number">${ch.number}</span>
-                        <span class="nav-chapter-title">${ch.title}</span>
-                    </a>
-                </li>
-            `).join('');
-    }
-
-    // ============================================
-    // 生成工具列表 Generate Tool List
-    // ============================================
-    function generateToolList() {
-        return TOOLS.map(tool => `
-            <li class="nav-tool-item">
-                <a href="${tool.file}" class="nav-tool-link" target="_blank">
-                    <span class="nav-tool-icon">${tool.icon}</span>
-                    <span class="nav-tool-title">${tool.title}</span>
+    function chapterList(cat) {
+        return CHAPTERS.filter(c => c.category === cat).map(c => `
+            <li class="nav-item" data-search="${(c.title + c.number).toLowerCase()}">
+                <a href="reader.html?chapter=${c.file}" class="nav-link">
+                    <span class="nav-link-icon">${icon(c.icon)}</span>
+                    <span class="nav-link-seal">${c.number}</span>
+                    <span class="nav-link-title">${c.title}</span>
                 </a>
-            </li>
-        `).join('');
+            </li>`).join('');
     }
 
-    // ============================================
-    // 创建面包屑导航 Create Breadcrumb Navigation
-    // ============================================
-    function createBreadcrumb() {
-        const currentChapter = getCurrentChapter();
-        if (!currentChapter) return null;
-
-        const breadcrumb = document.createElement('nav');
-        breadcrumb.className = 'breadcrumb-nav';
-        breadcrumb.setAttribute('aria-label', '面包屑导航');
-
-        breadcrumb.innerHTML = `
-            <ol class="breadcrumb-list">
-                <li class="breadcrumb-item">
-                    <a href="index.html" class="breadcrumb-link">📚 首页</a>
-                </li>
-                <li class="breadcrumb-separator">›</li>
-                <li class="breadcrumb-item">
-                    <span class="breadcrumb-category">${currentChapter.category === 'core' ? '核心章节' : '扩展专题'}</span>
-                </li>
-                <li class="breadcrumb-separator">›</li>
-                <li class="breadcrumb-item breadcrumb-current">
-                    <span>${currentChapter.icon} ${currentChapter.title}</span>
-                </li>
-            </ol>
-        `;
-
-        return breadcrumb;
+    function toolList() {
+        return TOOLS.map(t => `
+            <li class="nav-item" data-search="${t.title.toLowerCase()}">
+                <a href="${t.file}" class="nav-link" target="_blank" rel="noopener">
+                    <span class="nav-link-icon">${icon(t.icon)}</span>
+                    <span class="nav-link-title">${t.title}</span>
+                </a>
+            </li>`).join('');
     }
 
-    // ============================================
-    // 创建快捷键帮助面板 Create Shortcuts Panel
-    // ============================================
-    function createShortcutsPanel() {
+    function createShortcuts() {
         const panel = document.createElement('div');
         panel.id = 'shortcuts-panel';
         panel.className = 'shortcuts-panel';
-        panel.style.display = 'none';
-
+        panel.setAttribute('hidden', '');
         panel.innerHTML = `
-            <div class="shortcuts-content">
-                <div class="shortcuts-header">
-                    <h3>⌨️ 键盘快捷键</h3>
-                    <button class="shortcuts-close" onclick="window.BookNavigation.closeShortcuts()">✕</button>
+            <div class="shortcuts-card">
+                <div class="shortcuts-head">
+                    <h3>键盘快捷键</h3>
+                    <button class="nav-close" data-sc-close aria-label="关闭">${icon('close')}</button>
                 </div>
-                <div class="shortcuts-body">
-                    <div class="shortcut-group">
-                        <h4>📖 阅读导航</h4>
-                        <div class="shortcut-item">
-                            <kbd>←</kbd>
-                            <span>上一章</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>→</kbd>
-                            <span>下一章</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>Home</kbd>
-                            <span>跳转到顶部</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>End</kbd>
-                            <span>跳转到底部</span>
-                        </div>
+                <div class="shortcuts-grid">
+                    <div class="sc-group">
+                        <h4>阅读导航</h4>
+                        <div class="sc-item"><kbd>←</kbd><span>上一章</span></div>
+                        <div class="sc-item"><kbd>→</kbd><span>下一章</span></div>
+                        <div class="sc-item"><kbd>Home</kbd><span>回到顶部</span></div>
+                        <div class="sc-item"><kbd>End</kbd><span>跳到底部</span></div>
                     </div>
-                    <div class="shortcut-group">
-                        <h4>🎯 菜单操作</h4>
-                        <div class="shortcut-item">
-                            <kbd>N</kbd>
-                            <span>打开/关闭导航菜单</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>S</kbd>
-                            <span>聚焦搜索框</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>ESC</kbd>
-                            <span>关闭菜单/面板</span>
-                        </div>
+                    <div class="sc-group">
+                        <h4>菜单操作</h4>
+                        <div class="sc-item"><kbd>N</kbd><span>打开/关闭目录</span></div>
+                        <div class="sc-item"><kbd>S</kbd><span>聚焦搜索框</span></div>
+                        <div class="sc-item"><kbd>Esc</kbd><span>关闭面板</span></div>
                     </div>
-                    <div class="shortcut-group">
-                        <h4>⚡ 快捷功能</h4>
-                        <div class="shortcut-item">
-                            <kbd>P</kbd>
-                            <span>打印当前页</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>H</kbd>
-                            <span>返回首页</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>?</kbd>
-                            <span>显示此帮助</span>
-                        </div>
+                    <div class="sc-group">
+                        <h4>快捷功能</h4>
+                        <div class="sc-item"><kbd>P</kbd><span>打印当前页</span></div>
+                        <div class="sc-item"><kbd>H</kbd><span>返回首页</span></div>
+                        <div class="sc-item"><kbd>?</kbd><span>显示此帮助</span></div>
                     </div>
                 </div>
-            </div>
-        `;
-
+            </div>`;
+        panel.addEventListener('click', e => {
+            if (e.target === panel || e.target.closest('[data-sc-close]')) closeShortcuts();
+        });
         return panel;
     }
 
-    // ============================================
-    // 章节搜索功能 Chapter Search Function
-    // ============================================
-    function handleSearch(event) {
-        const searchTerm = event.target.value.toLowerCase();
-        const chapterItems = document.querySelectorAll('.nav-chapter-item, .nav-tool-item');
-
-        chapterItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(searchTerm)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
+    function handleSearch(e) {
+        const term = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const text = item.dataset.search || item.textContent.toLowerCase();
+            item.style.display = !term || text.includes(term) ? '' : 'none';
         });
     }
 
-    // ============================================
-    // 获取当前章节 Get Current Chapter
-    // ============================================
-    function getCurrentChapter() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const chapterFile = urlParams.get('chapter');
-
-        if (!chapterFile) return null;
-
-        return CHAPTERS.find(ch => ch.file === chapterFile);
+    function toggleMenu() {
+        navState.isMenuOpen ? closeMenu() : openMenu();
     }
-
-    // ============================================
-    // 切换导航菜单 Toggle Navigation Menu
-    // ============================================
-    function toggleNavigationMenu() {
-        const menu = document.getElementById('navigation-menu');
-        navState.isMenuOpen = !navState.isMenuOpen;
-
-        if (navState.isMenuOpen) {
-            menu.style.display = 'flex';
-            setTimeout(() => menu.classList.add('active'), 10);
-            // 聚焦到搜索框
-            const searchInput = document.getElementById('nav-search');
-            if (searchInput) searchInput.focus();
-        } else {
-            menu.classList.remove('active');
-            setTimeout(() => menu.style.display = 'none', 300);
-        }
+    function openMenu() {
+        const m = document.getElementById('navigation-menu');
+        if (!m) return;
+        m.removeAttribute('hidden');
+        requestAnimationFrame(() => m.classList.add('active'));
+        navState.isMenuOpen = true;
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            const s = document.getElementById('nav-search');
+            if (s) s.focus();
+        }, 200);
     }
-
-    // ============================================
-    // 关闭导航菜单 Close Navigation Menu
-    // ============================================
-    function closeNavigationMenu() {
-        const menu = document.getElementById('navigation-menu');
+    function closeMenu() {
+        const m = document.getElementById('navigation-menu');
+        if (!m) return;
+        m.classList.remove('active');
         navState.isMenuOpen = false;
-        menu.classList.remove('active');
-        setTimeout(() => menu.style.display = 'none', 300);
+        document.body.style.overflow = '';
+        setTimeout(() => m.setAttribute('hidden', ''), 300);
+    }
+    function showShortcuts() {
+        const p = document.getElementById('shortcuts-panel');
+        if (!p) return;
+        p.removeAttribute('hidden');
+        requestAnimationFrame(() => p.classList.add('active'));
+        navState.isShortcutsOpen = true;
+    }
+    function closeShortcuts() {
+        const p = document.getElementById('shortcuts-panel');
+        if (!p) return;
+        p.classList.remove('active');
+        navState.isShortcutsOpen = false;
+        setTimeout(() => p.setAttribute('hidden', ''), 300);
     }
 
-    // ============================================
-    // 显示快捷键面板 Show Shortcuts Panel
-    // ============================================
-    function showShortcutsPanel() {
-        const panel = document.getElementById('shortcuts-panel');
-        panel.style.display = 'flex';
-        setTimeout(() => panel.classList.add('active'), 10);
-    }
-
-    // ============================================
-    // 关闭快捷键面板 Close Shortcuts Panel
-    // ============================================
-    function closeShortcutsPanel() {
-        const panel = document.getElementById('shortcuts-panel');
-        panel.classList.remove('active');
-        setTimeout(() => panel.style.display = 'none', 300);
-    }
-
-    // ============================================
-    // 键盘快捷键处理 Keyboard Shortcuts Handler
-    // ============================================
-    function handleKeyboardShortcuts(event) {
-        // 忽略在输入框中的按键
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            if (event.key === 'Escape') {
-                event.target.blur();
-            }
+    function onKey(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+            if (e.key === 'Escape') e.target.blur();
             return;
         }
-
-        switch(event.key.toLowerCase()) {
-            case 'n':
-                event.preventDefault();
-                toggleNavigationMenu();
-                break;
-            case 's':
-                event.preventDefault();
-                toggleNavigationMenu();
-                setTimeout(() => {
-                    const searchInput = document.getElementById('nav-search');
-                    if (searchInput) searchInput.focus();
-                }, 100);
-                break;
-            case 'escape':
-                event.preventDefault();
-                closeNavigationMenu();
-                closeShortcutsPanel();
-                break;
-            case 'p':
-                if (!event.ctrlKey && !event.metaKey) {
-                    event.preventDefault();
-                    window.print();
-                }
-                break;
-            case 'h':
-                if (!event.ctrlKey && !event.metaKey) {
-                    event.preventDefault();
-                    window.location.href = 'index.html';
-                }
-                break;
-            case '?':
-                event.preventDefault();
-                showShortcutsPanel();
-                break;
-            case 'home':
-                event.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                break;
-            case 'end':
-                event.preventDefault();
-                window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
-                break;
+        switch (e.key.toLowerCase()) {
+            case 'n': e.preventDefault(); toggleMenu(); break;
+            case 's': e.preventDefault(); openMenu(); setTimeout(() => document.getElementById('nav-search')?.focus(), 200); break;
+            case 'escape': closeMenu(); closeShortcuts(); break;
+            case 'p': if (!e.ctrlKey && !e.metaKey) { e.preventDefault(); window.print(); } break;
+            case 'h': if (!e.ctrlKey && !e.metaKey) { e.preventDefault(); location.href = 'index.html'; } break;
+            case '?': e.preventDefault(); showShortcuts(); break;
+            case 'home': e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); break;
+            case 'end': e.preventDefault(); window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }); break;
         }
     }
 
-    // ============================================
-    // 初始化导航系统 Initialize Navigation System
-    // ============================================
-    function initializeNavigation() {
-        // 创建所有导航元素
-        const floatingButton = createFloatingNavButton();
-        const navMenu = createNavigationMenu();
-        const shortcutsPanel = createShortcutsPanel();
-        const breadcrumb = createBreadcrumb();
-
-        // 添加到DOM
-        document.body.appendChild(floatingButton);
-        document.body.appendChild(navMenu);
-        document.body.appendChild(shortcutsPanel);
-
-        // 添加面包屑到页面顶部
-        if (breadcrumb) {
-            const container = document.querySelector('.container') || document.body;
-            container.insertBefore(breadcrumb, container.firstChild);
-        }
-
-        // 绑定键盘事件
-        document.addEventListener('keydown', handleKeyboardShortcuts);
-
-        // 点击外部关闭菜单
-        document.addEventListener('click', (e) => {
-            const menu = document.getElementById('navigation-menu');
-            const button = document.getElementById('floating-nav-button');
-
-            if (navState.isMenuOpen &&
-                !menu.contains(e.target) &&
-                !button.contains(e.target)) {
-                closeNavigationMenu();
+    function init() {
+        document.body.appendChild(createFloatingButton());
+        document.body.appendChild(createMenu());
+        document.body.appendChild(createShortcuts());
+        document.addEventListener('keydown', onKey);
+        document.addEventListener('click', e => {
+            if (navState.isMenuOpen) {
+                const menu = document.getElementById('navigation-menu');
+                const fab = document.getElementById('floating-nav-button');
+                if (!menu.contains(e.target) && !fab.contains(e.target)) closeMenu();
             }
         });
-
-        console.log('✅ 导航系统初始化完成');
+        // 渲染注入的图标
+        if (window.Icons) Icons.renderAll();
     }
 
-    // ============================================
-    // 暴露公共API Expose Public API
-    // ============================================
     window.BookNavigation = {
-        init: initializeNavigation,
-        toggleMenu: toggleNavigationMenu,
-        closeMenu: closeNavigationMenu,
-        showShortcuts: showShortcutsPanel,
-        closeShortcuts: closeShortcutsPanel,
-        chapters: CHAPTERS,
-        tools: TOOLS,
-        state: navState
+        init, toggleMenu, openMenu, closeMenu,
+        showShortcuts, closeShortcuts,
+        chapters: CHAPTERS, tools: TOOLS, state: navState
     };
 
-    // 自动初始化
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeNavigation);
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        initializeNavigation();
+        init();
     }
-
 })();

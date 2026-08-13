@@ -1,0 +1,160 @@
+/* ==========================================================================
+   《绛唇解语花》设计令牌 Design Tokens
+   墨黑为骨 · 绛红为魂 · 留白为韵
+   ========================================================================== */
+
+:root {
+    /* ---- 品牌色 Brand -------------------------------------------------- */
+    --ink: #1D1D1F;              /* 墨黑 —— 主文字、标题骨架 */
+    --ink-soft: #424245;         /* 次级文字 */
+    --ink-muted: #6E6E73;        /* 辅助文字、说明 */
+    --ink-faint: #86868B;        /* 极弱文字、占位 */
+
+    --crimson: #8B1A2B;          /* 绛红 —— 唯一强调色，呼应《绛唇》 */
+    --crimson-deep: #6B121F;     /* hover/active */
+    --crimson-soft: #B85668;     /* 浅绛，少量装饰 */
+    --crimson-tint: rgba(139, 26, 43, 0.06);  /* 极浅底纹 */
+
+    --gold: #B8935A;             /* 古铜金 —— 极少量点缀（印章、分割） */
+
+    /* ---- 中性面 Neutral Surfaces -------------------------------------- */
+    --paper: #FAFAFA;            /* 页面底（纸白） */
+    --paper-elevated: #FFFFFF;   /* 卡片、浮起面 */
+    --paper-sunken: #F5F5F7;     /* 下沉区、代码块底 */
+
+    --line: #D2D2D7;             /* 分割线、边框 */
+    --line-soft: #E8E8ED;        /* 极浅分割 */
+
+    /* ---- 语义色 Semantic（克制使用，去饱和） -------------------------- */
+    --success: #2E7D32;
+    --warning: #8B5E00;
+    --danger: #8B1A2B;           /* 复用绛红，避免引入红色噪点 */
+    --info: #1F4E79;
+
+    /* ---- 字体 Typography ---------------------------------------------- */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC',
+                  'STSong', 'SimSun', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+                 'Helvetica Neue', 'Microsoft YaHei', 'Source Han Sans CN',
+                 sans-serif;
+    --font-mono: 'SF Mono', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+
+    /* 字号阶梯 —— Apple 风几何级数 */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+    --text-5xl: 3.5rem;    /* 56px —— 首页大标题 */
+
+    /* 字重 */
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* 行高 */
+    --leading-tight: 1.2;
+    --leading-snug: 1.4;
+    --leading-normal: 1.6;
+    --leading-relaxed: 1.8;    /* 正文阅读 */
+
+    /* 字间距 */
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.04em;
+    --tracking-cjk: 0.05em;    /* 中文标题微疏排 */
+
+    /* ---- 间距 Spacing（4px 基线） ------------------------------------- */
+    --space-1: 0.25rem;   /* 4px  */
+    --space-2: 0.5rem;    /* 8px  */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.5rem;    /* 24px */
+    --space-6: 2rem;      /* 32px */
+    --space-7: 2.5rem;    /* 40px */
+    --space-8: 3rem;      /* 48px */
+    --space-9: 4rem;      /* 64px */
+    --space-10: 6rem;     /* 96px —— 大段落留白 */
+
+    /* ---- 圆角 Radius -------------------------------------------------- */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* ---- 阴影 Shadow（中性灰，Apple 风） ------------------------------ */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
+
+    /* ---- 缓动 Easing -------------------------------------------------- */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+    --transition-fast: 0.15s var(--ease-standard);
+    --transition-base: 0.3s var(--ease-standard);
+    --transition-slow: 0.5s var(--ease-standard);
+
+    /* ---- 容器 Container ----------------------------------------------- */
+    --container-narrow: 760px;   /* 阅读器正文 */
+    --container-normal: 1080px;  /* 普通页 */
+    --container-wide: 1280px;    /* 首页网格 */
+
+    /* ---- 层级 z-index ------------------------------------------------- */
+    --z-base: 1;
+    --z-sticky: 100;
+    --z-progress: 200;
+    --z-nav-fab: 900;
+    --z-nav-menu: 1000;
+    --z-overlay: 1100;
+    --z-modal: 1200;
+    --z-top: 9999;
+}
+
+/* ==========================================================================
+   深色模式 Dark Mode —— 跟随系统
+   墨黑主调天然适配，绛红稍提亮以保证对比度
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ink: #F5F5F7;          /* 反转：浅色文字 */
+        --ink-soft: #C7C7CC;
+        --ink-muted: #98989D;
+        --ink-faint: #636366;
+
+        --crimson: #D2556A;      /* 深底上提亮的绛红 */
+        --crimson-deep: #E06A7F;
+        --crimson-soft: #D2556A;
+        --crimson-tint: rgba(210, 85, 106, 0.12);
+
+        --gold: #C9A86A;
+
+        --paper: #1C1C1E;        /* 近黑底，非纯黑以保留层次 */
+        --paper-elevated: #2C2C2E;
+        --paper-sunken: #131316;
+
+        --line: #38383A;
+        --line-soft: #2C2C2E;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+        --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.6);
+
+        color-scheme: dark;
+    }
+}
+
+/* 强制浅色（部分页面如打印页可通过 [data-theme="light"] 覆盖） */
+[data-theme="light"] {
+    color-scheme: light;
+}

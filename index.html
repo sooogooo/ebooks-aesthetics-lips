@@ -2,752 +2,707 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="绛唇解语花">
-    <meta name="theme-color" content="#8B4513">
-    <title>绛唇解语花 - 医学专著在线阅读</title>
-    <meta name="description" content="美容医生的唇部美学笔记 - 专业医学电子书籍在线阅读平台">
-    <meta name="keywords" content="唇部美学,医学专著,美容医学,电子书,在线阅读">
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
+    <title>绛唇解语花 — 美容医生的唇部美学笔记</title>
+    <meta name="description" content="《绛唇解语花》——一部专业的唇部美学医学专著。从文化美学、科学原理到临床技术，为医学美容从业者提供系统、权威的专业指导。">
+    <meta name="keywords" content="唇部美学,医学专著,美容医学,电子书,在线阅读,绛唇解语花">
+
+    <!-- Open Graph / 微信分享卡片 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="绛唇解语花 — 美容医生的唇部美学笔记">
+    <meta property="og:description" content="专业的唇部美学医学专著，从文化美学到临床技术的系统指南。">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="绛唇解语花">
+
     <link rel="icon" href="https://docs.bccsw.cn/favicon.png">
     <link rel="apple-touch-icon" href="https://docs.bccsw.cn/logo.png">
+
+    <!-- 思源宋体（古典书卷气） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/share.css">
     <link rel="stylesheet" href="css/mobile.css">
     <style>
-        :root {
-            --primary-color: #8B4513;
-            --primary-light: #D2B48C;
-            --primary-dark: #654321;
-            --secondary-color: #CD853F;
-            --accent-color: #F4A460;
-            --bg-primary: #FFF8DC;
-            --bg-secondary: #FFFEF7;
-            --text-primary: #2F1B14;
-            --text-secondary: #8B4513;
-            --text-light: #A0522D;
-            --border-color: #DEB887;
-            --shadow-light: 0 2px 8px rgba(139, 69, 19, 0.1);
-            --shadow-medium: 0 4px 16px rgba(139, 69, 19, 0.15);
-            --shadow-heavy: 0 8px 32px rgba(139, 69, 19, 0.2);
-        }
+        /* ==================================================================
+           首页专属样式
+           ================================================================== */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-size: 16px;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 2rem 0;
+        /* ---- Hero 区：大留白 + 宋体大标题 ---- */
+        .hero {
             text-align: center;
-            box-shadow: var(--shadow-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/><circle cx="20" cy="20" r="15" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.3"/></svg>');
-            opacity: 0.3;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
+            padding: var(--space-10) var(--space-6) var(--space-9);
+            max-width: var(--container-wide);
             margin: 0 auto;
-            padding: 0 2rem;
+            position: relative;
         }
 
-        .book-title {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 2px;
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--crimson);
+            letter-spacing: var(--tracking-wide);
+            margin-bottom: var(--space-5);
+            font-weight: var(--weight-medium);
         }
 
-        .book-subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--crimson);
+            opacity: 0.5;
         }
 
-        .book-meta {
-            font-size: 1rem;
-            opacity: 0.8;
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 7vw, var(--text-5xl));
+            font-weight: var(--weight-medium);
+            color: var(--ink);
+            letter-spacing: var(--tracking-cjk);
+            line-height: var(--leading-tight);
+            margin-bottom: var(--space-5);
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 2.5vw, var(--text-xl));
+            font-weight: var(--weight-light);
+            color: var(--ink-muted);
+            letter-spacing: var(--tracking-cjk);
+            margin-bottom: var(--space-7);
+        }
+
+        .hero-desc {
+            max-width: 580px;
+            margin: 0 auto var(--space-7);
+            font-size: var(--text-base);
+            color: var(--ink-soft);
+            line-height: var(--leading-relaxed);
+        }
+
+        .hero-actions {
             display: flex;
+            gap: var(--space-3);
             justify-content: center;
-            gap: 2rem;
             flex-wrap: wrap;
         }
 
-        .container {
-            max-width: 1400px;
+        /* ---- 统计概览 ---- */
+        .stats {
+            max-width: var(--container-wide);
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 0 var(--space-6);
         }
 
-        .book-intro {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
+        .stats-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-2);
+            padding: var(--space-7) var(--space-5);
+            background: var(--paper-elevated);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line-soft);
         }
 
-        .intro-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+        .stat {
             text-align: center;
-            max-width: 800px;
+            padding: var(--space-2);
+        }
+
+        .stat-num {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, var(--text-4xl));
+            font-weight: var(--weight-semibold);
+            color: var(--ink);
+            line-height: 1;
+            display: block;
+            margin-bottom: var(--space-3);
+        }
+
+        .stat-num::after {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--crimson);
+            margin: var(--space-3) auto 0;
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--ink-muted);
+            letter-spacing: var(--tracking-wide);
+        }
+
+        /* ---- 章节区 ---- */
+        .section {
+            max-width: var(--container-wide);
             margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 3.5vw, var(--text-3xl));
+            font-weight: var(--weight-medium);
+            color: var(--ink);
+            letter-spacing: var(--tracking-cjk);
+            margin-bottom: var(--space-3);
+        }
+
+        .section-subtitle {
+            color: var(--ink-muted);
+            font-size: var(--text-base);
         }
 
         .chapters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-4);
         }
 
         .chapter-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
             position: relative;
-            overflow: hidden;
-        }
-
-        .chapter-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            background: var(--paper-elevated);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
         }
 
         .chapter-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
+            border-color: var(--line);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
-        .chapter-card:hover::before {
-            transform: scaleX(1);
+        .chapter-card:active {
+            transform: translateY(0);
         }
 
-        .chapter-number {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            min-width: 60px;
-            text-align: center;
+        .chapter-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+        }
+
+        .chapter-seal {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            color: var(--crimson);
+            border: 1px solid var(--crimson);
+            border-radius: var(--radius-sm);
+            padding: 2px 10px;
+            background: var(--crimson-tint);
+            letter-spacing: var(--tracking-cjk);
+            font-weight: var(--weight-medium);
+        }
+
+        .chapter-icon {
+            color: var(--ink-muted);
+            font-size: 22px;
+        }
+
+        .chapter-card:hover .chapter-icon {
+            color: var(--crimson);
         }
 
         .chapter-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
+            font-family: var(--font-serif);
+            font-size: var(--text-xl);
+            font-weight: var(--weight-semibold);
+            color: var(--ink);
+            margin-bottom: var(--space-2);
+            letter-spacing: var(--tracking-cjk);
         }
 
         .chapter-desc {
-            color: var(--text-light);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
+            font-size: var(--text-sm);
+            color: var(--ink-muted);
+            line-height: var(--leading-normal);
+            flex: 1;
+            margin-bottom: var(--space-4);
         }
 
-        .chapter-meta {
-            display: flex;
-            justify-content: space-between;
+        .chapter-read {
+            display: inline-flex;
             align-items: center;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
+            gap: var(--space-1);
+            font-size: var(--text-sm);
+            color: var(--crimson);
+            font-weight: var(--weight-medium);
+            align-self: flex-start;
         }
 
-        .read-button {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+        .chapter-card:hover .chapter-read {
+            gap: var(--space-2);
         }
 
-        .read-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        .chapter-read i {
+            transition: transform var(--transition-fast);
+            font-size: 14px;
         }
 
-        .extended-section {
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
+        /* ---- 扩展专题（横向卡片） ---- */
         .extended-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: var(--space-4);
         }
 
         .extended-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            padding: var(--space-5);
+            background: var(--paper-elevated);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-lg);
             cursor: pointer;
+            transition: all var(--transition-base);
         }
 
         .extended-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
+            border-color: var(--line);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .extended-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--crimson-tint);
+            color: var(--crimson);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
         }
 
-        .extended-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
+        .extended-body h4 {
+            font-family: var(--font-serif);
+            font-size: var(--text-lg);
+            font-weight: var(--weight-semibold);
+            color: var(--ink);
+            margin-bottom: var(--space-1);
+            letter-spacing: var(--tracking-cjk);
         }
 
-        .extended-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
+        .extended-body p {
+            font-size: var(--text-sm);
+            color: var(--ink-muted);
+            line-height: var(--leading-normal);
         }
 
-        .footer {
-            margin-top: 4rem;
-            padding: 3rem 2rem;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
+        /* ---- 工具入口 ---- */
+        .tools-band {
+            background: var(--paper-sunken);
+            padding: var(--space-9) var(--space-6);
         }
 
-        .footer-content {
-            max-width: 800px;
+        .tools-inner {
+            max-width: var(--container-wide);
             margin: 0 auto;
         }
 
-        .stats-section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 3rem 0;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .stats-grid {
+        .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-7);
         }
 
-        .stat-item {
-            padding: 1rem;
+        .tool-chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-5) var(--space-3);
+            background: var(--paper-elevated);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-lg);
+            color: var(--ink);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+        .tool-chip:hover {
+            border-color: var(--crimson);
+            color: var(--crimson);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tool-chip i {
+            font-size: 26px;
+            color: var(--crimson);
+        }
+
+        .tool-chip-name {
+            font-size: var(--text-sm);
+            font-weight: var(--weight-medium);
+            letter-spacing: var(--tracking-cjk);
+        }
+
+        /* ---- 页脚 ---- */
+        .site-footer {
+            background: var(--ink);
+            color: var(--paper);
+            padding: var(--space-9) var(--space-6) var(--space-6);
+            margin-top: var(--space-9);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .site-footer {
+                background: #000;
+            }
+        }
+
+        .footer-inner {
+            max-width: var(--container-wide);
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: var(--text-xl);
+            font-weight: var(--weight-medium);
+            letter-spacing: var(--tracking-cjk);
+            margin-bottom: var(--space-2);
+            color: var(--paper);
+        }
+
+        .footer-tagline {
+            color: var(--ink-faint);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-7);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-7);
+        }
+
+        .footer-block {
+            padding: var(--space-4) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-block h5 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-semibold);
+            color: var(--paper);
+            margin-bottom: var(--space-3);
+            letter-spacing: var(--tracking-wide);
+        }
+
+        .footer-block h5 i {
+            font-size: 16px;
+            color: var(--crimson-soft);
+        }
+
+        .footer-block p,
+        .footer-block a {
+            color: var(--ink-faint);
+            font-size: var(--text-xs);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-1);
             display: block;
         }
 
-        .stat-label {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        .footer-block a:hover {
+            color: var(--paper);
         }
 
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            z-index: 1000;
-            transition: width 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .book-title {
-                font-size: 2.2rem;
-            }
-
-            .book-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .chapters-grid,
-            .extended-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            .book-meta {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-
-        @media print {
-            .header,
-            .footer,
-            .read-button {
-                display: none;
-            }
-
-            .chapter-card {
-                break-inside: avoid;
-                box-shadow: none;
-                border: 1px solid #ccc;
-            }
+        .footer-bottom {
+            padding-top: var(--space-5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--ink-faint);
+            font-size: var(--text-xs);
+            line-height: var(--leading-relaxed);
         }
     </style>
 </head>
 <body>
     <div class="reading-progress" id="reading-progress"></div>
 
-    <header class="header">
-        <div class="header-content">
-            <h1 class="book-title">绛唇解语花</h1>
-            <p class="book-subtitle">美容医生的唇部美学笔记</p>
-            <div class="book-meta">
-                <span>📖 专业医学电子书</span>
-                <span>🎯 唇部美学专著</span>
-                <span>👨‍⚕️ 权威医学指南</span>
-                <span>🌟 在线阅读平台</span>
+    <!-- ============ Header ============ -->
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="index.html" class="site-brand">
+                <span class="site-brand-mark">绛</span>
+                <span>绛唇解语花</span>
+            </a>
+            <div class="header-actions">
+                <button class="btn-icon" data-share-trigger aria-label="分享">
+                    <i data-icon="share"></i>
+                </button>
+                <button class="btn-icon" id="nav-trigger" aria-label="目录">
+                    <i data-icon="menu"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <div class="book-intro">
-            <p class="intro-text">
-                《绛唇解语花》是一部专业的唇部美学医学专著，汇集了现代医学美容领域的先进理念与实践经验。
-                本书从文化美学、科学原理到临床技术，为医学美容从业者提供全面、系统的专业指导。
-                通过深入浅出的阐述和丰富的案例分析，帮助读者掌握唇部美学的精髓，提升专业技能。
+    <main>
+        <!-- ============ Hero ============ -->
+        <section class="hero">
+            <div class="hero-eyebrow">唇部美学医学专著</div>
+            <h1 class="hero-title">绛唇解语花</h1>
+            <p class="hero-subtitle">美容医生的唇部美学笔记</p>
+            <p class="hero-desc">
+                融合东方美学与现代医学严谨性，从文化审美、解剖科学到临床技艺，
+                为医美从业者构建一套系统、专业的唇部美学知识体系。
             </p>
-        </div>
+            <div class="hero-actions">
+                <a href="reader.html?chapter=00_preface.md" class="btn btn-primary">
+                    <i data-icon="bookOpen"></i>
+                    <span>开始阅读</span>
+                </a>
+                <a href="#chapters" class="btn btn-ghost">浏览目录</a>
+            </div>
+        </section>
 
-        <div class="stats-section">
-            <h2 style="font-size: 1.8rem; color: var(--text-primary); margin-bottom: 1rem;">专著概览</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">12</span>
+        <!-- ============ 统计 ============ -->
+        <section class="stats">
+            <div class="stats-inner">
+                <div class="stat">
+                    <span class="stat-num" data-count="12">0</span>
                     <div class="stat-label">核心章节</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
+                <div class="stat">
+                    <span class="stat-num" data-count="3">0</span>
                     <div class="stat-label">扩展专题</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">150K+</span>
+                <div class="stat">
+                    <span class="stat-num" data-count="150" data-suffix="K+">0</span>
                     <div class="stat-label">总字数</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
+                <div class="stat">
+                    <span class="stat-num" data-count="100" data-suffix="%">0</span>
                     <div class="stat-label">原创内容</div>
-                </div>
-            </div>
-        </div>
-
-        <section>
-            <h2 class="section-title">📚 核心章节</h2>
-            <p class="section-subtitle">系统性的医学美容知识体系</p>
-
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="openChapter('00_preface.md')">
-                    <div class="chapter-number">序言</div>
-                    <h3 class="chapter-title">前言</h3>
-                    <p class="chapter-desc">唇部美学的艺术与科学 - 探讨医学美容的基本理念和发展趋势</p>
-                    <div class="chapter-meta">
-                        <span>📖 引言性质</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('01_cultural_aesthetics.md')">
-                    <div class="chapter-number">第一章</div>
-                    <h3 class="chapter-title">文化美学</h3>
-                    <p class="chapter-desc">东西方唇部美学理念对比 - 深入分析不同文化背景下的美学标准</p>
-                    <div class="chapter-meta">
-                        <span>🌍 文化维度</span>
-                        <a href="#" class="read-button" onclick="openChapter('01_cultural_aesthetics.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('02_scientific_principles.md')">
-                    <div class="chapter-number">第二章</div>
-                    <h3 class="chapter-title">科学原理</h3>
-                    <p class="chapter-desc">唇部解剖与生理学基础 - 从解剖学角度理解唇部结构和功能</p>
-                    <div class="chapter-meta">
-                        <span>🔬 基础医学</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('03_case_studies.md')">
-                    <div class="chapter-number">第三章</div>
-                    <h3 class="chapter-title">案例研究</h3>
-                    <p class="chapter-desc">经典案例分析与技术解读 - 通过真实案例学习实践技巧</p>
-                    <div class="chapter-meta">
-                        <span>📋 临床实践</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('04_technical_mastery_international.md')">
-                    <div class="chapter-number">第四章</div>
-                    <h3 class="chapter-title">技术精进</h3>
-                    <p class="chapter-desc">国际先进技术与实践 - 掌握最新的治疗技术和方法</p>
-                    <div class="chapter-meta">
-                        <span>⚡ 技术进阶</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('05_comprehensive_strategy.md')">
-                    <div class="chapter-number">第五章</div>
-                    <h3 class="chapter-title">综合策略</h3>
-                    <p class="chapter-desc">全方位治疗方案设计 - 制定个性化的治疗计划</p>
-                    <div class="chapter-meta">
-                        <span>🎯 策略规划</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('06_functional_reconstruction.md')">
-                    <div class="chapter-number">第六章</div>
-                    <h3 class="chapter-title">功能重建</h3>
-                    <p class="chapter-desc">唇部功能性修复技术 - 兼顾美观与功能的治疗方法</p>
-                    <div class="chapter-meta">
-                        <span>🔧 功能修复</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('07_doctor_selection.md')">
-                    <div class="chapter-number">第七章</div>
-                    <h3 class="chapter-title">医生选择</h3>
-                    <p class="chapter-desc">专业医生的评估标准 - 如何选择合适的医疗团队</p>
-                    <div class="chapter-meta">
-                        <span>👨‍⚕️ 专业评估</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('08_cosmetics_tattoo.md')">
-                    <div class="chapter-number">第八章</div>
-                    <h3 class="chapter-title">唇部纹绣</h3>
-                    <p class="chapter-desc">纹绣技术与美学结合 - 探索唇部纹绣的艺术与技巧</p>
-                    <div class="chapter-meta">
-                        <span>🎨 纹绣艺术</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('09_aftercare.md')">
-                    <div class="chapter-number">第九章</div>
-                    <h3 class="chapter-title">术后护理</h3>
-                    <p class="chapter-desc">科学的护理指导方案 - 确保治疗效果的护理要点</p>
-                    <div class="chapter-meta">
-                        <span>💊 护理指导</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('10_risk_aesthetics.md')">
-                    <div class="chapter-number">第十章</div>
-                    <h3 class="chapter-title">风险美学</h3>
-                    <p class="chapter-desc">风险评估与管理策略 - 预防并发症和风险控制</p>
-                    <div class="chapter-meta">
-                        <span>⚠️ 风险管理</span>
-                        <a href="#" class="read-button" onclick="openChapter('00_preface.md'); return false;">开始阅读</a>
-                    </div>
-                </div>
-
-                <div class="chapter-card" onclick="openChapter('11_appendix.md')">
-                    <div class="chapter-number">附录</div>
-                    <h3 class="chapter-title">参考资料</h3>
-                    <p class="chapter-desc">参考资料与技术规范 - 相关标准和参考文献</p>
-                    <div class="chapter-meta">
-                        <span>📑 参考资料</span>
-                        <a href="#" class="read-button" onclick="openChapter('11_appendix.md'); return false;">开始阅读</a>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="extended-section">
-            <h2 class="section-title">🔬 扩展专题</h2>
-            <p class="section-subtitle">前沿技术与创新应用研究</p>
+        <!-- ============ 核心章节 ============ -->
+        <section class="section" id="chapters">
+            <div class="section-head">
+                <h2 class="section-title">核心章节</h2>
+                <p class="section-subtitle">系统性的医学美容知识体系</p>
+            </div>
 
-            <div class="extended-grid">
-                <div class="extended-card" onclick="openChapter('ai_assessment_system.md')">
-                    <span class="extended-icon">🤖</span>
-                    <h4 class="extended-title">AI评估系统</h4>
-                    <p class="extended-desc">人工智能驱动的美学评估技术</p>
-                </div>
+            <div class="chapters-grid" id="chapters-grid">
+                <!-- 由 JS 渲染（数据与 navigation.js 同源，避免 onclick bug） -->
+            </div>
+        </section>
 
-                <div class="extended-card" onclick="openChapter('visual_design_guide.md')">
-                    <span class="extended-icon">🎨</span>
-                    <h4 class="extended-title">视觉设计指南</h4>
-                    <p class="extended-desc">专业的美学设计标准与规范</p>
-                </div>
+        <!-- ============ 扩展专题 ============ -->
+        <section class="section">
+            <div class="section-head">
+                <h2 class="section-title">扩展专题</h2>
+                <p class="section-subtitle">前沿技术与创新应用研究</p>
+            </div>
+            <div class="extended-grid" id="extended-grid"></div>
+        </section>
 
-                <div class="extended-card" onclick="openChapter('digital_ecosystem.md')">
-                    <span class="extended-icon">🌐</span>
-                    <h4 class="extended-title">数字生态系统</h4>
-                    <p class="extended-desc">数字化医疗美学生态建设</p>
+        <!-- ============ 交互式工具 ============ -->
+        <section class="tools-band">
+            <div class="tools-inner">
+                <div class="section-head" style="margin-bottom:0">
+                    <h2 class="section-title">交互式工具</h2>
+                    <p class="section-subtitle">专业的评估与自测工具集</p>
                 </div>
+                <div class="tools-grid" id="tools-grid"></div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <h3 style="margin-bottom: 1rem;">📚 绛唇解语花</h3>
-            <p style="margin-bottom: 1rem;">专业医学美容电子书籍平台</p>
+    <!-- ============ 页脚 ============ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">绛唇解语花</div>
+            <p class="footer-tagline">专业医学美容电子书籍平台</p>
 
-            <!-- 公司信息 -->
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h4 style="margin-bottom: 10px;">📍 机构信息</h4>
-                <p><strong>重庆联合丽格科技有限公司</strong></p>
-                <p>📍 地址：重庆市渝中区临江支路28号</p>
-                <p>🌐 网站：<a href="https://www.bccsw.cn" style="color: #FFD700;">https://www.bccsw.cn</a></p>
-                <p>📞 电话：023-68726872</p>
-                <p>📧 邮箱：bccsw@cqlhlg.work</p>
-                <p>📄 渝 ICP 备 2024023473 号</p>
+            <div class="footer-grid">
+                <div class="footer-block">
+                    <h5><i data-icon="mapPin"></i>机构信息</h5>
+                    <p><strong>重庆联合丽格科技有限公司</strong></p>
+                    <p>地址：重庆市渝中区临江支路28号</p>
+                    <p>网站：<a href="https://www.bccsw.cn">www.bccsw.cn</a></p>
+                    <p>电话：023-68726872</p>
+                    <p>邮箱：bccsw@cqlhlg.work</p>
+                    <p>渝 ICP 备 2024023473 号</p>
+                </div>
+                <div class="footer-block">
+                    <h5><i data-icon="alertMedical"></i>医疗内容免责声明</h5>
+                    <p>本书内容仅供专业医学参考，不构成具体医疗建议。任何医疗决策应咨询具有相关资质的专业医生。个体差异显著，治疗效果因人而异。请在专业医生指导下进行任何医疗美容操作。</p>
+                </div>
+                <div class="footer-block">
+                    <h5><i data-icon="robot"></i>AI 内容标识</h5>
+                    <p>本书部分内容在编写过程中使用了人工智能技术辅助生成和优化。所有 AI 生成内容均经过专业医学审核和人工校验。AI 技术仅作为辅助工具，最终内容的准确性和适用性由专业医学团队负责。</p>
+                </div>
+                <div class="footer-block">
+                    <h5><i data-icon="lock"></i>隐私保护声明</h5>
+                    <p>我们严格保护用户隐私信息，遵循相关法律法规。本平台不收集个人身份信息，仅记录必要的访问统计数据。如有隐私问题或数据删除需求，请联系：bccsw@cqlhlg.work</p>
+                </div>
             </div>
 
-            <!-- 医疗内容免责声明 -->
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h4 style="margin-bottom: 10px;">⚠️ 医疗内容免责声明</h4>
-                <p style="text-align: left; font-size: 0.9rem; line-height: 1.6;">
-                    本书内容仅供专业医学参考，不构成具体医疗建议。任何医疗决策应咨询具有相关资质的专业医生。
-                    个体差异显著，治疗效果因人而异。请在专业医生指导下进行任何医疗美容操作。
-                    本机构不对基于本书内容做出的任何医疗决策承担责任。
-                </p>
-            </div>
-
-            <!-- AI内容标识和免责声明 -->
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h4 style="margin-bottom: 10px;">🤖 AI内容标识</h4>
-                <p style="text-align: left; font-size: 0.9rem; line-height: 1.6;">
-                    本书部分内容在编写过程中使用了人工智能技术辅助生成和优化。
-                    所有AI生成内容均经过专业医学审核和人工校验。
-                    AI技术仅作为辅助工具，最终内容的准确性和适用性由专业医学团队负责。
-                </p>
-            </div>
-
-            <!-- 隐私保护声明 -->
-            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h4 style="margin-bottom: 10px;">🔒 隐私保护声明</h4>
-                <p style="text-align: left; font-size: 0.9rem; line-height: 1.6;">
-                    我们严格保护用户隐私信息，遵循相关法律法规。
-                    本平台不收集个人身份信息，仅记录必要的访问统计数据。
-                    如有隐私问题或数据删除需求，请联系：bccsw@cqlhlg.work
-                </p>
-            </div>
-
-            <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 20px;">
+            <div class="footer-bottom">
                 © 2025 重庆联合丽格科技有限公司 · 专业唇部美学医学专著 · 权威医学指导 · 在线阅读平台
-            </p>
+            </div>
         </div>
     </footer>
 
+    <script src="js/icons.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/navigation.js"></script>
     <script>
-        // 阅读进度条
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.getElementById('reading-progress').style.width = scrolled + '%';
-        });
+        /* ==================================================================
+           首页数据驱动渲染（与 navigation.js CHAPTERS/TOOLS 同源，修复 onclick bug）
+           ================================================================== */
+        const CHAPTERS = [
+            { file: '00_preface.md', title: '前言', seal: '序言', desc: '唇部美学的艺术与科学——探讨医学美容的基本理念和发展趋势', icon: 'book', cat: 'core' },
+            { file: '01_cultural_aesthetics.md', title: '文化美学', seal: '第一章', desc: '东西方唇部美学理念对比——深入分析不同文化背景下的美学标准', icon: 'globe', cat: 'core' },
+            { file: '02_scientific_principles.md', title: '科学原理', seal: '第二章', desc: '唇部解剖与生理学基础——从解剖学角度理解唇部结构和功能', icon: 'flask', cat: 'core' },
+            { file: '03_case_studies.md', title: '案例研究', seal: '第三章', desc: '经典案例分析与技术解读——通过真实案例学习实践技巧', icon: 'clipboard', cat: 'core' },
+            { file: '04_technical_mastery_international.md', title: '技术精进', seal: '第四章', desc: '国际先进技术与实践——掌握最新的治疗技术和方法', icon: 'zap', cat: 'core' },
+            { file: '05_comprehensive_strategy.md', title: '综合策略', seal: '第五章', desc: '全方位治疗方案设计——制定个性化的治疗计划', icon: 'target', cat: 'core' },
+            { file: '06_functional_reconstruction.md', title: '功能重建', seal: '第六章', desc: '唇部功能性修复技术——兼顾美观与功能的治疗方法', icon: 'wrench', cat: 'core' },
+            { file: '07_doctor_selection.md', title: '医生选择', seal: '第七章', desc: '专业医生的评估标准——如何选择合适的医疗团队', icon: 'stethoscope', cat: 'core' },
+            { file: '08_cosmetics_tattoo.md', title: '唇部纹绣', seal: '第八章', desc: '纹绣技术与美学结合——探索唇部纹绣的艺术与技巧', icon: 'palette', cat: 'core' },
+            { file: '09_aftercare.md', title: '术后护理', seal: '第九章', desc: '科学的护理指导方案——确保治疗效果的护理要点', icon: 'pill', cat: 'core' },
+            { file: '10_risk_aesthetics.md', title: '风险美学', seal: '第十章', desc: '风险评估与管理策略——预防并发症和风险控制', icon: 'shield', cat: 'core' },
+            { file: '11_appendix.md', title: '参考资料', seal: '附录', desc: '参考资料与技术规范——相关标准和参考文献', icon: 'fileText', cat: 'core' },
+            { file: 'ai_assessment_system.md', title: 'AI 评估系统', seal: '专题一', desc: '人工智能驱动的美学评估技术', icon: 'robot', cat: 'extended' },
+            { file: 'visual_design_guide.md', title: '视觉设计指南', seal: '专题二', desc: '专业的美学设计标准与规范', icon: 'palette', cat: 'extended' },
+            { file: 'digital_ecosystem.md', title: '数字生态系统', seal: '专题三', desc: '数字化医疗美学生态建设', icon: 'layers', cat: 'extended' }
+        ];
 
-        // 章节阅读功能
+        const TOOLS = [
+            { file: 'lip-assessment-test.html', title: '唇部美学评估', icon: 'lipAssess' },
+            { file: 'doctor-skill-assessment.html', title: '医生技能测试', icon: 'stethoscope' },
+            { file: 'preoperative-risk-assessment.html', title: '术前风险评估', icon: 'alertMedical' },
+            { file: 'emergency-response-simulation.html', title: '应急响应模拟', icon: 'siren' },
+            { file: 'patient-satisfaction-survey.html', title: '满意度调查', icon: 'smile' }
+        ];
+
         function openChapter(filename) {
-            // 在新窗口中打开章节阅读器
-            window.open(`reader.html?chapter=${filename}`, '_blank');
+            window.location.href = `reader.html?chapter=${filename}`;
         }
 
-        // 修复按钮点击问题
-        document.addEventListener('DOMContentLoaded', function() {
-            // 更新所有读按钮的onclick
-            const chapters = [
-                { button: 0, file: '00_preface.md' },
-                { button: 1, file: '01_cultural_aesthetics.md' },
-                { button: 2, file: '02_scientific_principles.md' },
-                { button: 3, file: '03_case_studies.md' },
-                { button: 4, file: '04_technical_mastery_international.md' },
-                { button: 5, file: '05_comprehensive_strategy.md' },
-                { button: 6, file: '06_functional_reconstruction.md' },
-                { button: 7, file: '07_doctor_selection.md' },
-                { button: 8, file: '08_cosmetics_tattoo.md' },
-                { button: 9, file: '09_aftercare.md' },
-                { button: 10, file: '10_risk_aesthetics.md' },
-                { button: 11, file: '11_appendix.md' }
-            ];
+        // 渲染核心章节
+        document.getElementById('chapters-grid').innerHTML = CHAPTERS
+            .filter(c => c.cat === 'core')
+            .map(c => `
+                <article class="chapter-card" onclick="openChapter('${c.file}')">
+                    <div class="chapter-card-top">
+                        <span class="chapter-seal">${c.seal}</span>
+                        <i class="chapter-icon" data-icon="${c.icon}"></i>
+                    </div>
+                    <h3 class="chapter-title">${c.title}</h3>
+                    <p class="chapter-desc">${c.desc}</p>
+                    <span class="chapter-read">
+                        <span>开始阅读</span>
+                        <i data-icon="arrowRight"></i>
+                    </span>
+                </article>
+            `).join('');
 
-            const readButtons = document.querySelectorAll('.read-button');
-            chapters.forEach((chap, index) => {
-                if (readButtons[index]) {
-                    readButtons[index].onclick = function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openChapter(chap.file);
-                        return false;
-                    };
+        // 渲染扩展专题
+        document.getElementById('extended-grid').innerHTML = CHAPTERS
+            .filter(c => c.cat === 'extended')
+            .map(c => `
+                <article class="extended-card" onclick="openChapter('${c.file}')">
+                    <span class="extended-icon"><i data-icon="${c.icon}"></i></span>
+                    <div class="extended-body">
+                        <h4>${c.title}</h4>
+                        <p>${c.desc}</p>
+                    </div>
+                </article>
+            `).join('');
+
+        // 渲染工具
+        document.getElementById('tools-grid').innerHTML = TOOLS
+            .map(t => `
+                <a href="${t.file}" class="tool-chip" target="_blank" rel="noopener">
+                    <i data-icon="${t.icon}"></i>
+                    <span class="tool-chip-name">${t.title}</span>
+                </a>
+            `).join('');
+
+        // 重新渲染图标（动态插入的 DOM）
+        Icons.renderAll();
+
+        /* ---- 统计数字动画 ---- */
+        function animateCount(el) {
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1200;
+            const start = performance.now();
+            function tick(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.floor(eased * target) + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCount(e.target);
+                    countObserver.unobserve(e.target);
                 }
             });
-        });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
 
-        // 统计数字动画
-        document.addEventListener('DOMContentLoaded', function() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            const observerOptions = {
-                threshold: 0.7
-            };
+        /* ---- 阅读进度条 ---- */
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('reading-progress').style.width = Math.min(scrolled, 100) + '%';
+        }, { passive: true });
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = entry.target;
-                        const finalText = target.textContent;
-
-                        if (finalText.includes('K')) {
-                            // 处理150K+格式
-                            const number = parseInt(finalText);
-                            let current = 0;
-                            const increment = number / 50;
-
-                            const timer = setInterval(() => {
-                                current += increment;
-                                if (current >= number) {
-                                    target.textContent = number + 'K+';
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = Math.floor(current) + 'K+';
-                                }
-                            }, 30);
-                        } else if (finalText.includes('%')) {
-                            // 处理百分比
-                            target.textContent = '100%';
-                        } else if (!isNaN(parseInt(finalText))) {
-                            // 处理普通数字
-                            const finalNumber = parseInt(finalText);
-                            let currentNumber = 0;
-                            const increment = finalNumber / 30;
-
-                            const timer = setInterval(() => {
-                                currentNumber += increment;
-                                if (currentNumber >= finalNumber) {
-                                    target.textContent = finalNumber;
-                                    clearInterval(timer);
-                                } else {
-                                    target.textContent = Math.floor(currentNumber);
-                                }
-                            }, 50);
-                        }
-                        observer.unobserve(target);
-                    }
-                });
-            }, observerOptions);
-
-            statNumbers.forEach(stat => {
-                observer.observe(stat);
-            });
-
-            // 卡片hover效果
-            document.querySelectorAll('.chapter-card, .extended-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-4px) scale(1.02)';
-                });
-
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
-
-        // 防止点击事件冲突
-        document.querySelectorAll('.read-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+        /* ---- 目录触发器：打开导航抽屉 ---- */
+        document.getElementById('nav-trigger').addEventListener('click', () => {
+            if (window.BookNavigation) window.BookNavigation.toggleMenu();
         });
     </script>
-    <script src="js/navigation.js"></script>
 </body>
 </html>

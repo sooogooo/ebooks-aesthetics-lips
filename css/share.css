@@ -1,0 +1,211 @@
+/* ==========================================================================
+   分享面板样式 Share Sheet
+   底部弹出（移动端）/ 居中弹窗（桌面）
+   依赖：tokens.css
+   ========================================================================== */
+
+.share-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.share-sheet[hidden] { display: none; }
+
+.share-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.share-sheet.active .share-overlay {
+    opacity: 1;
+}
+
+.share-panel {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: var(--paper-elevated);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding: var(--space-4) var(--space-5) var(--space-6);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+    box-shadow: var(--shadow-xl);
+}
+
+.share-sheet.active .share-panel {
+    transform: translateY(0);
+}
+
+/* 桌面端：居中弹窗 */
+@media (min-width: 769px) {
+    .share-sheet {
+        align-items: center;
+    }
+    .share-panel {
+        border-radius: var(--radius-xl);
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    .share-sheet.active .share-panel {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 顶部抓手（移动端） */
+.share-handle {
+    width: 36px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--line);
+    margin: 0 auto var(--space-4);
+}
+
+@media (min-width: 769px) {
+    .share-handle { display: none; }
+}
+
+.share-title {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--ink);
+    letter-spacing: var(--tracking-cjk);
+    margin-bottom: var(--space-5);
+}
+
+/* ---- 分享选项 ---- */
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.share-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+}
+
+.share-opt:active {
+    transform: scale(0.95);
+}
+
+.share-opt-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: var(--paper-elevated);
+    transition: all var(--transition-fast);
+}
+
+.share-opt:hover .share-opt-icon {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.share-opt-wechat { background: #07C160; }
+.share-opt-moments { background: var(--crimson); }
+.share-opt-copy { background: var(--ink-soft); }
+.share-opt-qr { background: var(--gold); }
+
+.share-opt-label {
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-cjk);
+}
+
+/* ---- 二维码区 ---- */
+.share-qr-area {
+    text-align: center;
+    padding: var(--space-5);
+    margin-bottom: var(--space-4);
+    background: var(--paper-sunken);
+    border-radius: var(--radius-md);
+}
+
+#share-qr-img {
+    display: inline-block;
+    padding: var(--space-3);
+    background: white;
+    border-radius: var(--radius-md);
+    line-height: 0;
+}
+
+#share-qr-img svg {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+.share-qr-tip {
+    margin-top: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+}
+
+/* ---- 微信引导提示 ---- */
+.share-wechat-tip {
+    text-align: center;
+    padding: var(--space-5);
+    margin-bottom: var(--space-4);
+    background: var(--crimson-tint);
+    border-radius: var(--radius-md);
+}
+
+.share-wechat-tip p {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-1);
+}
+
+.share-wechat-tip strong {
+    color: var(--crimson);
+    font-weight: var(--weight-semibold);
+}
+
+/* ---- 取消按钮 ---- */
+.share-cancel {
+    width: 100%;
+    padding: var(--space-4);
+    background: var(--paper-sunken);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.share-cancel:hover {
+    background: var(--line-soft);
+}
+
+.share-cancel:active {
+    transform: scale(0.98);
+}
