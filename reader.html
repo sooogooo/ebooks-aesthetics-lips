@@ -624,6 +624,34 @@
         // Markdown → HTML（保留原有解析逻辑）
         function convertMarkdownToHTML(markdown) {
             let html = markdown;
+
+            // ---- 表格解析（标准 markdown 表格语法）----
+            // 匹配连续的表格行块：表头 | 分隔 | 数据行
+            html = html.replace(/(?:^|\n)((?:\|[^\n]+\|\s*\n)+\|[^\n]+\|)(?:\n|$)/g, function(match, tableText) {
+                const rows = tableText.trim().split('\n').map(r => r.trim());
+                if (rows.length < 2) return match;
+                // 第二行必须是分隔行 |---|---|
+                if (!/^\|?[\s:-]+-\|[\s:-]/.test(rows[1])) return match;
+                const parseRow = (row) => {
+                    return row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+                };
+                const headers = parseRow(rows[0]);
+                const bodyRows = rows.slice(2).map(parseRow);
+                let tbl = '<table><thead><tr>';
+                headers.forEach(h => { tbl += '<th>' + h + '</th>'; });
+                tbl += '</tr></thead><tbody>';
+                bodyRows.forEach(cells => {
+                    tbl += '<tr>';
+                    // 对齐列数
+                    for (let i = 0; i < headers.length; i++) {
+                        tbl += '<td>' + (cells[i] || '') + '</td>';
+                    }
+                    tbl += '</tr>';
+                });
+                tbl += '</tbody></table>';
+                return '\n' + tbl + '\n';
+            });
+
             html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
             html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
             html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
