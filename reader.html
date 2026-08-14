@@ -626,31 +626,45 @@
             let html = markdown;
 
             // ---- 表格解析（标准 markdown 表格语法）----
-            // 匹配连续的表格行块：表头 | 分隔 | 数据行
-            html = html.replace(/(?:^|\n)((?:\|[^\n]+\|\s*\n)+\|[^\n]+\|)(?:\n|$)/g, function(match, tableText) {
-                const rows = tableText.trim().split('\n').map(r => r.trim());
-                if (rows.length < 2) return match;
-                // 第二行必须是分隔行 |---|---|
-                if (!/^\|?[\s:-]+-\|[\s:-]/.test(rows[1])) return match;
-                const parseRow = (row) => {
-                    return row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
-                };
-                const headers = parseRow(rows[0]);
-                const bodyRows = rows.slice(2).map(parseRow);
-                let tbl = '<table><thead><tr>';
-                headers.forEach(h => { tbl += '<th>' + h + '</th>'; });
-                tbl += '</tr></thead><tbody>';
-                bodyRows.forEach(cells => {
-                    tbl += '<tr>';
-                    // 对齐列数
-                    for (let i = 0; i < headers.length; i++) {
-                        tbl += '<td>' + (cells[i] || '') + '</td>';
+            // 先按行扫描，识别表格块（连续以 | 开头/结尾的行，且第二行是 |---| 分隔行）
+            const inputLines = html.split('\n');
+            const outputLines = [];
+            let i = 0;
+            while (i < inputLines.length) {
+                const line = inputLines[i];
+                // 检测表格起始：当前行是 |...| 且下一行是 |---| 分隔
+                if (/^\|.*\|\s*$/.test(line) && i + 1 < inputLines.length &&
+                    /^\|[\s:|-]+\|\s*$/.test(inputLines[i + 1]) && /-/.test(inputLines[i + 1])) {
+                    // 收集表格行
+                    const tableRows = [line];
+                    let j = i + 2;
+                    while (j < inputLines.length && /^\|.*\|\s*$/.test(inputLines[j])) {
+                        tableRows.push(inputLines[j]);
+                        j++;
                     }
-                    tbl += '</tr>';
-                });
-                tbl += '</tbody></table>';
-                return '\n' + tbl + '\n';
-            });
+                    // 解析表格
+                    const parseRow = (row) => row.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map(c => c.trim());
+                    const headers = parseRow(tableRows[0]);
+                    const bodyRows = tableRows.slice(2).map(parseRow);
+                    let tbl = '\n<table><thead><tr>';
+                    headers.forEach(h => { tbl += '<th>' + h + '</th>'; });
+                    tbl += '</tr></thead><tbody>';
+                    bodyRows.forEach(cells => {
+                        tbl += '<tr>';
+                        for (let k = 0; k < headers.length; k++) {
+                            tbl += '<td>' + (cells[k] || '') + '</td>';
+                        }
+                        tbl += '</tr>';
+                    });
+                    tbl += '</tbody></table>\n';
+                    outputLines.push(tbl);
+                    i = j;
+                } else {
+                    outputLines.push(line);
+                    i++;
+                }
+            }
+            html = outputLines.join('\n');
 
             html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
             html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
