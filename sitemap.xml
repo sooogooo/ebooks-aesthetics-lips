@@ -1,170 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <!-- 主页和阅读器 -->
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/index.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/reader.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/reader.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/README.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- 核心章节内容 -->
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/00_preface.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/01_cultural_aesthetics.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/02_scientific_principles.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/03_case_studies.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/04_technical_mastery.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/05_comprehensive_strategy.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/06_functional_reconstruction.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/07_doctor_selection.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/08_cosmetics_tattoo.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/09_aftercare.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/10_risk_aesthetics.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/11_appendix.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
     <!-- 交互式评估工具 -->
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/lip-assessment-test.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/lip-assessment-test.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/doctor-skill-assessment.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/doctor-skill-assessment.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/preoperative-risk-assessment.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/preoperative-risk-assessment.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/emergency-response-simulation.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/emergency-response-simulation.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/patient-satisfaction-survey.html</loc>
-        <lastmod>2025-10-12</lastmod>
+        <loc>https://sooogooo.github.io/ebooks-aesthetics-lips/patient-satisfaction-survey.html</loc>
+        <lastmod>2026-08-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
-    </url>
-
-    <!-- 扩展专题 -->
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/ai_assessment_system.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/visual_design_guide.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/digital_ecosystem.md</loc>
-        <lastmod>2025-10-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
     </url>
 
 </urlset>

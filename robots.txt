@@ -1,5 +1,5 @@
 # robots.txt for 《绛唇解语花》医美专业指导书
-# 生成日期: 2025-10-12
+# 更新日期: 2026-08-14
 
 User-agent: *
 Allow: /
@@ -7,14 +7,13 @@ Allow: /
 # 主要页面
 Allow: /index.html
 Allow: /reader.html
-Allow: /README.md
 
-# 核心章节内容
+# 核心章节内容（通过 reader.html?chapter= 加载）
 Allow: /*_preface.md
 Allow: /*_cultural_aesthetics.md
 Allow: /*_scientific_principles.md
 Allow: /*_case_studies.md
-Allow: /*_technical_mastery.md
+Allow: /*_technical_mastery_international.md
 Allow: /*_comprehensive_strategy.md
 Allow: /*_functional_reconstruction.md
 Allow: /*_doctor_selection.md
@@ -28,7 +27,7 @@ Allow: /*assessment*.html
 Allow: /*simulation*.html
 Allow: /*survey*.html
 
-# 扩展专题
+# 配套资料
 Allow: /ai_assessment_system.md
 Allow: /visual_design_guide.md
 Allow: /digital_ecosystem.md
@@ -38,18 +37,12 @@ Disallow: /.git/
 Disallow: /.gitignore
 Disallow: /node_modules/
 Disallow: /*.log
-Disallow: /*test*.html
-Disallow: /*debug*.html
-Disallow: /book_server.log
 
-# 打印版本（可选是否索引）
+# 打印版本
 Allow: /*-print.html
 
 # Sitemap 位置
-Sitemap: https://github.com/sooogooo/ebooks-aesthetics-lips/blob/master/sitemap.xml
-
-# 爬虫速率限制（可选）
-# Crawl-delay: 10
+Sitemap: https://sooogooo.github.io/ebooks-aesthetics-lips/sitemap.xml
 
 # 特定爬虫规则
 User-agent: Googlebot
@@ -60,7 +53,3 @@ Allow: /
 
 User-agent: Bingbot
 Allow: /
-
-# 禁止特定爬虫（示例）
-# User-agent: BadBot
-# Disallow: /
