@@ -28,7 +28,67 @@
 
 血管栓塞是唇部填充最严重的并发症之一，虽然发生率极低，但一旦发生可能导致组织坏死甚至失明等灾难性后果。因此，每一位从事注射美容的医生都必须熟练掌握血管栓塞的识别和处理流程，这既是技术要求，也是职业道德的体现。
 
-血管栓塞的早期识别至关重要，黄金救治窗口期通常只有几个小时。最典型的表现是注射后立即或短时间内出现的剧烈疼痛，伴随皮肤苍白或网状青斑。患者常描述为“撕裂样”或“烧灼样”疼痛，这种疼痛的性质和强度明显不同于普通的注射疼痛。皮肤颜色的改变呈现特征性的分布模式，与血管的解剖走行一致。如果栓塞发生在面动脉或其分支，可能影响整个唇部甚至鼻翼的血供。
+血管栓塞的早期识别至关重要，黄金救治窗口期通常只有几个小时。最典型的表现是注射后立即或短时间内出现的剧烈疼痛，伴随皮肤苍白或网状青斑。患者常描述为”撕裂样”或”烧灼样”疼痛，这种疼痛的性质和强度明显不同于普通的注射疼痛。皮肤颜色的改变呈现特征性的分布模式，与血管的解剖走行一致。如果栓塞发生在面动脉或其分支，可能影响整个唇部甚至鼻翼的血供。
+
+<div style=”margin:2rem 0;padding:1.5rem;background:#FAFAFA;border:1px solid #D2D2D7;border-radius:14px;”>
+<div style=”font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:#1D1D1F;margin-bottom:1rem;letter-spacing:0.05em;”>血管栓塞应急处理流程</div>
+
+<div style=”display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;”>
+<span style=”background:#8B1A2B;color:#fff;padding:6px 16px;border-radius:999px;font-size:0.85rem;font-weight:600;white-space:nowrap;”>疑似栓塞</span>
+<span style=”color:#6E6E73;font-size:1.2rem;”>→</span>
+<span style=”background:#fff;border:1px solid #8B1A2B;color:#8B1A2B;padding:6px 16px;border-radius:8px;font-size:0.85rem;font-weight:500;white-space:nowrap;”>立即停止注射</span>
+</div>
+
+<div style=”display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;padding-left:2.2rem;”>
+<span style=”color:#6E6E73;font-size:0.8rem;”>↓ 评估症状</span>
+</div>
+
+<div style=”display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0.8rem;”>
+<div style=”flex:1;min-width:200px;background:#fff;border-left:3px solid #8B1A2B;padding:10px 14px;border-radius:0 8px 8px 0;”>
+<div style=”font-weight:600;color:#1D1D1F;font-size:0.9rem;margin-bottom:4px;”>典型征象</div>
+<div style=”color:#6E6E73;font-size:0.82rem;line-height:1.6;”>剧烈疼痛（撕裂样/烧灼样）· 皮肤苍白或网状青斑 · 颜色改变沿血管走行分布</div>
+</div>
+</div>
+
+<div style=”display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;padding-left:2.2rem;”>
+<span style=”color:#6E6E73;font-size:0.8rem;”>↓ 确认后立即启动（黄金窗口仅数小时）</span>
+</div>
+
+<div style=”display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;”>
+<span style=”background:#8B1A2B;color:#fff;padding:6px 16px;border-radius:999px;font-size:0.85rem;font-weight:600;white-space:nowrap;”>应急处理</span>
+</div>
+
+<div style=”display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;margin-bottom:0.8rem;”>
+<div style=”background:#fff;border:1px solid #D2D2D7;padding:12px 14px;border-radius:10px;”>
+<div style=”font-weight:600;color:#8B1A2B;font-size:0.88rem;margin-bottom:4px;”>① 透明质酸酶</div>
+<div style=”color:#6E6E73;font-size:0.8rem;line-height:1.6;”>150-300 单位，广泛浸润注射至栓塞区及周围，可配合轻柔按摩促进扩散</div>
+</div>
+<div style=”background:#fff;border:1px solid #D2D2D7;padding:12px 14px;border-radius:10px;”>
+<div style=”font-weight:600;color:#8B1A2B;font-size:0.88rem;margin-bottom:4px;”>② 热敷扩张</div>
+<div style=”color:#6E6E73;font-size:0.8rem;line-height:1.6;”>40-45℃ 温毛巾，每次 15-20 分钟，每 2 小时一次；可加硝酸甘油贴片</div>
+</div>
+<div style=”background:#fff;border:1px solid #D2D2D7;padding:12px 14px;border-radius:10px;”>
+<div style=”font-weight:600;color:#8B1A2B;font-size:0.88rem;margin-bottom:4px;”>③ 高压氧</div>
+<div style=”color:#6E6E73;font-size:0.8rem;line-height:1.6;”>每日 1-2 次，持续 5-10 天；无条件者转诊至有设备的医院</div>
+</div>
+<div style=”background:#fff;border:1px solid #D2D2D7;padding:12px 14px;border-radius:10px;”>
+<div style=”font-weight:600;color:#8B1A2B;font-size:0.88rem;margin-bottom:4px;”>④ 阿司匹林</div>
+<div style=”color:#6E6E73;font-size:0.8rem;line-height:1.6;”>口服改善微循环，需权衡出血风险</div>
+</div>
+</div>
+
+<div style=”display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;padding-left:2.2rem;”>
+<span style=”color:#6E6E73;font-size:0.8rem;”>↓ 持续观察</span>
+</div>
+
+<div style=”display:flex;gap:1rem;flex-wrap:wrap;”>
+<div style=”flex:1;min-width:200px;background:#FFF8DC;border:1px solid #DEB887;padding:10px 14px;border-radius:8px;”>
+<div style=”font-weight:600;color:#8B5E00;font-size:0.85rem;”>每 30-60 分钟评估</div>
+<div style=”color:#8B6E3A;font-size:0.8rem;line-height:1.6;”>疼痛是否缓解 · 皮肤颜色是否改善 · 毛细血管充盈时间 · 如 24h 内无改善，加大透明质酸酶剂量并转诊</div>
+</div>
+</div>
+
+</div>
 
 一旦怀疑血管栓塞，必须立即停止注射并启动应急处理流程。首要措施是使用透明质酸酶进行溶解治疗。透明质酸酶的使用有其特定的技术要求：剂量要充足，通常需要150-300单位甚至更多；注射范围要广泛，不仅包括栓塞区域，还应包括周围的血管分布区；注射方式可采用直接注射和局部浸润相结合。有些医生建议在注射透明质酸酶的同时进行轻柔的按摩，以促进药物扩散和血管再通。
 

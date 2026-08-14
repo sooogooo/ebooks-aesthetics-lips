@@ -32,6 +32,38 @@
 
 唇峰和唇谷的位置关系同样遵循黄金比例原理。上唇的两个唇峰位置应该与瞳孔中线基本对齐，而唇峰的高度与人中深度的比例也应该符合美学标准。人中的长度与上唇红唇厚度的比例，以及唇峰突出程度与整体唇部厚度的比例，都可以参考黄金比例来进行优化设计。
 
+<div style="margin:2rem 0;padding:1.5rem;background:#FAFAFA;border:1px solid #D2D2D7;border-radius:14px;">
+<div style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:#1D1D1F;margin-bottom:0.5rem;letter-spacing:0.05em;">唇部美学关键比例</div>
+<div style="color:#6E6E73;font-size:0.82rem;margin-bottom:1.2rem;">以下为参考值，临床须根据个体特征灵活调整</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+
+<div style="background:#fff;border:1px solid #D2D2D7;border-radius:10px;padding:1rem;">
+<div style="font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:600;color:#8B1A2B;letter-spacing:0.02em;">1 : 1.6</div>
+<div style="color:#1D1D1F;font-size:0.88rem;font-weight:500;margin-top:4px;">上唇 : 下唇（厚度）</div>
+<div style="color:#6E6E73;font-size:0.8rem;margin-top:4px;line-height:1.5;">下唇略厚于上唇，符合大多数人的天然结构与审美偏好</div>
+</div>
+
+<div style="background:#fff;border:1px solid #D2D2D7;border-radius:10px;padding:1rem;">
+<div style="font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:600;color:#8B1A2B;letter-spacing:0.02em;">1 : 1.618</div>
+<div style="color:#1D1D1F;font-size:0.88rem;font-weight:500;margin-top:4px;">上唇红唇缘 : 鼻底—上唇距</div>
+<div style="color:#6E6E73;font-size:0.8rem;margin-top:4px;line-height:1.5;">面部下三分之一内部的黄金分割关系</div>
+</div>
+
+<div style="background:#fff;border:1px solid #D2D2D7;border-radius:10px;padding:1rem;">
+<div style="font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:600;color:#8B1A2B;letter-spacing:0.02em;">1.2-1.5 : 1</div>
+<div style="color:#1D1D1F;font-size:0.88rem;font-weight:500;margin-top:4px;">唇宽 : 鼻翼间距</div>
+<div style="color:#6E6E73;font-size:0.8rem;margin-top:4px;line-height:1.5;">唇角间距略大于鼻翼宽度，保持水平协调</div>
+</div>
+
+</div>
+
+<div style="margin-top:1.2rem;padding:0.8rem 1rem;background:#FFF8DC;border-radius:8px;border-left:3px solid #B8935A;">
+<div style="color:#8B6E3A;font-size:0.82rem;line-height:1.6;">⚠ 黄金比例是参考框架而非绝对标准。静态比例符合的唇部，在动态表情中可能不协调。临床应用中，医生需结合患者的面部特征、年龄、种族和个人偏好做综合判断。</div>
+</div>
+
+</div>
+
 ### 1.3 个体差异与黄金比例的灵活应用
 
 尽管黄金比例为唇部美学设计提供了重要的理论基础，但在实际临床应用中，医生必须充分考虑个体差异的影响。每个人的面部结构、骨骼形态、软组织分布都是独特的，盲目追求标准的黄金比例可能导致不自然的效果，甚至破坏原有的面部和谐。
@@ -122,6 +154,16 @@
 
 在实际操作中，医生往往需要在多个层次进行组合注射，以达到最佳的美学效果。这种分层注射技术要求医生对各个解剖层次有精确的把握，能够在注射过程中准确控制针头的深度和材料的分布。
 
+**唇部注射层次速查**
+
+| 注射层次 | 适用需求 | 推荐材料 | 效果特点 | 风险提示 |
+|---------|---------|---------|---------|---------|
+| 真皮浅层 | 唇周细纹、肤质改善 | 低交联度透明质酸、水光针 | 改善细纹和光泽，体积增加有限 | 过浅易见丁达尔现象（蓝色透光） |
+| 真皮深层 | 增加唇体体积、强化轮廓 | 中交联度透明质酸 | 常用层次，效果自然，触感好 | 避免过量导致结节 |
+| 粘膜下层 | 红唇丰满度、唇体外翻 | 高交联度透明质酸、自体脂肪 | 从内侧支撑，无表面创口 | 血管密集，需熟悉解剖避免栓塞 |
+| 肌肉层 | 功能性问题（极少） | 肉毒素（针对性） | 改善肌肉过度活跃 | 影响唇部运动功能，风险高 |
+| 皮下层 | 唇周凹陷、法令纹衔接 | 自体脂肪、CaHA | 填充凹陷，过渡自然 | 层次过深效果不明显 |
+
 ### 2.4 血管神经分布与安全注射
 
 唇部丰富的血管神经分布是注射操作中必须重点考虑的安全因素。了解这些结构的精确位置和走行规律，对于避免并发症、确保注射安全具有至关重要的意义。
@@ -165,6 +207,16 @@
 钙羟磷灰石微球是一种半永久性填充材料，主要成分与人体骨骼和牙齿的矿物成分相同，具有良好的生物相容性。这种材料在注射后会刺激胶原蛋白增生，产生持久的填充效果。但由于其半永久性特点，一旦出现问题较难处理，因此在唇部使用时需要特别谨慎。
 
 在选择注射材料时，医生需要综合考虑患者的具体需求、治疗目标、风险承受能力等因素。对于初次注射的患者，通常建议从可逆性好的材料开始，如透明质酸。对于有经验的患者或对效果持续性要求较高的情况，可以考虑使用作用时间更长的材料。
+
+**唇部填充材料对比**
+
+| 材料 | 作用机制 | 维持时间 | 可逆性 | 唇部适用性 | 主要风险 |
+|------|---------|---------|--------|-----------|---------|
+| 透明质酸（HA） | 物理填充 | 6-18 个月 | 可用透明质酸酶溶解 | ★★★★★ 首选 | 栓塞（罕见）、丁达尔现象 |
+| 胶原蛋白 | 物理填充 | 3-6 个月 | 不可逆 | ★★☆ 需皮试 | 过敏反应（动物源性） |
+| 自体脂肪 | 填充+再生 | 存活部分长期保留 | 不可逆（需手术吸取） | ★★★☆ 适合大量填充 | 吸收率高（30-50%） |
+| 聚乳酸（PLLA） | 胶原刺激 | 18-24 个月 | 不可逆 | ★★☆ 唇部慎用 | 结节、效果延迟 |
+| 羟基磷灰石（CaHA） | 填充+胶原刺激 | 12-18 个月 | 难以溶解 | ★★ 唇部慎用 | 半永久，出现问题难处理 |
 
 需要特别强调的是，任何注射材料都存在一定的风险，包括过敏反应、感染、血管栓塞、结节形成等。医生在使用任何材料前都应该充分了解其特性，掌握正确的使用方法，建立完善的风险防控机制。
 

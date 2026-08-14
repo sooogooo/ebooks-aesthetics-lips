@@ -82,6 +82,45 @@
 
 从侧面轮廓来看，常参考 Ricketts 审美平面（E 线）：从鼻尖到下巴颏前缘连一条直线，理想的侧貌下，上唇应略前突于该线（约 2-4mm），下唇位于该线上或略后（约 1-2mm）。在自然的侧面层次中，上唇比下唇略前突约 1mm，下唇又比下巴颏略前突，形成由上到下逐层后退的柔和曲线。
 
+<div style="margin:2rem 0;padding:1.5rem;background:#FAFAFA;border:1px solid #D2D2D7;border-radius:14px;">
+<div style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:#1D1D1F;margin-bottom:0.3rem;letter-spacing:0.05em;">Ricketts 审美平面（E 线）</div>
+<div style="color:#6E6E73;font-size:0.82rem;margin-bottom:1.2rem;">鼻尖 → 颏前缘连线，评估唇部侧面突出度</div>
+
+<div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start;">
+
+<div style="flex:0 0 200px;text-align:center;">
+<svg viewBox="0 0 200 180" style="width:100%;max-width:200px;">
+<rect width="200" height="180" fill="#fff" rx="10"/>
+<path d="M 48 20 Q 45 35 50 50 Q 55 60 62 65 L 70 72 Q 75 80 78 88 L 82 95 Q 84 98 88 96 L 92 93 Q 96 90 100 92 L 105 98 Q 112 108 115 120 L 118 135 Q 120 148 115 158 L 108 168 L 100 172 L 95 170" fill="none" stroke="#1D1D1F" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="55" y1="48" x2="112" y2="160" stroke="#8B1A2B" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="85" cy="92" r="2.5" fill="#8B1A2B"/>
+<circle cx="93" cy="98" r="2.5" fill="#8B1A2B"/>
+<text x="92" y="88" font-size="7" fill="#8B1A2B" font-family="sans-serif">上唇</text>
+<text x="100" y="103" font-size="7" fill="#8B1A2B" font-family="sans-serif">下唇</text>
+<text x="50" y="42" font-size="7" fill="#6E6E73" font-family="sans-serif">鼻尖</text>
+<text x="100" y="170" font-size="7" fill="#6E6E73" font-family="sans-serif">颏前缘</text>
+<text x="120" y="100" font-size="8" fill="#8B1A2B" font-family="sans-serif" font-weight="600">E 线</text>
+</svg>
+</div>
+
+<div style="flex:1;min-width:180px;">
+<div style="background:#fff;border-left:3px solid #8B1A2B;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:0.8rem;">
+<div style="font-weight:600;color:#1D1D1F;font-size:0.88rem;">上唇</div>
+<div style="color:#6E6E73;font-size:0.8rem;">前突于 E 线 <strong style="color:#8B1A2B;">2-4mm</strong></div>
+</div>
+<div style="background:#fff;border-left:3px solid #8B1A2B;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:0.8rem;">
+<div style="font-weight:600;color:#1D1D1F;font-size:0.88rem;">下唇</div>
+<div style="color:#6E6E73;font-size:0.8rem;">位于 E 线上或略后 <strong style="color:#8B1A2B;">0-2mm</strong></div>
+</div>
+<div style="background:#fff;border-left:3px solid #8B1A2B;padding:10px 14px;border-radius:0 8px 8px 0;">
+<div style="font-weight:600;color:#1D1D1F;font-size:0.88rem;">层次关系</div>
+<div style="color:#6E6E73;font-size:0.8rem;">上唇 > 下唇 > 颏（逐层后退的柔和曲线）</div>
+</div>
+</div>
+
+</div>
+</div>
+
 下巴的角度也是影响唇部美感的重要因素。理想的下巴角度应该与面部的整体线条保持协调，既不能过于垂直显得生硬，也不能过于后倾显得软弱。从耳垂到下巴最低点的连线应该与法兰克福平面形成约15-25度的角度，这样的角度能够很好地衬托唇部的美感。
 
 在实际的临床评估中，我们发现下巴形态的问题往往是影响唇部美感的重要因素。下巴后缩是最常见的问题之一，它会使整个下面部显得萎缩，唇部失去应有的立体感和存在感。下巴后缩的程度不同，对唇部美感的影响也不同。轻度的下巴后缩可能只是影响侧面轮廓的流畅性，而严重的下巴后缩则会使唇部显得过于突出，破坏整个面部的比例关系。
